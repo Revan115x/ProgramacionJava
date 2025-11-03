@@ -2,7 +2,7 @@ package Bucles;
 
 import java.util.Scanner;
 
-public class practica2 {
+public class practica_2 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
