@@ -1,8 +1,8 @@
-package ExamenSwitch;
+package Examenes;
 
 import java.util.Scanner;
 
-public class Examen {
+public class ExamenSwitch {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
