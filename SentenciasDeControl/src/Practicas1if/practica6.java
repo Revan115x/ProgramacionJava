@@ -13,11 +13,12 @@ public class practica6 {
 		System.out.println("?");
 		marcas=sc.nextInt();
 		
-		if(marcas>=5 && programacion >=5)
+		if(marcas>=5) {
 			System.out.println("En hora buena has aprobado ambas");
-		else
-			if(marcas<5 && programacion =%)
-		
+		}else {
+			if(marcas<5)
+				System.out.println("nose");
+		}
 	}
 
 }

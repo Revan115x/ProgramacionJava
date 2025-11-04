@@ -18,7 +18,6 @@ public class practica6 {
 			System.out.println("no tienes descuento");
 		else
 			if(precio<=6 && precio<60) {
-				p
 				System.out.println("tienes descuento del 5%"+(precio));
 			}
 	}

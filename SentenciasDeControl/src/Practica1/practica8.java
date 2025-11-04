@@ -9,14 +9,12 @@ public class practica8 {
 		
 		int t,minutos,hora,segundos;
 		
-		//minutos= t/60;
-		
 		try (Scanner sc = new Scanner(System.in)) {
 			System.out.print(" ");
-			a=sc.nextInt();
+			t=sc.nextInt();
+		}
 		
-		
-		System.out.println("de segundos a minutos es "+minutos);
+		System.out.println("de segundos a minutos es ");
 		
 		
 	}
