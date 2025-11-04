@@ -1,8 +1,8 @@
-package examen_bucles;
+package Examenes;
 
 import java.util.Scanner;
 
-public class examen_p2 {
+public class examen_p2bucles {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
