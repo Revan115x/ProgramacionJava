@@ -1,5 +1,6 @@
 package Practica1;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Practica41 {
@@ -11,7 +12,7 @@ public class Practica41 {
 		double radio,resultado;
 		
 		Scanner sc=new Scanner(System.in);
-		sc.useLocale(LOCALE.INGLISH);
+		sc.useLocale(Locale.ENGLISH);
 		System.out.println("introduce eñ radio");
 		radio=sc.nextDouble();
 		
