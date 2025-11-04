@@ -8,7 +8,7 @@ public class examenchatgpt {
 		// TODO Auto-generated method stub
 
 		int pasajeros, edad;
-		boolean ok = true;a
+		boolean ok = true;
 		char tipo;
 		double precio = 0,descuento=0,precioTotal=0;
 
@@ -36,9 +36,9 @@ public class examenchatgpt {
 		case 'E':
 		case 'e':
 			precio = 30;
-			break;aaaaaa
 			System.out.println("Error");
 			ok = false;
+			break;
 		}
 
 		if (ok == true) {
