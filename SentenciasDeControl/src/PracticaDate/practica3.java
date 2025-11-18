@@ -16,7 +16,7 @@ public class practica3 {
 		
 		String fecha;
 		String fecha2;
-		LocalDate fechab = null,fechabb = null,calculo = null;
+		LocalDate fechab = null,calculo = null;
 		
 		Scanner sc=new Scanner(System.in);
 		
