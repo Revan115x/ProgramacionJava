@@ -2,7 +2,9 @@ package PracticaDate;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 public class practica7 {
@@ -14,6 +16,7 @@ public class practica7 {
 
 		String nacimiento;
 		LocalDate dia = null;
+		LocalDate HOY=LocalDate.now();
 		boolean correcto = true;
 		DateTimeFormatter formato;
 
@@ -34,6 +37,9 @@ public class practica7 {
 			}
 
 		} while (!correcto);
+		
+		long años= Math.abs(ChronoUnit.YEARS.between(dia, HOY));
+		System.out.println(años);
 
 	}
 

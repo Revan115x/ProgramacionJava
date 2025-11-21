@@ -4,6 +4,8 @@ import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class practica6 {
@@ -39,12 +41,11 @@ public class practica6 {
 
 		} while (!correcto);
 		
-		DayOfWeek diaSemana = dia.getDayOfWeek();
+		String diaSemana = dia.getDayOfWeek().getDisplayName(TextStyle.FULL,Locale.getDefault());
 
-        String day = diaSemana.toString().substring(0,1).toUpperCase() +
-                        diaSemana.toString().substring(1).toLowerCase();
 
-        System.out.println("has nacido un " +day+" del año "+dia.getYear()+" Del mes "+dia.getMonthValue());
+        
+        System.out.println("has nacido un " +diaSemana+" del año "+dia.getYear()+" Del mes "+dia.getMonthValue());
 
 	}
 
