@@ -16,38 +16,39 @@ public class ejercicio3 {
 		 * controlar la división por cero.
 		 */
 
-		int num = 0, media;
+		int num = 0;
+		double media = 0;
 		int acumulador = 0;
 		int cont = 0;
 
 		Scanner sc = new Scanner(System.in);
-		
-	       do {
 
-	            try {
-	                System.out.println("introduce un numero");
-	                num = sc.nextInt();
+		do {
 
-	                if (num != 0) { 
-	                    acumulador += num;
-	                    cont++;
-	                }
+			try {
+				System.out.println("introduce un numero");
+				num = sc.nextInt();
 
-	                media = acumulador / cont;
-	                System.out.println("Media: " + media);
+				if (num != 0) {
+					acumulador += num;
+					cont++;
+				}
 
-	            } catch (InputMismatchException e) {
-	                System.out.println("Error: debes introducir un número.");
-	                e.printStackTrace();
-	                sc.nextLine();
-	            } catch (ArithmeticException e) {
-	            	e.printStackTrace();
-	                System.out.println("No se puede dividir entre cero todavía.");
-	            }
+				media = (double)acumulador / cont;
+				System.out.println("Media: " + media);
 
-	        } while (num != 0);
+			} catch (InputMismatchException e) {
+				System.out.println("Error: debes introducir un número.");
+				num=-1;
+				sc.nextLine();
+			} catch (ArithmeticException e) {
+				//e.printStackTrace();
+				System.out.println("No se puede dividir entre cero todavía.");
+			}
 
-	        System.out.println("Programa finalizado.");
+		} while (num != 0);
+
+		System.out.println("Programa finalizado." +media);
 
 	}
 

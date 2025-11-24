@@ -3,9 +3,12 @@ package Excepciones;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class ejercicio2 {
+
+	static Scanner sc;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -14,33 +17,37 @@ public class ejercicio2 {
 		 * Haced una función que lea una fecha en formato dd/mm/aa mientras sea
 		 * incorrecta.
 		 */
+		
+		DateTimeFormatter patron;
+		patron = DateTimeFormatter.ofPattern("dd/MM/yy");
 
-		String fech;
 		LocalDate Buena = null;
 
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 
-		while (Buena == null) {
-			
-			System.out.println("fecha?");
-			fech = sc.nextLine();
-			Buena = validarFecha(fech);
-		}
+		Buena = validarFecha();
 
-		System.out.println(Buena);
+		System.out.println(patron.format(Buena));
 
 	}
 
-	public static LocalDate validarFecha(String fech) {
+	public static LocalDate validarFecha() {
+		String fech;
 
 		LocalDate fecha = null;
 
 		DateTimeFormatter patron;
 		patron = DateTimeFormatter.ofPattern("dd/MM/yy");
-		try {
-			fecha = LocalDate.parse(fech, patron);
-		} catch (DateTimeException e) {
-			System.out.println("error");
+
+		while (fecha == null) {
+
+			System.out.println("fecha?");
+			fech = sc.nextLine();
+			try {
+				fecha = LocalDate.parse(fech, patron);
+			} catch (DateTimeParseException e) {
+				System.out.println("error");
+			}
 		}
 
 		return fecha;
