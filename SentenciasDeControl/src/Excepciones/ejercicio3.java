@@ -40,7 +40,7 @@ public class ejercicio3 {
 			} catch (InputMismatchException e) {
 				System.out.println("Error: debes introducir un número.");
 				num=-1;
-				sc.nextLine();
+				sc.nextLine(); 
 			} catch (ArithmeticException e) {
 				//e.printStackTrace();
 				System.out.println("No se puede dividir entre cero todavía.");
