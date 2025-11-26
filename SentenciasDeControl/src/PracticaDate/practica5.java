@@ -49,11 +49,11 @@ public class practica5 {
 		long diferencia=0;
 		
 		if (tipo1.isBefore(tipo2))
-			diferencia = ChronoUnit.HOURS.between(tipo1, tipo2);
+			diferencia = ChronoUnit.MINUTES.between(tipo1, tipo2);
 		else
-			diferencia = ChronoUnit.HOURS.between(tipo2, tipo1);
+			diferencia = ChronoUnit.MINUTES.between(tipo2, tipo1);
 
-		System.out.println("la diferencia de horas es es de "+diferencia);
+		System.out.println("la diferencia de minutos es es de "+diferencia);
 		
 	}
 

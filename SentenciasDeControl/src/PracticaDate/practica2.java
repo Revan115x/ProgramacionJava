@@ -33,6 +33,8 @@ public class practica2 {
 			System.out.println("Segunda Fecha");
 			fechaUser2 = sc.nextLine();
 
+			//LocalDate fecha=LocalDate.of(0, 0, 0)) leer int uno por uno
+			
 			try {
 
 				fecha1 = LocalDate.parse(fechaUser, patron);

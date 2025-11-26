@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class ExamenExcepciones {
 	static Scanner sc;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws excepcionnombre {
 		// TODO Auto-generated method stub
 
 		/*
@@ -31,14 +31,13 @@ public class ExamenExcepciones {
 		 * abonos normales son 10 euros, los VIP 50, los familiares 30. Si el usuario es
 		 * jubilado (65 años o más) tiene un descuento del 20% y si es menor de 18 del
 		 * 10%. Si ha elegido abono familiar y tiene menos de 18 años devolver una
-		 * excepción propia con vuestro nombre y apellido. (2 ptos) 
+		 * excepción propia con vuestro nombre y apellido. (2 ptos)
 		 * 
-		 * Introducir una
-		 * aserción en la función anterior para comprobar que el tipo de abono es el
-		 * correcto. Si el cálculo del importe es correcto, generar una contraseña de
-		 * longitud 7 que tenga los dos primeros caracteres del tipo de abono en
-		 * mayúsculas y a continuación 5 dígitos aleatorios. Mostrad la contraseña por
-		 * pantalla (2 ptos)
+		 * Introducir una aserción en la función anterior para comprobar que el tipo de
+		 * abono es el correcto. Si el cálculo del importe es correcto, generar una
+		 * contraseña de longitud 7 que tenga los dos primeros caracteres del tipo de
+		 * abono en mayúsculas y a continuación 5 dígitos aleatorios. Mostrad la
+		 * contraseña por pantalla (2 ptos)
 		 */
 
 		/* Declaro ahora la fecha actual */
@@ -53,9 +52,9 @@ public class ExamenExcepciones {
 		/* Declaro el scanner para poder leer */
 		sc = new Scanner(System.in);
 
-		/*variable para guardaar edad*/
-		int edad=0;
-		
+		/* variable para guardaar edad */
+		int edad = 0;
+
 		/* Bucle para pedir fecha hasta que este correcto */
 		do {
 			System.out.println("Fecha nacimiento: 31/10/1999");
@@ -69,32 +68,25 @@ public class ExamenExcepciones {
 				System.out.println("Error con el formato de fecha");
 			}
 		} while (correcto == false);
-		
-		System.out.println("edad es " +edad);
+
+		System.out.println("edad es " + edad);
 
 		correcto = false;
 		String bono;
 		double importe = 0;
 
 		do {
+			correcto=true;
 			System.out.println("tipo de bono VIP/NORMAL/FAMILIAR");
 			bono = sc.nextLine();
-
-			try {
-				importe = tipobono(bono);
-				correcto = true;
-			} catch (StringIndexOutOfBoundsException e) {
-				System.out.println("error");
-			} catch (NullPointerException a) {
-				System.out.println("Debes de introucir un dato");
-			}
+			
+			if (!bono.equalsIgnoreCase("vip") && !bono.equalsIgnoreCase("familiar") && !bono.equalsIgnoreCase("normal") )
+				correcto=false;
+			
 		} while (correcto == false);
+		importe = tipobono(bono);
 
-		/*
-		 * Corregir importe sino pones nada devuelve 0, si no pones ningun tipo tambien
-		 * devuelve 0
-		 */
-		System.out.println("El importe es de = "+importe+ "€");
+		System.out.println("El importe es de = " + importe + "€");
 
 		correcto = false;
 		String nombre;
@@ -105,22 +97,26 @@ public class ExamenExcepciones {
 			nombre = sc.nextLine();
 
 			valido = validarnombre(nombre);
-			
-			if(valido==null) {
+
+			if (valido == null) {
 				System.out.println("no cumples los parametros de nombre");
-				correcto=false;
-			}else
-				correcto=true;
-			
+				correcto = false;
+			} else
+				correcto = true;
+
 		} while (correcto == false);
 
-		System.out.println("Nombre de usuario es "+valido);
-		
-		
-		double ImporteTotal=calcularDesc(edad,importe,bono);
-		
-		System.out.println("Se ha aplicado el descuento"+ImporteTotal);
+		System.out.println("Nombre de usuario es " + valido);
 
+		try {
+			double importeTotal = calcularDesc(edad, importe, bono);			
+			if (importeTotal > 0)
+				System.out.println("Se ha aplicado descuento. Importe: " + importeTotal);
+			else
+				System.out.println("tu no tienes descuento" + importe);
+		} catch (excepcionnombre e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public static int calcularEdad(String fech) {
@@ -159,7 +155,7 @@ public class ExamenExcepciones {
 		try {
 			if (tipo.equalsIgnoreCase("normal"))
 				precio = 10;
-			else if (tipo.equalsIgnoreCase("VIP"))
+			else if (tipo.equalsIgnoreCase("vip"))
 				precio = 30;
 			else if (tipo.equalsIgnoreCase("familiar"))
 				precio = 50;
@@ -174,27 +170,25 @@ public class ExamenExcepciones {
 
 	public static String validarnombre(String name) {
 
-		String patron = "^[a-zA-Z][a-zA-Z0-9]{4,7}$";// ^[a-zA-Z]que empiece por mayus o minus, [a-zA-Z0-9] pueden ser letras mayus o minus o numeros,{4,7} que sean 5-7 max caracteres
-
+		String patron = "^[a-zA-Z][a-zA-Z0-9]{4,7}$";// ^[a-zA-Z]que empiece por mayus o minus, [a-zA-Z0-9] pueden ser
+														// letras mayus o minus o numeros,{4,7} que sean 5-7 max
+														// caracteres
 		if (name != null && name.matches(patron)) {
 			return name;
 		} else {
 			return null;
 		}
 	}
-	
-	public static double calcularDesc(int edad, double precio ,String tipo) {
-		
-		double descuento=0;
-		
-		if(edad>65)
-			descuento=precio*0.8;
-		else if (edad<18)
-			descuento=precio*0.9;
-		
-		
-		//else if (tipo.equalsIgnoreCase("familiar") && edad<18)
-			
+
+	public static double calcularDesc(int edad, double precio, String tipo) throws excepcionnombre {
+
+		double descuento = 0;
+		if (tipo.equals("Familiar") && edad<18)
+			throw new excepcionnombre("Jose Arriaga");
+		if (edad > 65)
+			return descuento = precio * 0.8;
+		else if (edad < 18)
+				return descuento = precio * 0.9;
 		
 		return descuento;
 	}
