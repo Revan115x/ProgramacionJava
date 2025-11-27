@@ -1,16 +1,10 @@
 package Excepciones;
 
-<<<<<<< HEAD
 import java.util.Scanner;
 
 public class ejercicio6 {
 	static Scanner sc;
-	public static void main(String[] args) throws rellenar {
-=======
-public class ejercicio6 {
-
 	public static void main(String[] args) {
->>>>>>> f8041008b82d5457a2cdafb50ce48a1bcb2b1e17
 		// TODO Auto-generated method stub
 
 		/*
@@ -18,7 +12,7 @@ public class ejercicio6 {
 		 * primera está incluida en la segunda. Devuelve una excepción propia si
 		 * cualquiera de las dos está vacía.
 		 */
-<<<<<<< HEAD
+
 		
 		
 		String cadena1;
@@ -50,9 +44,6 @@ public class ejercicio6 {
 			cont++;
 		
 		return cont;
-=======
-
->>>>>>> f8041008b82d5457a2cdafb50ce48a1bcb2b1e17
 	}
 
 }
