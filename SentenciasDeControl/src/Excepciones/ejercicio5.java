@@ -30,7 +30,6 @@ public class ejercicio5 {
 		do {
 			System.out.println("Primera fecha dd/mm/aa");
 			uno = sc.nextLine();
-<<<<<<< HEAD
 			System.out.println("Primera fecha dd/mm/aa");
 			dos = sc.nextLine();
 			
@@ -62,44 +61,6 @@ public class ejercicio5 {
 		meses = (int) ChronoUnit.MONTHS.between(fch, fch2);
 		System.out.println("la diferencia de meses es de " + meses);
 		return meses;
-=======
-
-			System.out.println("Primera fecha dd/mm/aa");
-			dos = sc.nextLine();
-
-			try {
-				fecha1 = LocalDate.parse(uno, patron);
-				fecha2 = LocalDate.parse(dos, patron);
-
-				if (fecha1.isAfter(fecha2)) {
-					System.out.println("la primer fecha debe ser menor que la segunda");
-					correcto = false;
-
-				} else if (fecha1.getYear() == fecha2.getYear() && fecha1.getMonthValue() == fecha2.getMonthValue()) {
-					comparar = validarfecha(fecha1, fecha2);
-					System.out.println("Las fechas son del mismo mes y año, la diferencia de dias es: " + comparar);
-					correcto = true;
-				} else {
-					correcto = true;
-					System.out.println("correcto");
-				}
-
-			} catch (DateTimeParseException e) {
-				System.out.println("error");
-				correcto = false;
-			}
-
-		} while (correcto == false);
-
-	}
-
-	public static int validarfecha(LocalDate fch, LocalDate fch2) {
-
-		int dias = 0;
-		dias = (int) ChronoUnit.DAYS.between(fch, fch2);
-		return dias;
-
->>>>>>> f8041008b82d5457a2cdafb50ce48a1bcb2b1e17
 	}
 
 }
