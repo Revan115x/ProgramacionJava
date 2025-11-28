@@ -1,4 +1,4 @@
-package Excepciones;
+package PracticaExcepciones;
 
 public class ejercicio5 {
 

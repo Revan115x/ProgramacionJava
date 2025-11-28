@@ -1,4 +1,4 @@
-package Excepciones;
+package PracticaExcepciones;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;

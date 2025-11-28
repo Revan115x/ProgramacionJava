@@ -1,4 +1,4 @@
-package Examenes;
+package ExamenesGenerales;
 
 import java.util.Locale;
 import java.util.Scanner;

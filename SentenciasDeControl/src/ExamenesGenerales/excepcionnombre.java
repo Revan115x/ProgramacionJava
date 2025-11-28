@@ -1,4 +1,4 @@
-package Examenes;
+package ExamenesGenerales;
 
 public class excepcionnombre extends Exception {
 

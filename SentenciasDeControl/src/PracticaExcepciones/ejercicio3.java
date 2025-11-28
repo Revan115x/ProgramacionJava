@@ -1,4 +1,4 @@
-package Excepciones;
+package PracticaExcepciones;
 
 import java.security.AlgorithmParameterGenerator;
 import java.util.InputMismatchException;

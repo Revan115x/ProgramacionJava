@@ -1,4 +1,4 @@
-package paqueteyExcepciones;
+package PracticapaqueteyExcepciones;
 
 public class rellenar extends Exception {
 

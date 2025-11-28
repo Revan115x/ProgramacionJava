@@ -1,4 +1,4 @@
-package paqueteyExcepciones;
+package PracticapaqueteyExcepciones;
 
 import java.util.Scanner;
 
