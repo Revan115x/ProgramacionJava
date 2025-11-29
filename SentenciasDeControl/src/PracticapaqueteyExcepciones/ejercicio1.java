@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class ejercicio1 {
 
+	//DECLARO EL SCANNER PARA LEER DESDE TODOS LOS LADOS
 	static Scanner sc;
 
 	public static void main(String[] args) {
@@ -21,6 +22,7 @@ public class ejercicio1 {
 		 */
 		sc = new Scanner(System.in);
 
+		//DECLARO LAS VARIABLES QUE USARE
 		LocalDate fecha1, fecha2;
 		int comparar;
 		DateTimeFormatter patron = DateTimeFormatter.ofPattern("dd/MM/yy");
@@ -28,17 +30,21 @@ public class ejercicio1 {
 		boolean correcto = false;
 
 		do {
+			//LEO LAS FECHAS
 			System.out.println("Primera fecha dd/mm/aa");
 			uno = sc.nextLine();
 			System.out.println("Primera fecha dd/mm/aa");
 			dos = sc.nextLine();
 			
 			try {
+				//PASO LAS FECHAS STRING A LOCALDATE
 				fecha1 = LocalDate.parse(uno, patron);
 				fecha2 = LocalDate.parse(dos, patron);
 				
+				//COMPARO PARA QUE LA PRIMERA FECHA SEA MENOR QUE LA SEGUNDA
 				if (fecha1.isAfter(fecha2)) {
 					System.out.println("la primer fecha debe ser menor que la segunda");
+				//EN CASO QUE LO DE ARRIBA ESTE CORRECTO COMPROBO LAS FECHAS CON MI FUNCION
 				} else {
 					comparar = validarfecha(fecha1, fecha2);
 					correcto = true;
@@ -49,15 +55,21 @@ public class ejercicio1 {
 			}
 		} while (correcto == false);
 	}
+	
+	//FUNCION PARA VALIDAR LA DIFERENCIAS DE DIAS Y MESES
 	public static int validarfecha(LocalDate fch, LocalDate fch2) {
 
 		int dias = 0;
 		int meses = 0;
+		
+		//SI EL MES Y EL AÑO SON IGUALES ME DEVUELVE LOS DIAS QUE HAY ENTRE LAS DOS FECHAS
 		if (fch.getYear() == fch2.getYear() && fch.getMonthValue() == fch2.getMonthValue()) {
 			dias = (int) ChronoUnit.DAYS.between(fch, fch2);
 			System.out.println("la diferencia de dias es de " + dias);
 			return dias;
 		}
+		
+		// DEVUELVE LA DIFERENCIA DE MESES QUE HAY EN GENERAL
 		meses = (int) ChronoUnit.MONTHS.between(fch, fch2);
 		System.out.println("la diferencia de meses es de " + meses);
 		return meses;
