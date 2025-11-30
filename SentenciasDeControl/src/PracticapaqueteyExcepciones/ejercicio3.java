@@ -3,6 +3,7 @@ package PracticapaqueteyExcepciones;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -22,17 +23,17 @@ public class ejercicio3 {
 		 * manejarse con excepciones.
 		 */
 
-		//DECLARO VARIABLES QUE USARE
-		int dia, mes, año;
+		// DECLARO VARIABLES QUE USARE
+		int dia, mes, año, cont = 0;
 		LocalDate fecha;
-		LocalDate fecha2 = LocalDate.of(2004,10,29);//DEFINO FECHA ALEATORIA
-		boolean correcto = false;
+		LocalDate fecha2 = LocalDate.of(2004, 10, 29);// DEFINO FECHA ALEATORIA PREGUNTAR COMO GENERAR UNA
+		boolean correcto = false, pista = false;
 		DateTimeFormatter patron = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-		//LLAMO AL SCANNER
+		// LLAMO AL SCANNER
 		sc = new Scanner(System.in);
-		
-		//BUCLE PARA REPETIR EL EJERCICO EN CASO DE ERROR
+
+		// BUCLE PARA REPETIR EL EJERCICO EN CASO DE ERROR
 		while (!correcto) {
 
 			/*
@@ -48,7 +49,7 @@ public class ejercicio3 {
 
 			try {
 
-				//LEO LAS FECHAS 
+				// LEO LAS FECHAS
 				System.out.println("Dime el dia");
 				dia = sc.nextInt();
 
@@ -58,28 +59,53 @@ public class ejercicio3 {
 				System.out.println("Dime año");
 				año = sc.nextInt();
 
-				//PASO LOS INT A FECHAS
+				// PASO LOS INT A FECHAS
 				fecha = LocalDate.of(año, mes, dia);
-				//PASO LA FECHA A MI PATRON
+				// PASO LA FECHA A MI PATRON
 				System.out.println(patron.format(fecha));
-				//PASO TAMBIEN LA FECHA "ALEATORIA A MI PATRON PARA QUE PUEDA COMPARAR BIEN"
+				// PASO TAMBIEN LA FECHA "ALEATORIA A MI PATRON PARA QUE PUEDA COMPARAR BIEN"
 				patron.format(fecha2);
+				cont++;
 
-				//COMPARO LAS FECHAS
+				System.out.println("Numero de intentos es " + cont);
+
+				// COMPARO LAS FECHAS
 				if (fecha.isAfter(fecha2)) {
 					System.out.println("te has pasado");
-					correcto=false;
+					correcto = false;
 				} else if (fecha.isBefore(fecha2)) {
 					System.out.println("ES UN POCO MAS ADELANTE");
-					correcto=false;
+					correcto = false;
 				} else {
 					System.out.println("ENHORABUENA HAS ACERTADO LA FECHA!" + fecha2);
 					correcto = true;
+					break;
 				}
 				
-				//PROPONER MEJORAR PROGRAMA INDICANDO EL DIA,MES,AÑO
-				
-			} catch (InputMismatchException e) {// ESTA EXCEPCION SIEMPRE DEBE IR DELANTE Y LIMPIAR BUFFER 
+				//AÑADIDO BLOQUE PARA DAR PISTAS ENTRE MESES Y AÑOS
+
+				if (cont == 2) {
+					System.out.println("quieres una pista?");
+					pista = sc.nextBoolean();
+					if (pista == true) {
+						int meses;
+						meses = (int) ChronoUnit.MONTHS.between(fecha, fecha2);
+						System.out.println("la diferencia de meses es de " + meses);
+					}
+				}
+				if (cont > 3) {
+					System.out.println("quieres una pista?");
+					pista = sc.nextBoolean();
+					if (pista == true) {
+						int años;
+						años = (int) ChronoUnit.YEARS.between(fecha, fecha2);
+						System.out.println("la diferencia de años es de " + años);
+					}
+				}
+
+				// PROPONER MEJORAR PROGRAMA INDICANDO EL DIA,MES,AÑO
+
+			} catch (InputMismatchException e) {// ESTA EXCEPCION SIEMPRE DEBE IR DELANTE Y LIMPIAR BUFFER
 				System.out.println("Introduce caracteres numericos");
 				sc.nextLine();
 			} catch (DateTimeException e) {
@@ -87,7 +113,7 @@ public class ejercicio3 {
 			}
 
 		}
-		
+
 		System.out.println("FIN EL PROGRAMA");
 
 	}
