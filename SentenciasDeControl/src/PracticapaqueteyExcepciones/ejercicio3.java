@@ -26,7 +26,7 @@ public class ejercicio3 {
 		// DECLARO VARIABLES QUE USARE
 		int dia, mes, año, cont = 0;
 		LocalDate fecha;
-		LocalDate fecha2 = LocalDate.of(2004, 10, 29);// DEFINO FECHA ALEATORIA PREGUNTAR COMO GENERAR UNA
+		LocalDate fecha2 = LocalDate.of(2006, 07, 04);// DEFINO FECHA ALEATORIA PREGUNTAR COMO GENERAR UNA
 		boolean correcto = false, pista = false;
 		DateTimeFormatter patron = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -81,11 +81,11 @@ public class ejercicio3 {
 					correcto = true;
 					break;
 				}
-				
-				//AÑADIDO BLOQUE PARA DAR PISTAS ENTRE MESES Y AÑOS
+
+				// AÑADIDO BLOQUE PARA DAR PISTAS ENTRE MESES Y AÑOS
 
 				if (cont == 2) {
-					System.out.println("quieres una pista?");
+					System.out.println("quieres una pista? True/false");
 					pista = sc.nextBoolean();
 					if (pista == true) {
 						int meses;
@@ -93,13 +93,22 @@ public class ejercicio3 {
 						System.out.println("la diferencia de meses es de " + meses);
 					}
 				}
-				if (cont > 3) {
-					System.out.println("quieres una pista?");
+				if (cont == 2) {
+					System.out.println("quieres una pista? True/false");
 					pista = sc.nextBoolean();
 					if (pista == true) {
 						int años;
 						años = (int) ChronoUnit.YEARS.between(fecha, fecha2);
 						System.out.println("la diferencia de años es de " + años);
+					}
+				}
+
+				if (cont == 3) {
+					System.out.println("te rindes? true/false");
+					pista = sc.nextBoolean();
+					if (pista == true) {
+						System.out.println("LA FECHA ERA "+patron.format(fecha2)+" PIERDES POR PRINGAO");
+						break;
 					}
 				}
 

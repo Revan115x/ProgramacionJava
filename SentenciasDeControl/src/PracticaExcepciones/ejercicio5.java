@@ -1,8 +1,11 @@
 package PracticaExcepciones;
 
+import java.util.Scanner;
+
 public class ejercicio5 {
 
-	public static void main(String[] args) {
+	static Scanner sc;
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 
 		/*
@@ -15,6 +18,87 @@ public class ejercicio5 {
 		 * una excepción propia DistintivoErroneoException.
 		 */
 
+		sc = new Scanner(System.in);
+
+		String tipocombustible = "";
+
+		double emision;
+
+		System.out.println("introduce el tipo de combustible que usas (0,E,C,B)");
+
+		tipocombustible = sc.nextLine();
+
+		while (tipocombustible.equalsIgnoreCase("f"))
+			;
+		{
+
+			System.out.println("introduce los kilomestros recorridos");
+
+			double km = sc.nextDouble();
+
+			try {
+
+				emision = CalcularEmisiones(tipocombustible, km);
+
+				System.out.println("el total de las emisiones es" + emision);
+
+			} catch (DistintivoErroneoException e) {
+
+				// TODO Auto-generated catch block
+
+				System.out.println("introduce un dato valido");
+
+			}
+
+			System.out.println("introduce el tipo de combustible que usas (0,E,C,B)");
+
+			tipocombustible = sc.nextLine();
+
+		}
+
+	}
+
+	public static double CalcularEmisiones(String tipocombustible, double km) throws Exception {
+
+		double emision = 0;
+
+		final double cero = 0, e = 0.001, c = 0.02, b = 0.05;
+
+		tipocombustible = tipocombustible.toUpperCase();
+
+		switch (tipocombustible) {
+
+		case "0":
+
+			emision = km * cero;
+
+			break;
+
+		case "E":
+
+			emision = km * e;
+
+			break;
+
+		case "C":
+
+			emision = km * c;
+
+			break;
+
+		case "B":
+
+			emision = km * b;
+
+			break;
+
+		default:
+
+			throw new Exception("Distintivo incorrecto");
+
+		}
+
+		return emision;
 	}
 
 }

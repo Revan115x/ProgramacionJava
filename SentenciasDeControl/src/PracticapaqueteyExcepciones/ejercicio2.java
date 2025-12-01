@@ -26,6 +26,7 @@ public class ejercicio2 {
 			cadena2=sc.nextLine();
 			
 			veces=cadenarepite(cadena1,cadena2);
+			System.out.println(+veces);
 			
 		}catch(NullPointerException e) {
 			System.out.println(e.getMessage());
@@ -34,12 +35,17 @@ public class ejercicio2 {
 	
 	public static int cadenarepite(String uno,String dos) throws rellenar {
 		
-		int cont=0;
-		if(uno.equalsIgnoreCase(null)|| dos.equalsIgnoreCase(null)) {
+		int cont=0,pos=0;
+		if(uno.length()==0 || dos.length()==0) {
 			throw new rellenar ("Rellena el campo");
 		}
-		else if(uno.equals(dos))
+		
+		pos=uno.indexOf(dos,pos);
+		
+		while(pos!=-1) {
 			cont++;
+			pos=uno.indexOf(dos,pos+dos.length());
+		}
 		
 		return cont;
 	}
