@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class ejercicio5 {
 
 	static Scanner sc;
-	public static void main(String[] args) throws Exception {
+
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		/*
@@ -28,9 +29,7 @@ public class ejercicio5 {
 
 		tipocombustible = sc.nextLine();
 
-		while (tipocombustible.equalsIgnoreCase("f"))
-			;
-		{
+		while (tipocombustible.equalsIgnoreCase("f"));{
 
 			System.out.println("introduce los kilomestros recorridos");
 
@@ -58,7 +57,7 @@ public class ejercicio5 {
 
 	}
 
-	public static double CalcularEmisiones(String tipocombustible, double km) throws Exception {
+	public static double CalcularEmisiones(String tipocombustible, double km) throws DistintivoErroneoException {
 
 		double emision = 0;
 
@@ -94,11 +93,12 @@ public class ejercicio5 {
 
 		default:
 
-			throw new Exception("Distintivo incorrecto");
+			throw new DistintivoErroneoException("Distintivo incorrecto");
 
 		}
 
 		return emision;
+
 	}
 
 }

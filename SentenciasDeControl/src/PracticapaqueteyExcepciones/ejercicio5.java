@@ -8,9 +8,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ejercicio5 {
-
 	static Scanner sc;
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -21,50 +19,70 @@ public class ejercicio5 {
 		 * encuentren varias deberán manejarse con excepciones.
 		 */
 
-		//variables que utilizare
+		// variables que utilizare
+		String nacimiento = null;
 		boolean correcto = false;
-		String nacimiento, posible = null;
-		LocalDate fecha;
+		LocalDate fechaCorrecta;
 		DateTimeFormatter patron = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-		//llamo el scanner para poder leer desde cualquier lado
+		// llamo el scanner para poder leer desde cualquier lado
 		sc = new Scanner(System.in);
 
-		//bucle para validar la fecha
+		// bucle para validar la fecha
 		do {
-
-			//pido la fecha
-			System.out.println("QUE DIAS HAS NACIDO?");
+			System.out.println("¿Qué día has nacido?");
 			nacimiento = sc.nextLine();
+			try {
+				fechaCorrecta = validarFecha(nacimiento);
+				System.out.println("TU FECHA ES " + patron.format(fechaCorrecta));
+				correcto = true;
+			} catch (Exception e) {
+				System.out.println("ERROR: " + e.getMessage());
+			}
 
-			//intento con un bucle por ir pasando por cada caracter del string
-			for (int i = 0; i < nacimiento.length(); i++) {
-				//si lee un caracter que es numero para
-				if (Character.isDigit(nacimiento.charAt(i))) {
-					//cuando detecta solo se queda ese numero, entonces le digo i+10 (10 porque es lo que mide mi patron dd/MM/yyyy )para que pille todo los numeros siguientes y que no se pase de la longitud de la cadena
-					if (i + 10 <= nacimiento.length()) {
-						//posible es la que almacenara la cadena de numeros que hemos sacado con un substring diciendo que pille i y i le sume 10 para coger todos los numeros
-						posible = nacimiento.substring(i, i + 10);
-						
-						try {
-							
-							// intento pasar el string a local date + el patron, si es correcto sale del bucle
-							fecha = LocalDate.parse(posible, patron);
-							System.out.println("LA FECHA ES " + patron.format(fecha));
-							correcto = true;
-						} catch (DateTimeException e) {//en caso de no ser correcta la fecha del string posible salta esta excepcion
-							System.out.println("NO HAY FECHA");
-							sc.nextLine();
-						} catch (NullPointerException e) {//cuando no detecta nada en general
-							System.out.println("AÑADE ALGO");
-						}
+		} while (!correcto);
 
+	}
+
+	public static LocalDate validarFecha(String f1) throws Exception {
+
+		String posible = null;
+		LocalDate fecha = null;
+		DateTimeFormatter patron = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		int contador = 0;
+
+		// Recorremos carácter por carácter
+		for (int i = 0; i < f1.length(); i++) {
+
+			// Si es dígito, puede comenzar una fecha
+			if (Character.isDigit(f1.charAt(i))) {
+
+				// Aseguramos que caben 10 caracteres
+				if (i + 10 <= f1.length()) {
+
+					posible = f1.substring(i, i + 10);
+
+					try {
+						// Intentamos parsear con patrón
+						fecha = LocalDate.parse(posible, patron);
+						contador++;
+
+					} catch (DateTimeException e) {
+						// No hacemos nada, simplemente ignoramos esta posición
 					}
 				}
 			}
-			
-		} while (!correcto);
+		}
 
+		// Validaciones del ejercicio
+		if (contador == 0) {
+			throw new Exception("NO SE HA ENCONTRADO NINGUNA FECHA VALIDA.");
+		}
+		if (contador > 1) {
+			throw new Exception("SE HAN ENCONTRADO VARIAS FECHAS EN LA CADENA.");
+		}
+
+		return fecha;
 	}
 
 }
