@@ -3,16 +3,16 @@ package PracticaArray;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class ejercicio4 {
+public class ejercicio5 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		/*
-		 * Programa que lee 5 nombres de personas. Introducirlos en un array y
-		 * ordenarlos alfabéticamente (usar método sort de la clase Arrays). Llevad otro
-		 * array con el número de ventas de cada uno de ellos, inicialmente cero.
-		 * Comprobar si otro nombre introducido después se encuentra entre esos 5.
+		 * Queremos llevar las ventas de 6 comerciales. Primero anota el nombre de los
+		 * comerciales. Después, mientras lo desee el usuario lee el nombre de comercial
+		 * y las unidades vendidas por éste y acumúlalas. Al finalizar muestra por cada
+		 * comercial el número de ventas realizadas.
 		 */
 
 		Scanner sc = new Scanner(System.in);
@@ -66,7 +66,7 @@ public class ejercicio4 {
 
 			}
 		} while (encontrado == false);
-
+		
 	}
 
 }
