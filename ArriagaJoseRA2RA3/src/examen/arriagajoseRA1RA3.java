@@ -31,7 +31,7 @@ public class arriagajoseRA1RA3 {
 			try {
 				System.out.println("CODIGO DE EMPLEADO EJEM TU DEPART MKT,DES,RRH Y CODIGO ****");
 				empleado = sc.nextLine();
-				empleado.toUpperCase();
+				empleado=empleado.toUpperCase();
 
 				/*
 				 * if (empleado.substring(0,2) != "MKT" ) {
@@ -63,15 +63,16 @@ public class arriagajoseRA1RA3 {
 
 				entrada = LocalTime.parse(fichaje);
 				salida = LocalTime.parse(fichajesalida);
+				System.out.println("todo bien");
+				correcto = true;
+
 
 				if (entrada.isAfter(salida)) {
 					System.out.println("Error: la primera hora no puede ser despues de la segunda");
 					correcto = false;
 				}
 
-				System.out.println("todo bien");
-				correcto = true;
-
+			
 			} catch (DateTimeParseException e) {
 				System.out.println("Error: EL FORMATO DE TU FECHA ESTA MAL");
 			}
@@ -117,19 +118,19 @@ public class arriagajoseRA1RA3 {
 			break;
 		}
 
+		long horas =(int) Math.abs(ChronoUnit.HOURS.between(entrada, salida));
+		long MM = (int)(Math.abs(ChronoUnit.MINUTES.between(entrada, salida)));
+		System.out.println("HORAS TRABAJADAS " +MM/60 + "HORAS Y " + MM%60 + "MINUTOS");
+		
 		if (entrada.isAfter(horaentrada)) {
-			throw new retrasoException(" JOSE ARRIAGA HAS LLEGADO TARDE");
+			throw new retrasoException(" JOSE ARRIAGA HAS LLEGADO TARDE, HORAS TRABAJAS"+horas);
 		}
 		if (salida.isBefore(horasalida)) {
-			throw new salidaantes(" JOSE ARRIAGA HAS SALIDO ANTES DE TU HORA");
+			throw new salidaantes(" JOSE ARRIAGA HAS SALIDO ANTES DE TU HORA, HORAS TRABAJADAS"+horas);
 		}
-		
-		long horas =(int) Math.abs(ChronoUnit.HOURS.between(entrada, salida));
-		long MM = Math.abs(ChronoUnit.MINUTES.between(entrada, salida));
-		System.out.println("HORAS TRABAJADAS " +horas + "HORAS Y " + MM + "MINUTOS");
 
 
-		return (int) horas;
+		return (int) MM;
 
 	}
 
