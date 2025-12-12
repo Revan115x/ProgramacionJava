@@ -33,6 +33,9 @@ public class arriagajoseRA1RA3 {
 		LocalTime entrada = null;
 		LocalTime salida = null;
 		
+		int incidencias=0;
+		
+		
 		DayOfWeek primer=DayOfWeek.MONDAY;//Mostrar el dia de la semana,lo empezamos en lunes
 		
 		sc = new Scanner(System.in);//LLamamos al Scanner
@@ -65,7 +68,6 @@ public class arriagajoseRA1RA3 {
 		
 		//Inicializamos correcto otra vez
 		correcto = false;
-
 		
 		//Bucle para ir leyendo el horario de entrada y salida de lunes a viernes
 		for (int i = 0; i < 5; i++) {
@@ -99,20 +101,22 @@ public class arriagajoseRA1RA3 {
 
 			} while (!correcto);
 
-			
 			//Cuando ya tenemos las horas bien ya comparamos el departemento y las horas trabajadas
 			try {
 
 				int tiempo = calcularhoras(entrada, salida, empleado);
 
 			} catch (retrasoException e) {
+				incidencias++;
 				System.out.println(e.getMessage());
 			} catch (salidaantes e) {
+				incidencias++;
 				System.out.println(e.getMessage());
 			}
 
 		}
 		
+		System.out.println("Esta semana has tenido este total de incidencias :"+incidencias);
 		System.out.println("FIN DEL PROGRAMA");
 
 	}
@@ -123,7 +127,8 @@ public class arriagajoseRA1RA3 {
 		//Creamos las variables que compararemos con nuestras horas
 		LocalTime horaentrada = null;
 		LocalTime horasalida = null;
-
+		int cont=0;
+		
 		//Sacamos el subtring del empleado para validar el departamento 
 		String cod = usuario.substring(0, 3);
 
