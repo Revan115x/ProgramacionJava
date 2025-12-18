@@ -24,6 +24,8 @@ public class ejemplo8 {
 			System.out.println("Introduce los numeros");
 			num[i] = sc.nextInt();
 			cont++;
+			
+			
 
 		}
 
