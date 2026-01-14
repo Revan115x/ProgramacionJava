@@ -24,18 +24,29 @@ public class ExamenArrays {
 			temp = sc.nextDouble();
 
 			if (temp > 0) {
-				positivos[i]=temp;
+				positivos[contpositivos]=temp;
 				contpositivos++;
 			} else {
-				negativos[i]=temp;
+				negativos[contnegativos]=temp;
 				contnegativos++;
 			}
 		}
-
+		
 		Arrays.sort(positivos, 0, contpositivos);
 		Arrays.sort(negativos, 0, contnegativos);
 
-		System.out.println("Buscar temp");
+		System.out.println("Temperaturas positivas");
+		for (int i = 0; i < contpositivos; i++) {
+			System.out.println(positivos[i]);
+		}
+		
+		System.out.println("Temperaturas negativas");
+		for (int i = 0; i < contnegativos; i++) {
+			System.out.println(negativos[i]);
+		}
+		
+
+		//System.out.println("Buscar temp");
 		buscar = sc.nextDouble();
 
 		for (int i = 0; i < contpositivos; i++) {
@@ -56,7 +67,7 @@ public class ExamenArrays {
 
 		if (encontrado == 0) {
 			System.out.println("no esta en ningun array tu temperatura");
-		}
+		}//
 
 	}
 
