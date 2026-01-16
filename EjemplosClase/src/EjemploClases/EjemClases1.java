@@ -1,10 +1,7 @@
 
-package Practicas;
+package EjemploClases;
 import java.util.*;
-/**
- *
- * @author rcerrato
- */
+
 public class EjemClases1 {
     
     public static void main(String[] args) {
