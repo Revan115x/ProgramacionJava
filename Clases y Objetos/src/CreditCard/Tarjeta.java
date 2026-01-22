@@ -30,7 +30,7 @@ public class Tarjeta {
 			System.out.println("Contraseña incorrecta");
 			return false;
 		}
-		if(M==mes) {
+		if(M==mes ) {
 			System.out.println("mes caducada");
 			return false;
 		}
