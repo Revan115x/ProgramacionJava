@@ -86,7 +86,7 @@ public class Main {
 				break;
 			case 5:
 				System.out.println("Fin del programa");
-				System.out.println("Total vehiculos alquolados:"+Vehiculo.geta));
+				System.out.println("Total vehiculos alquolados:"+Vehiculo.geta());
 			default:
 				System.out.println("Opción incorrecta");
 		}
