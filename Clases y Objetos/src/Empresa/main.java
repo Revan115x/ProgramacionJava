@@ -10,11 +10,12 @@ public class main {
 		double metros, alquilarGaraje;
 		double plazaprecio;
 		boolean encontrado = false;
+		double beneficiosTotales = 0;
 
 		Empresa alquiler[] = new Empresa[5];
 		Scanner sc = new Scanner(System.in);
 
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 5; i++) {
 
 			System.out.println("Numero de plaza:");
 			numero = sc.nextInt();
@@ -41,28 +42,98 @@ public class main {
 
 			switch (opcion) {
 			case 1:
-				System.out.println("Introduce el número del garaje que quieres alquilar:");
+				System.out.print("Introduce el número del garaje: ");
 				numero = sc.nextInt();
-				alquilarGaraje = alquiler[numero].alquiler();
+
+				encontrado = false;
+
 				for (int i = 0; i < alquiler.length; i++) {
-					if (alquilarGaraje == 0) {
-						System.out.println("El garaje ya está alquilado.");
+
+					if (alquiler[i] != null && alquiler[i].getNum() == numero) {
+
+						encontrado = true;
+
+						double precio = alquiler[i].alquiler();
+						beneficiosTotales += precio;
+
+						if (precio == 0) {
+							System.out.println("El garaje ya está alquilado.");
+						} else {
+							System.out.println("Garaje alquilado correctamente.");
+							System.out.println("Precio anual: " + precio + " €");
+						}
+						break;
 					}
-					System.out.println("Garaje alquilado. Precio: " + alquilarGaraje);
-					encontrado = true;
-					break;
 				}
+
 				if (!encontrado) {
-					System.out.println("Garaje no encontrado.");
+					System.out.println("No existe ningún garaje con ese número.");
 				}
 				break;
+
 			case 2:
-				System.out.println("Introduce el número del garaje:");
+				System.out.print("Introduce el número del garaje: ");
 				numero = sc.nextInt();
-				System.out.println("El precio de alquiler del garaje " + numero + " es: " + alquiler[numero].getFinalprecio());
+				encontrado = false;
+				for (int i = 0; i < alquiler.length; i++) {
+					if (alquiler[i] != null && alquiler[i].getNum() == numero) {
+						System.out.println("Precio del garaje: " + alquiler[i].getFinalprecio() + " €");
+						encontrado = true;
+						break;
+					}
+				}
+
+				if (!encontrado)
+					System.out.println("Garaje no encontrado.");
 				break;
+			case 3:
+				System.out.println("GARAJES DISPONIBLES:");
+
+				boolean hayLibres = false;
+
+				for (int i = 0; i < alquiler.length; i++) {
+					if (alquiler[i] != null && !alquiler[i].isAlquilado()) {
+						System.out.println(alquiler[i]);
+						hayLibres = true;
+					}
+				}
+
+				if (!hayLibres)
+					System.out.println("No hay garajes libres.");
+
+				break;
+			case 4:
+				System.out.print("Número del garaje: ");
+				numero = sc.nextInt();
+
+				System.out.print("Porcentaje de subida: ");
+				double porcentaje = sc.nextDouble();
+
+				encontrado = false;
+
+				for (int i = 0; i < alquiler.length; i++) {
+					if (alquiler[i] != null && alquiler[i].getNum() == numero) {
+
+						encontrado = true;
+
+						if (alquiler[i].subirPrecio(porcentaje))
+							System.out.println("Precio actualizado.");
+						else
+							System.out.println("No se puede subir: garaje alquilado.");
+
+						break;
+					}
+				}
+
+				if (!encontrado)
+					System.out.println("Garaje no encontrado.");
+
+				break;
+			case 5:
+				System.out.println("Beneficios totales: " + beneficiosTotales + " €");
+				break;
+
 			}
 		} while (opcion != 0);
-
 	}
 }

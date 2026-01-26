@@ -25,17 +25,18 @@ public class Empresa {
 	private int num;
 	private double metros;
 	private int planta;
-	private static final double baseprecio=18;
-	private double finalprecio,beneficios;
+	private static final double baseprecio = 18;
+	private double finalprecio;
+	private static double beneficios;
 	private boolean alquilado;
 
-	public Empresa(int num, int planta ,double metros) {
+	public Empresa(int num, int planta, double metros) {
 		super();
 		this.num = num;
 		this.planta = planta;
 		this.metros = metros;
-		
-		finalprecio=baseprecio;
+
+		finalprecio = baseprecio;
 
 		/* Precio por planta */
 		if (planta == 1)
@@ -54,20 +55,20 @@ public class Empresa {
 	}
 
 	public double alquiler() {
-		if(alquilado==true)
+		if (alquilado == true)
 			return 0;
-		alquilado=true;
-		beneficios+=finalprecio;
+		alquilado = true;
+		beneficios += finalprecio;
 		return finalprecio;
 	}
-	
+
 	public boolean subirPrecio(double porcentaje) {
-		if(alquilado)
+		if (alquilado)
 			return false;
-	
+
 		finalprecio += finalprecio * porcentaje / 100;
-	    return true;		
-		
+		return true;
+
 	}
 
 	public int getNum() {

@@ -13,7 +13,8 @@ public class main {
 		 * operaciones: - Constructor 
 		 * 
 		 * - Método que devuelva la información de cadacargamento de fruta. 
-		 * - Método “rebajar” que rebaja el precio de venta en una cantidad pasada como parámetro, (el precio de venta nunca puede ser menor que
+		 * - Método “rebajar” que rebaja el precio de venta en una cantidad pasada como parámetro, 
+		 *   (el precio de venta nunca puede ser menor que
 		 * el precio de coste). 
 		 * - Método “vender”: se le pasa el número de kilos a vender y si hay suficiente cantidad, 
 		 * se decrementa el número de kilos y se devuelve el importe de la venta, sino da error. 
@@ -28,11 +29,35 @@ public class main {
 		 * - Muestre el beneficio obtenido por el almacén.
 		 */
 
-		Almacen s1 = new Almacen("Manzanas", "Chile", 1000, 2.5, 1.5);
+		Almacen s1 = new Almacen("Manzanas", "España", 1000, 2.5, 1.5);
 		Almacen s2 = new Almacen("Naranjas", "España", 500, 3.0, 2.0);
-		System.out.println(s1.getNombre());
-		System.out.println(s2.toString());
 		
+		
+		/*/*información de cadacargamento de fruta*/
+		System.out.println("Informacion Cargamento :"+ s1.Infocargemento());
+		
+		
+		/*Rebajar precio a fruta*/
+		s1.rebajar(0.3);
+		
+		System.out.println("Precio despues de rebajar "+ s1.getPrecioV());
+		
+		
+		/*Vender fruta*/
+		double venta1 = s1.vender(200); // vendemos 200 kg de s1
+		double venta2 = s2.vender(100); // vendemos 100 kg de s2
+		System.out.println("Venta 1: " + venta1 + " €");
+		System.out.println("Venta 2: " + venta2 + " €");
+
+		
+		/*Comparar si tienen la misma procedencia*/
+		if(s1.mismaProcedencia(s2))
+			System.out.println("si tienen la misma procedencia");
+		else
+			System.out.println("no tienen la misma procedencia");
+			
+		System.out.println("Beneficio total del almacén: " + Almacen.getBeneficio() + " €");
+
 		
 	}
 

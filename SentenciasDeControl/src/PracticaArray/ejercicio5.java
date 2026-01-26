@@ -31,6 +31,7 @@ public class ejercicio5 {
 		}
 
 		Arrays.sort(nombre);
+		
 		// for para leer las ventas
 
 		for (int j = 0; j < ventas.length; j++) {
@@ -41,9 +42,9 @@ public class ejercicio5 {
 		}
 
 		//limpiar buffer despues de leer int
+		
 		sc.nextLine();
 	
-		
 		// boolean para seguir en el bucle en caso de no encontrar al usuario
 		boolean encontrado = false;
 
@@ -53,7 +54,6 @@ public class ejercicio5 {
 			System.out.println("nombre empleado");
 			buscar = sc.nextLine();
 
-			
 			//for para pasar por cada usuario y leerlo
 			
 			for (int i = 0; i < nombre.length; i++) {
