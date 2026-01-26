@@ -29,11 +29,12 @@ public class Empresa {
 	private double finalprecio,beneficios;
 	private boolean alquilado;
 
-	public Empresa(int num, double metros, int planta ,int periodo) {
+	public Empresa(int num, int planta ,double metros) {
 		super();
 		this.num = num;
 		this.planta = planta;
 		this.metros = metros;
+		
 		finalprecio=baseprecio;
 
 		/* Precio por planta */
@@ -50,8 +51,6 @@ public class Empresa {
 			finalprecio += 1.5;
 		if (metros < 3)
 			finalprecio -= 1;
-		
-		
 	}
 
 	public double alquiler() {
@@ -69,6 +68,58 @@ public class Empresa {
 		finalprecio += finalprecio * porcentaje / 100;
 	    return true;		
 		
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public double getMetros() {
+		return metros;
+	}
+
+	public void setMetros(double metros) {
+		this.metros = metros;
+	}
+
+	public int getPlanta() {
+		return planta;
+	}
+
+	public void setPlanta(int planta) {
+		this.planta = planta;
+	}
+
+	public double getFinalprecio() {
+		return finalprecio;
+	}
+
+	public void setFinalprecio(double finalprecio) {
+		this.finalprecio = finalprecio;
+	}
+
+	public double getBeneficios() {
+		return beneficios;
+	}
+
+	public void setBeneficios(double beneficios) {
+		this.beneficios = beneficios;
+	}
+
+	public boolean isAlquilado() {
+		return alquilado;
+	}
+
+	public void setAlquilado(boolean alquilado) {
+		this.alquilado = alquilado;
+	}
+
+	public static double getBaseprecio() {
+		return baseprecio;
 	}
 
 	@Override
