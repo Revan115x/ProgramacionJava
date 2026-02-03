@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class Teatro {
+public class Representacion {
 
 	/*
 	 * Nombre del Alumno: Se quieren gestionar las entradas de una pequeña sala de
@@ -44,17 +44,23 @@ public class Teatro {
 	
 	private String codigo;
 	private String titulo;
-	private LocalDateTime fecha;
+	private LocalDate fecha;
 	private int entradasVIP=15;
 	private int entradasNormales=25;
 	private static final int MAX_VIP = 15;
 	private static final int MAX_NORMALES = 25;
 
 	
-	public Teatro(String titulo, LocalDateTime fecha) {
+	public Representacion(String titulo, LocalDate fechaObra) {
 		this.titulo = titulo;
-		this.fecha = fecha;
-		this.codigo = titulo.substring(0, 3).toUpperCase() + "-" + fecha.getDayOfMonth()+""+fecha.getMonthValue();
+		this.fecha = fechaObra;
+		this.codigo = titulo.substring(0, 3).toUpperCase() + "-" + fechaObra.getMonthValue()+""+fechaObra.getDayOfMonth();
 	}
+
+	public LocalDate getFecha() {
+		return fecha;
+	}
+	
+	
 	
 }

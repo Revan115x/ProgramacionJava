@@ -13,12 +13,13 @@ public class main {
 
 		Scanner sc = new Scanner(System.in);
 
-		String fecha,tituloObra ;
-		LocalDate fechaObra;
+		String fecha, tituloObra = null;
+		LocalDate fechaObra = null;
 		DateTimeFormatter patron = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		boolean fechaValida = false;
+		int cont=0;
 
-		Teatro proyectos[] = new Teatro[10];
+		Representacion proyectos[] = new Representacion[10];
 		int opcion;
 
 		do {
@@ -29,11 +30,17 @@ public class main {
 			System.out.println("5. Mostrar el importe total recaudado");
 			System.out.println("6. Salir");
 			opcion = sc.nextInt();
+			sc.nextLine(); // Limpiar buffer
 
 			switch (opcion) {
 			case 1:
-				sc.nextLine(); // Limpiar buffer
+				
+				if(cont==proyectos.length)
 				do {
+
+					System.out.println("Dime el título de la obra:");
+					tituloObra = sc.nextLine();
+
 					try {
 						System.out.println("Dar de alta afecha de la obra | dd/mm/yyyy |");
 						fecha = sc.nextLine();
@@ -42,17 +49,12 @@ public class main {
 
 					} catch (DateTimeParseException e) {
 						System.out.println("Fecha no válida");
-					} 
-					
-				System.out.println("Dime el título de la obra:");
-				tituloObra= sc.nextLine();
-				proyectos[0]= new Teatro(tituloObra, fechaObra);
-					
-					
+					}
+
 				} while (!fechaValida);
-				
-				
-				
+
+				proyectos[cont] = new Representacion(tituloObra, fechaObra);
+
 				break;
 			case 2:
 				// Ordenar las representaciones
@@ -77,5 +79,18 @@ public class main {
 		} while (opcion != 6);
 
 	}
+	
+	public static boolean buscarFecha(Representacion proyectos[],int cont,LocalDate f) {
+		
+		for(int i=0;i<cont;i++) {
+			if(proyectos[i].getFecha().isEqual(f))
+				return true;
+		}
+		
+		return false;
+		
+	}
 
 }
+
+
