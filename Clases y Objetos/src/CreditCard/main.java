@@ -31,7 +31,6 @@ public class main {
 
 			switch (menu) {
 			/***************************************************************/
-
 			case 1:
 
 				System.out.println("Numero tarjeta");
@@ -59,9 +58,8 @@ public class main {
 				break;
 
 			/********************************************************************/
-
 			case 2:
-				
+
 				System.out.println("Numero tarjeta");
 				numero = sc.nextLine();
 
@@ -71,22 +69,26 @@ public class main {
 					System.out.println("Tarjeta no encontrada");
 					break;
 				}
-				
+
 				if (clientes[pos].isBloqueado()) {
-				    System.out.println("La tarjeta ya está bloqueada");
+					System.out.println("La tarjeta ya está bloqueada");
+					System.out.println("quieres Desbloquearla?");
+					boolean desbloquear = sc.nextBoolean();
+
+					if (desbloquear)
+						clientes[pos].setBloqueado(true);
+					System.out.println("Has desbloqueado tarjeta");
+
 				} else {
-				    System.out.println("¿Deseas bloquear la tarjeta? (true/false)");
-				    boolean bloquear = sc.nextBoolean();
-				    sc.nextLine();
+					System.out.println("¿Deseas bloquear la tarjeta? (true/false)");
+					boolean bloquear = sc.nextBoolean();
+					sc.nextLine();
 
-				    if (bloquear) {
-				        clientes[pos].setBloqueado(true);
-				        System.out.println("Tarjeta bloqueada correctamente");
-				    }
+					if (bloquear) {
+						clientes[pos].setBloqueado(true);
+						System.out.println("Tarjeta bloqueada correctamente");
+					}
 				}
-
-					
-				
 				break;
 
 			/********************************************************************/
@@ -96,7 +98,7 @@ public class main {
 				System.out.println("Numero tarjeta");
 				numero = sc.nextLine();
 
-				int pos = buscar(clientes, cont, numero);
+				pos = buscar(clientes, cont, numero);
 
 				if (pos == -1) {
 					System.out.println("Tarjeta no encontrada");
@@ -209,11 +211,11 @@ public class main {
 				System.out.println("Tarjeta borrada con éxito.");
 
 				break;
-				
+
 			case 7:
-				
-				System.out.println("Numero de tarjetas bloqueadas son" + Tarjeta.getNumBloqueadas() );
-				
+
+				System.out.println("Numero de tarjetas bloqueadas son" + Tarjeta.getNumBloqueadas());
+
 				break;
 
 			}

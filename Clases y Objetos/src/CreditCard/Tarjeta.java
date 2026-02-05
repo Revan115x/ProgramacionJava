@@ -23,7 +23,7 @@ public class Tarjeta {
 		this.año = año;
 	}
 
-	public void bloquear(boolean block, int cont) {
+	public void bloquear(boolean block, int cont,boolean unlock) {
 
 		if (block == true) {
 			System.out.println("HAS BLOQUEADO LA TARJETA");
@@ -39,6 +39,9 @@ public class Tarjeta {
 
 		if (bloqueado == false)
 			System.out.println("NO ESTA BLOQUEADAE");
+		
+		if(unlock==true)
+			bloqueado=false;
 	}
 
 	public boolean Pagar(String contraseña, double pago, int M, int A, int contIntentos) {
@@ -150,9 +153,13 @@ public class Tarjeta {
 	public void setBloqueado(boolean bloqueado) {
 		this.bloqueado = bloqueado;
 	}
+	
+	
 
 	public void setCredito(Double credito) {
 		this.credito = credito;
 	}
+	
+	
 
 }
