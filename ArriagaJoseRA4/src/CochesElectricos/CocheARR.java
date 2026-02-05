@@ -28,10 +28,6 @@ public class CocheARR {
 	public String getMatricula() {
 		return matricula;
 	}
-	
-	public void getMatricula(String matricula) {
-		this.matricula;
-	}
 
 	
 	
