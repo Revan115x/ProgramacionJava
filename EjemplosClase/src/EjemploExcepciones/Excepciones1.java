@@ -44,6 +44,18 @@ public class Excepciones1 {
 			
 		}
 		
+		
+		/*Imposible convertir una cadena a un tipo de dato concreto:
+		NumberFormatException, DateTimeParseException.
+		➢ No poder crear una fecha o una hora porque los datos son incorrectos (
+		método of): DateTimeException
+		➢ Que al leer un número el formato no sea correcto:
+		InputMistMachException.
+		➢ Salirnos de los límites de un String: StringIndexOutOfBoundsException.
+		➢ Dividir por cero: ArithMeticException.
+		➢ Intentar acceder a un objeto que está sin instanciar:
+		NullPointerException*/
+				
 		System.out.println("N�mero leido:"+numero2);
 		
 		try {

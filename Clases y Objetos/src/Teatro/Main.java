@@ -1,4 +1,4 @@
-package Teatro;
+package TeatroJoan;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
