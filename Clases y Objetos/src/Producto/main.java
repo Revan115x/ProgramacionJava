@@ -13,9 +13,9 @@ public class main {
         int opcion = -1;
 
         while (opcion != 0) {
-            System.out.println("\n*****************************************");
-            System.out.println("* SISTEMA DE INVENTARIO         *");
-            System.out.println("*****************************************");
+            System.out.println("**1*****************************************");
+            System.out.println("*           SISTEMA DE INVENTARIO         *");
+            System.out.println("*******************************************");
             System.out.println("1. Listar Productos");
             System.out.println("2. Borrar Producto (Desplazar Izquierda)");
             System.out.println("3. Ordenar Ascendente (Burbuja)");

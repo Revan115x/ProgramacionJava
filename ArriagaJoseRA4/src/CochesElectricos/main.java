@@ -17,7 +17,7 @@ public class main {
 		CocheARR autos[] = new CocheARR[10];
 
 		do {
-			System.out.println("\n--- MENU AUTOS ---");
+			System.out.println("e--- MENU AUTOS ---");
 			System.out.println("1. Registrar auto");
 			System.out.println("2. Reservar auto Libre");
 			System.out.println("3. Alquilar auto Reservado");
@@ -46,7 +46,7 @@ public class main {
 						reservado = sc.nextBoolean();
 					}
 						autos[cont] = new CocheARR(matricula, alquilado, reservado);
-						/* CocheARR autos1 = new CocheARR("0048AKC", false,false); */
+						/*CocheARR autos[cont] = new CocheARR("0048AKC", false,false); */
 						cont++;
 				}
 					break;

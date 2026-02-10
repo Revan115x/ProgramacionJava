@@ -1,4 +1,4 @@
-package Alumnos;
+package Alumnos.ArrayList;
 
 import java.util.ArrayList;
 import java.util.Locale;
