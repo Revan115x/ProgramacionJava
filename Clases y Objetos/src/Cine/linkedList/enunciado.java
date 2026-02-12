@@ -1,4 +1,4 @@
-package Cine;
+package Cine.linkedList;
 
 public class enunciado {
 

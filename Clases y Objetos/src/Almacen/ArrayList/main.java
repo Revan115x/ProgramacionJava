@@ -34,6 +34,7 @@ public class main {
 			System.out.println("0. salir.");
 			System.out.print("Seleccione una opción: ");
 			opcion = sc.nextInt();
+			sc.nextLine();
 			switch (opcion) {
 			case 1:
 				crearCargamento(sc, val, almacen);
