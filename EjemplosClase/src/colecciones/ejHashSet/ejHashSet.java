@@ -12,6 +12,11 @@ public class ejHashSet {
     numbers.add(4);
     numbers.add(7);
     numbers.add(8);
+    
+    if(numbers.contains(8))
+		System.out.println("El 9 est� en el conjunto");
+	else
+		System.out.println("El 9 no est� en el conjunto");
 
     // Recorrer el set
     System.out.println("Elementos del conjunto:");

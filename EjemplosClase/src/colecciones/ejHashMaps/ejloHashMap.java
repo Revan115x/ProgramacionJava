@@ -9,11 +9,19 @@ public class ejloHashMap {
 
         // Insertar pares clave-valor
         edades.put("Juan", 30);
-        edades.put("Mar�a", 25);
+        edades.put("Maria", 25);
         edades.put("Pedro", 40);
 
         // Acceder a un valor asociado a una clave
         System.out.println("La edad de Mar�a es: " + edades.get("Mar�a"));
+        String nombreC="Maria";
+        System.out.println("hashCode de "+nombreC+" es: "+nombreC.hashCode());
+        nombreC="juan";
+        System.out.println("hashCode de "+nombreC+" es: "+nombreC.hashCode());
+        nombreC="Pedro";
+        System.out.println("hashCode de "+nombreC+" es: "+nombreC.hashCode());
+        
+        System.out.println(edades.toString(	));
 
         // Comprobar si una clave existe
         if (edades.containsKey("Pedro")) {
