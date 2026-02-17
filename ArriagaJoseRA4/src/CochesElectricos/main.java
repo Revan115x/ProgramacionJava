@@ -16,6 +16,7 @@ public class main {
 		int cont = 0;
 		CocheARR autos[] = new CocheARR[10];
 
+		autos [cont] = new CocheARR("0048AKC", false,false);
 		do {
 			System.out.println("e--- MENU AUTOS ---");
 			System.out.println("1. Registrar auto");
@@ -46,7 +47,7 @@ public class main {
 						reservado = sc.nextBoolean();
 					}
 						autos[cont] = new CocheARR(matricula, alquilado, reservado);
-						/*CocheARR autos[cont] = new CocheARR("0048AKC", false,false); */
+						autos [cont] = new CocheARR("0048AKC", false,false);
 						cont++;
 				}
 					break;
@@ -83,19 +84,7 @@ public class main {
 				} while (!correcto);
 				break;
 				
-			case 4:
-				/*NO ME DIO TIEMPO*/
-				System.out.println("NUMERO MATRICULA");
-				matricula=sc.nextLine();
-				for (int i = 0; i < cont; i++) {
-				int buscar=buscar(autos[i],matricula,cont);
-					if (buscar.alquilado() == 2) {
-						correcto=true;
-						System.out.println(autos.toString());
-					}
-				}
-				
-				break;
+	
 			}
 		} while (opc != 6);
 	}

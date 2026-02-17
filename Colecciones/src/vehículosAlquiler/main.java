@@ -14,9 +14,11 @@ public class main {
 		int opc, pos;
 		double importeAlquiler;
 
-		HashMap<String, vehiculos> Autos = new HashMap<String, vehiculos>();
-		Scanner sc = new Scanner(System.in);
+		HashMap<String, Vehiculo> Autos = new HashMap<String, Vehiculo>();
 		
+		Scanner sc = new Scanner(System.in);
+		for (int i = 0; i < 5; i++) {
+			System.out.println("AUTO NUMERO: " +i);
 			do {
 				System.out.println("Introduce matrícula:");
 				matricula = sc.nextLine();
@@ -31,26 +33,29 @@ public class main {
 			// Validar categoria
 			System.out.println("Categoria:(1/2)");
 			categoria = sc.nextInt();
-			Autos.
-
+			
+			Autos.put(matricula, new Vehiculo(matricula, modelo, marca, año, categoria));
+			sc.nextLine(); // limpiar buffer
+		}
 		do {
 			System.out.println("1.Alquilar.\n2.Devolver.\n3.Inf.\n4.Información general\n5.Salir");
 			opc = sc.nextInt();
+			sc.nextLine(); // limpiar buffer
 			switch (opc) {
+			
 			case 1:
-				sc.nextLine(); // limpiar buffer
 				System.out.println("Introduce matrícula:");
 				matricula = sc.nextLine();
-				pos = buscarMatricula(vehiculos, matricula);
-				if (pos == -1)
+
+				if (!Autos.containsKey(matricula))
 					System.out.println("No existe ese vehículo");
 				else {
-					if (vehiculos[pos].isAlquilado())
+					if (Autos.get(matricula).isAlquilado())
 						System.out.println("Ya está alquilado");
 					else {
 						System.out.println("Por cuántos días quieres alquilarlo:");
 						dias = sc.nextInt();
-						importeAlquiler = vehiculos[pos].alquilar(dias);
+						importeAlquiler = Autos.get(matricula).alquilar(dias);
 						if (importeAlquiler == 0)
 							System.out.println("Error alquilando, avise a sistemas");
 						System.out.println("El importe de su alquiler es:" + importeAlquiler);
@@ -61,11 +66,10 @@ public class main {
 				sc.nextLine(); // limpiar buffer
 				System.out.println("Introduce matrícula:");
 				matricula = sc.nextLine();
-				pos = buscarMatricula(vehiculos, matricula);
-				if (pos == -1)
+				if (Autos.get(matricula).isAlquilado())
 					System.out.println("No existe ese vehículo");
 				else {
-					if (!vehiculos[pos].devolver())
+					if (Autos.get(matricula).devolver())
 						System.out.println("vehiculo devuelto con éxito");
 					System.out.println(" Error devolviendo, avise a sistemas");
 				}
@@ -74,15 +78,15 @@ public class main {
 				sc.nextLine(); // limpiar buffer
 				System.out.println("Introduce matrícula:");
 				matricula = sc.nextLine();
-				pos = buscarMatricula(vehiculos, matricula);
-				if (pos == -1)
+				if (Autos.get(matricula).isAlquilado())
 					System.out.println("No existe ese vehículo");
 				else
-					System.out.println(vehiculos[pos].toString());
+					System.out.println(Autos);
 				break;
 			case 4:
-				for (int i = 0; i < vehiculos.length; i++)
-					System.out.println(vehiculos[i].toString());
+				for (String key : Autos.keySet()) {
+					System.out.println(Autos.get(key));
+				}
 				break;
 			case 5:
 				System.out.println("Fin del programa");
@@ -92,22 +96,6 @@ public class main {
 			}
 		} while (opc != 5);
 
-	}
-
-	/**
-	 * Busca la matrícula en el array de vehículos
-	 * 
-	 * @param v
-	 * @param mat
-	 * @return Devuelve la posición dónde ha encontrado el vehículo con esa
-	 *         matrícula, -1 si no lo encuentra
-	 */
-	public static int buscarMatricula(Vehiculo v[], String mat) {
-		for (int i = 0; i < v.length; i++)
-			if (v[i].getMatricula().equalsIgnoreCase(mat))
-				return i;
-
-		return -1;
 	}
 
 }
