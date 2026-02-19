@@ -1,4 +1,4 @@
-package Cine.linkedList.copy;
+package Cine2_Objetos;
 
 import java.util.LinkedList;
 import java.util.Random;
