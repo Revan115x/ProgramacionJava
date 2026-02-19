@@ -1,4 +1,4 @@
-package vehículosAlquiler;
+package vehículosAlquiler_HashMap;
 
 public class Vehiculo {
 

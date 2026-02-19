@@ -1,4 +1,4 @@
-package vehículosAlquiler;
+package vehículosAlquiler_HashMap;
 
 import java.util.HashMap;
 import java.util.Scanner;

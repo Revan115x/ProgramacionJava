@@ -1,4 +1,4 @@
-package Instrumentos;
+package Instrumentos_HashSet;
 
 import java.util.HashSet;
 import java.util.Scanner;

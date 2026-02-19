@@ -1,4 +1,4 @@
-package Nacionalidad;
+package Nacionalidad_HashMap;
 
 import java.util.HashMap;
 import java.util.Scanner;

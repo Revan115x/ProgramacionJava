@@ -1,4 +1,4 @@
-package Cine.linkedList;
+package Cine.LinkedList;
 
 import java.util.LinkedList;
 
