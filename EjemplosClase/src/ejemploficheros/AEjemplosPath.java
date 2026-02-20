@@ -14,9 +14,7 @@ public class AEjemplosPath {
 		Path ruta2=Paths.get("../hola.txt");
 		infoPath(ruta2);
 				
-		
 		// C�MO OBTENER UN PATH A PARTIR DE DATOS ANOTADOS DE TECLADO
-		
 		
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Introduce una ruta:");

@@ -18,9 +18,9 @@ public class main {
 
 		do {
 			System.out.println("╔══════════════════════════════╗");
-			System.out.println("║        📬 MENU CORREOS        ║");
+			System.out.println("║         MENU CORREOS         ║");
 			System.out.println("╠══════════════════════════════╣");
-			System.out.println("║ 1 Guardar Carta Ordenada     ║");
+			System.out.println("║ 1  Guardar Carta Ordenada    ║");
 			System.out.println("║ 2️  Clasificar Cartas         ║");
 			System.out.println("║ 3️  Mostrar Colecciones       ║");
 			System.out.println("║ 0️  Salir                     ║");
