@@ -4,14 +4,13 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
 
-
 public class notas {
 
-	/*Version hashMap de alumnos*/
-	
+	/* Version hashMap de alumnos */
+
 	public static void main(String[] args) {
 		HashMap<String, Double> notas = new HashMap<String, Double>();
-		
+
 		Scanner sc = new Scanner(System.in);
 		int opc, pos;
 		double nota;
@@ -33,24 +32,24 @@ public class notas {
 			case 1:
 				System.out.println("Nombre alumno");
 				nombre = sc.nextLine();
-				/*Comprobamos si existe el alumno, si esta no podemos seguir*/
+				/* Comprobamos si existe el alumno, si esta no podemos seguir */
 				if (notas.containsKey(nombre)) {
 					System.out.println("Ya existe ese alumno");
-					opc=6;
-				}else {
+					opc = 6;
+				} else {
 					System.out.println("Introduce nota: ");
 					nota = sc.nextDouble();
-					/*Guardamos los datos que hemos recogido en notas*/
-					notas.put(nombre,nota);
+					/* Guardamos los datos que hemos recogido en notas */
+					notas.put(nombre, nota);
 				}
 				break;
 			case 2:
 				System.out.println("nombre alumno");
-				nombre = sc.nextLine(); 
+				nombre = sc.nextLine();
 				if (!notas.containsKey(nombre)) {
 					System.out.println("No existe ese alumno");
-					opc=6;
-				}else {
+					opc = 6;
+				} else {
 					System.out.println("Introduce la nueva nota: ");
 					nota = sc.nextDouble();
 					notas.put(nombre, nota);
@@ -63,9 +62,9 @@ public class notas {
 					System.out.println("NO EXISTE EL ALUMNO");
 				else {
 					System.out.println("Nombre nuevo Alumno");
-					nombre=sc.nextLine();
+					nombre = sc.nextLine();
 					System.out.println("Introduce la nota del nuevo Alumno");
-					nota=sc.nextDouble();
+					nota = sc.nextDouble();
 					notas.put(nombre, nota);
 				}
 				break;
@@ -75,20 +74,22 @@ public class notas {
 				if (!notas.containsKey(nombre))
 					System.out.println("NO EXISTE EL ALUMNO NO LO PUEDES ELIMINAR");
 				else {
-					System.out.println("SE HA ELIMINADO CORRECTAMENTE HA "+notas.get(nombre));
+					System.out.println("SE HA ELIMINADO CORRECTAMENTE HA " + notas.get(nombre));
 					notas.remove(nombre);
 				}
-			case 5: 
-				if(notas.isEmpty())
+			case 5:
+				if (notas.isEmpty())
 					System.out.println("NO HAY USUARIOS");
-				for( String alumnos: notas.keySet()) {
-					System.out.println("EL ALUMNO "+notas.keySet()+"con nota de"+notas.get(nombre));
+				for (String alumnos : notas.keySet()) {
+					System.out.println("EL ALUMNO " + notas.keySet() + "con nota de" + notas.get(nombre));
 				}
+				break;
+
 			}
 
 		} while (opc != 6);
 
 		System.out.println("HAS SALIDO DEL PROGRAMA");
-		
+
 	}
 }
