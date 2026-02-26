@@ -1,4 +1,4 @@
-package ejemploficheros;
+package FICHEROS;
 
 import java.nio.file.*;
 import java.io.*;

@@ -24,8 +24,7 @@ public class main1 {
 				System.out.println("ERROR: No existe el fichero");
 			}else {
 				for(int i=0;i<n;i++) {
-					System.out.println(fich.getNameCount());
-					System.out.println(fich.toString());
+					System.out.println(fich.getName(i));
 				}
 			}
 			

@@ -17,6 +17,8 @@ public class Carta {
 		this.ciudad = ciudad;
 		this.pais = pais;
 	}
+
+
 	
 	
 

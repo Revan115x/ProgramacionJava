@@ -1,5 +1,9 @@
 #!/bin/bash
-#Script para actualizar GitHub sin escribir las lineas por pereza
+
+cd /home/inf1/Desktop/Programacion/ScriptBash || exit 1
+
 git add .
-git commit -m "Actualización automática"
+
+git commit -m "Actualización automática" || true
+
 git push origin main

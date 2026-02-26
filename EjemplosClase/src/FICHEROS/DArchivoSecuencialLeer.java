@@ -1,4 +1,4 @@
-package ejemploficheros;
+package FICHEROS;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 
 /**
  * @descrition Clase que arbre un archivo en forma secuencial, con stream y
- *             buffer para leer las líneas del archivo
+ *             buffer para leer las lï¿½neas del archivo
  * 
  */
 public class DArchivoSecuencialLeer {

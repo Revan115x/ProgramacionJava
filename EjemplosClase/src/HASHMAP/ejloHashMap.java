@@ -1,4 +1,4 @@
-package ejHashMaps;
+package HASHMAP;
 
 import java.util.HashMap;
 
@@ -9,27 +9,27 @@ public class ejloHashMap {
 
         // Insertar pares clave-valor
         edades.put("Juan", 30);
-        edades.put("María", 25);
+        edades.put("Marï¿½a", 25);
         edades.put("Pedro", 40);
 
         // Acceder a un valor asociado a una clave
-        System.out.println("La edad de María es: " + edades.get("María"));
+        System.out.println("La edad de Marï¿½a es: " + edades.get("Marï¿½a"));
 
         // Comprobar si una clave existe
         if (edades.containsKey("Pedro")) {
-            System.out.println("Pedro está en el HashMap");
+            System.out.println("Pedro estï¿½ en el HashMap");
         }
 
         // Iterar sobre el conjunto de claves
         for (String nombre : edades.keySet()) {
-            System.out.println(nombre + " tiene " + edades.get(nombre) + " años.");
+            System.out.println(nombre + " tiene " + edades.get(nombre) + " aï¿½os.");
         }
 
         // Eliminar un elemento
         edades.remove("Juan");
 
-        // Imprimir el tamaño actual del HashMap
-        System.out.println("Número de elementos: " + edades.size());
+        // Imprimir el tamaï¿½o actual del HashMap
+        System.out.println("Nï¿½mero de elementos: " + edades.size());
     }
 }
 

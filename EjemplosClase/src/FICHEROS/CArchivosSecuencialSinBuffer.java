@@ -1,4 +1,4 @@
-package ejemploficheros;
+package FICHEROS;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -12,8 +12,8 @@ import java.nio.file.Paths;
 public class CArchivosSecuencialSinBuffer {
 	
 	public static void main(String[] args) {
-		Path entrada = Paths.get("osos.jpg");
-		Path salida = Paths.get("osos2.jpg");
+		Path entrada = Paths.get("/home/inf1/Desktop/texto.txt");
+		Path salida = Paths.get("/home/inf1/Desktop/texto2.txt");
 		// Array de bytes para leer todos los bytes del archivo
 		InputStream istream=null;
 		OutputStream ostream=null;
@@ -25,12 +25,16 @@ public class CArchivosSecuencialSinBuffer {
 			ostream = Files.newOutputStream(salida);
 			while ((c = istream.read()) != -1) {
 				// Escribimos todos los bytes en el archivo salida
-				// Después de ejecutar comprobar que es igual a entrada
+				// Despuï¿½s de ejecutar comprobar que es igual a entrada
 				ostream.write(c);
 			}
 			istream.close();
 			ostream.close();
 		} catch (IOException io) {
+			
+			
+			
+			
 			System.err.println(io);
 		}
 	}
