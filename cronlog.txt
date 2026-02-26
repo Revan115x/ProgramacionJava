@@ -1,0 +1,6 @@
+[main fb93fbd] Actualización automática
+ 2 files changed, 10 insertions(+)
+ create mode 100644 Ficheros/src/Fichero6/main.java
+ create mode 100644 cronlog.txt
+To https://github.com/Revan115x/ProgramacionJava.git
+   a9c96aa..fb93fbd  main -> main
