@@ -6,6 +6,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class main {
@@ -32,19 +33,23 @@ public class main {
 		} else {
 			if (!Files.isDirectory(fich)) {
 				System.out.println("la ruta no pertenece a un directorio");
-			}else {
-				DirectoryStream<Path> Stream = null;
+			} else {
+				/*DirectoryStream permite leer todos los ficheros del direcotorio  con nombre files*/
 				DirectoryStream<Path> files = null;
 				try {
-					Stream = Files.newDirectoryStream(fich);
+					/*abre esa carpeta que le hemos pasado que es fich*/
 					files = Files.newDirectoryStream(fich);
 					
-						if (!Stream.iterator().hasNext()) {
-							System.out.println("Directorio Vacio");
-							System.out.println("Eliminando Directorio....");
-							Files.delete(fich);
-							System.exit(0);						}
+					/*Es un puntero que va mirando elementos uno por uno y le damos el nombre it*/
+					Iterator<Path> it=files.iterator();
 
+					/*si it no tiene nada elimina la carpeta*/
+					if (!it.hasNext()) {
+						System.out.println("Directorio Vacio");
+						System.out.println("Eliminando Directorio....");
+						Files.delete(fich);
+						System.exit(0);
+					} else {
 						System.out.println("Quieres borrar los archivos que contiene la carpeta?");
 						boolean borrar = sc.nextBoolean();
 						if (!borrar) {
@@ -56,12 +61,12 @@ public class main {
 								Files.delete(file);
 							}
 						}
-						/*
-						 * System.out.println("Eliminano directorio..");
-						 *  Files.delete(fich);
-						 */
+					}
+					/*
+					 * System.out.println("Eliminano directorio.."); Files.delete(fich);
+					 */
 
-					}catch (DirectoryNotEmptyException e) {
+				} catch (DirectoryNotEmptyException e) {
 					System.out.println("El directirio no esta vacio" + fich);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -70,9 +75,8 @@ public class main {
 
 			}
 		}
-		
+
 		System.out.println("Fin del programa");
-		
+
 	}
 }
-
