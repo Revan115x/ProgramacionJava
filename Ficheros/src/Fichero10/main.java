@@ -1,4 +1,4 @@
-package vocales;
+package Fichero10;
 
 import java.io.IOException;
 import java.io.InputStream;

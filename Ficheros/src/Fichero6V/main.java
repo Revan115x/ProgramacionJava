@@ -1,4 +1,4 @@
-package Fichero6;
+package Fichero6V;
 
 import java.io.IOException;
 import java.nio.file.DirectoryNotEmptyException;

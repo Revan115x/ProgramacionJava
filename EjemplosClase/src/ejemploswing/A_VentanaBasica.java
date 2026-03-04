@@ -1,4 +1,4 @@
-package ejemploswing;
+	package ejemploswing;
 import javax.swing.*;
 
 public class A_VentanaBasica {
