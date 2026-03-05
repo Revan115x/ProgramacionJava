@@ -23,58 +23,69 @@ public class main {
 		 * leídos crea un ArrayList, luego lo ordena por nota de mayor a menor.
 		 */
 
-		Scanner sc=new Scanner(System.in);
-		
-		
-		/*Declaro el tipo de codificacion*/
+		Scanner sc = new Scanner(System.in);
+
+		/* Declaro el tipo de codificacion */
 		Charset charset = Charset.forName("UTF-8");
-		
-		/*Declaro la direccion del fichero*/
-		Path AlumFich= Paths.get("Alumno.txt");
-		
-		/*Declaro buffer para poder leer el fichero*/
-		BufferedReader leer=null;
-		
-		/*Declaro arraylist para guardar los datos del fichero*/
-		LinkedList<Alumno>Alumnos=new LinkedList<Alumno>();
-		
-		/*preguntamos si es un fichero*/
-		if(!Files.isRegularFile(AlumFich)) {
+
+		/* Declaro la direccion del fichero */
+		Path AlumFich = Paths.get("Alumno.txt");
+
+		/* Declaro buffer para poder leer el fichero */
+		BufferedReader leer = null;
+
+		/* Declaro arraylist para guardar los datos del fichero */
+		LinkedList<Alumno> Alumnos = new LinkedList<Alumno>();
+
+		/* preguntamos si es un fichero */
+		if (!Files.isRegularFile(AlumFich)) {
 			System.out.println("Debe de ser un fichero!");
-		}else {
+		} else {
 			try {
-				/*Leer es fichero y la codificacion*/
-				leer = Files.newBufferedReader(AlumFich,charset);
-				String line=null;
-				
-				while((line=leer.readLine())!=null){
-					
-					/*Creamos un array de String*/
-					/*separamos los datos del fichero con split */
-					String separacion[]=line.split(",");
-					
-					/*guardamos los datos en string*/
-					String nombre=separacion[0];
-					String apellido=separacion[1];
-					Double nota=Double.parseDouble(separacion[2]);
-					LocalDate fecha=LocalDate.parse(separacion[3]);
-				
+				/* Leer es fichero y la codificacion */
+				leer = Files.newBufferedReader(AlumFich, charset);
+				String line = null;
+
+				while ((line = leer.readLine()) != null) {
+
+					/* Creamos un array de String */
+					/* separamos los datos del fichero con split */
+					String separacion[] = line.split(",");
+
+					/* guardamos los datos en string */
+					String nombre = separacion[0];
+					String apellido = separacion[1];
+					Double nota = Double.parseDouble(separacion[2]);
+					String fecha = separacion[3];
+
 					/**/
-					String datos=""+nombre+" "+apellido+" "+1+" "+fecha;
+					String datos = "" + nombre + " " + apellido + " " + nota + " " + fecha;
+
+					Alumno a = new Alumno(nombre, apellido, nota, fecha);
+					int posicion=pos(Alumnos,a);
 					
-					
-					Alumnos.add(null);
-					
-					System.out.println(datos);
-					
+					Alumnos.add(posicion,a);
+
 				}
 				
+				for (Alumno al : Alumnos) {
+				    System.out.println(al);
+				}
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+
+	}
+
+	public static int pos(LinkedList<Alumno> alum, Alumno a) {
 		
-		
+		for (int i=0;i<alum.size();i++) {
+			if(a.getNota()>alum.get(i).getNota())
+				return i;
+		}
+		return alum.size();
 	}
 
 }
