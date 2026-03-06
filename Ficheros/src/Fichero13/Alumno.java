@@ -7,9 +7,9 @@ public class Alumno {
 	private String nombre;
 	private String apellido;
 	private double nota;
-	private String fechaNacimiento;
+	private LocalDate fechaNacimiento;
 	
-	public Alumno(String nombre, String apellido, double nota, String fechaNacimiento) {
+	public Alumno(String nombre, String apellido, double nota, LocalDate fechaNacimiento) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
