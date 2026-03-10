@@ -20,7 +20,7 @@ public class main1 {
 			String archivo = sc.nextLine();
 			fich = Paths.get(ruta + "/" + archivo);
 			int n = fich.getNameCount();
-			if (Files.isSameFile(fich, fich)) {
+			if (Files.isDirectory(fich)) {
 				System.out.println("ERROR: No existe el fichero");
 			}else {
 				for(int i=0;i<n;i++) {

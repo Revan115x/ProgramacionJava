@@ -63,7 +63,7 @@ public class main {
 				String line = null;
 
 				while ((line = leer.readLine()) != null) {
-					
+
 					try {
 						/* Creamos un array de String */
 						/* separamos los datos del fichero con split */
@@ -73,7 +73,7 @@ public class main {
 						String nombre = separacion[0];
 						String apellido = separacion[1];
 						Alumno a;
-						
+
 						Double nota = Double.parseDouble(separacion[2]);
 						LocalDate fecha = LocalDate.parse(separacion[3], d);
 						/* guardo el objeto en la clase */
@@ -82,10 +82,10 @@ public class main {
 						int posicion = pos(Alumnos, a);
 
 						Alumnos.add(posicion, a);
-					}catch (DateTimeParseException e) {
-						escribir.write("ERROR EN : "+line);
-					}catch (NumberFormatException e) {
-						escribir.write("ERROR EN : "+line);
+					} catch (DateTimeParseException e) {
+						escribir.write("ERROR EN : " + line);
+					} catch (NumberFormatException e) {
+						escribir.write("ERROR EN : " + line);
 					}
 
 				}
@@ -97,8 +97,16 @@ public class main {
 
 			} catch (IOException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (leer != null)
+						leer.close();
+					if (escribir != null)
+						escribir.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
-			
 			System.out.println("Fin del programa");
 
 		}
