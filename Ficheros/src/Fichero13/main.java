@@ -42,12 +42,16 @@ public class main {
 		/* Declaro en fichero para guardar errores */
 		Path errores = Paths.get("log.txt");
 
+		/* declaaro el nuevo archivo para guardar en orden*/
+		Path salida = Paths.get("AlumnoOrdenado.txt");
 		/* Declaro buffer para poder leer el fichero */
 		BufferedReader leer = null;
 
 		/* Declaro buffer para escribir los errores el fichero log.txt */
 		BufferedWriter escribir = null;
 
+		BufferedWriter limpio=null;
+		
 		/* Declaro arraylist para guardar los datos del fichero */
 		LinkedList<Alumno> Alumnos = new LinkedList<Alumno>();
 
@@ -59,6 +63,7 @@ public class main {
 				/* Leer es fichero y la codificacion */
 				leer = Files.newBufferedReader(AlumFich, charset);
 				escribir = Files.newBufferedWriter(errores, charset);
+				limpio= Files.newBufferedWriter(salida, charset);
 
 				String line = null;
 
@@ -92,6 +97,8 @@ public class main {
 
 				for (Alumno al : Alumnos) {
 					System.out.println(al);
+					limpio.write(al.toString());
+					limpio.newLine();
 
 				}
 
@@ -103,6 +110,8 @@ public class main {
 						leer.close();
 					if (escribir != null)
 						escribir.close();
+					if (limpio != null)
+						limpio.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
