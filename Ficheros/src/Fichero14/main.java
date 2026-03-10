@@ -46,8 +46,6 @@ public class main {
 				leer=Files.newBufferedReader(entrada,charset);
 				String line=null;
 				
-				while((line.)
-				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

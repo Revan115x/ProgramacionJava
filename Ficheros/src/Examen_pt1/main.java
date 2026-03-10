@@ -93,7 +93,7 @@ public class main {
 
 				/* BUFFER PARA LEER LOS AUTO.INF Y ESCRIBIR EN LOG LOS ERRORES */
 				leer = Files.newBufferedReader(autos, charset);
-				escribir = Files.newBufferedWriter(Paths.get("log.txt"), charset,CREATE, APPEND);
+				escribir = Files.newBufferedWriter(Paths.get("log.txt"), charset, CREATE, APPEND);
 				String line = null;
 
 				/* BUCLE PARA LEER LAS LINEAS DE AUTOS.INF */
@@ -118,13 +118,14 @@ public class main {
 						auto datos = new auto(matricula, fecha_comp, precio, dni);
 
 						/*
-						 * funcion para ordenar LinkedList por fecha mas vieja a reciente O POR PRECIO
+						 * FUNCION QUE NOS DA LA POSICION DEL OBJETO SEGUN SU FECHA O PRECIO DE MENOR A
+						 * MAYOR
 						 */
 						int posicion = pos(coche, datos);
 
 						/* LLAMAMOS AL HASHMAP Y PREGUNTAMOS SI MI ID ESTA ES SU COLLECION */
 						if (dueño.containsKey(dni))
-							/* SI ESTA GUARDAMOS EL OBJETO EN LA CLASE CON SU POSICION */
+							/* SI ESTA GUARDAMOS EL OBJETO EN EL ARRAYLIST CON SU POSICION */
 							coche.add(posicion, datos);
 						else
 							/* SI NO ESTA ESCRIBIMOS EN LOG LA LINEA DEL ERROR */
@@ -166,10 +167,13 @@ public class main {
 
 		/* leermos la clase */
 		for (int i = 0; i < coche.size(); i++) {
-			 /* COMPARAMOS LAS FECHAS DE MI OBJETO CON LAS DEL FECHAS QUE TENGO EN MI LINKEDLIST*/
+			/*
+			 * COMPARAMOS LAS FECHAS DE MI OBJETO CON LAS DEL FECHAS QUE TENGO EN MI
+			 * LINKEDLIST
+			 */
 			if (datos.getFechaCompra().isAfter(coche.get(i).getFechaCompra()))
 				return i;
-			/*SI LAS FECHAS SON IGUALES PASAMOS A COMPARAR POR PRECIO DE MAYOR A MENOR*/
+			/* SI LAS FECHAS SON IGUALES PASAMOS A COMPARAR POR PRECIO DE MAYOR A MENOR */
 			else if (datos.getFechaCompra().isEqual(coche.get(i).getFechaCompra()))
 				if (datos.getPrecio() > coche.get(i).getPrecio())
 					return i;

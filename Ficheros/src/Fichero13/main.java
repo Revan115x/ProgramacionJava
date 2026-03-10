@@ -86,6 +86,7 @@ public class main {
 						/* llamo mi funcion pos para ordenar */
 						int posicion = pos(Alumnos, a);
 
+						/*guardamos el objeto en el arraylist con la posicion*/
 						Alumnos.add(posicion, a);
 					} catch (DateTimeParseException e) {
 						escribir.write("ERROR EN : " + line);
@@ -95,9 +96,12 @@ public class main {
 
 				}
 
+				/*Muestro lo que hay dentro del arraylist*/
 				for (Alumno al : Alumnos) {
 					System.out.println(al);
+					/*Guardo los datos del array en un fichero*/
 					limpio.write(al.toString());
+					/*Salto de linea para que no este pegado*/
 					limpio.newLine();
 
 				}
@@ -105,6 +109,7 @@ public class main {
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {
+				/*CERRAMOS TODOS LOS BUFFERS*/
 				try {
 					if (leer != null)
 						leer.close();
