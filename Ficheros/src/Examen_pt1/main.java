@@ -1,5 +1,8 @@
 package Examen_pt1;
 
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -13,6 +16,7 @@ import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.nio.file.OpenOption;
 
 import Fichero13.Alumno;
 
@@ -89,7 +93,7 @@ public class main {
 
 				/* BUFFER PARA LEER LOS AUTO.INF Y ESCRIBIR EN LOG LOS ERRORES */
 				leer = Files.newBufferedReader(autos, charset);
-				escribir = Files.newBufferedWriter(Paths.get("log.txt"), charset);
+				escribir = Files.newBufferedWriter(Paths.get("log.txt"), charset,CREATE, APPEND);
 				String line = null;
 
 				/* BUCLE PARA LEER LAS LINEAS DE AUTOS.INF */
