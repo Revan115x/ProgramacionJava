@@ -100,11 +100,11 @@ public class main {
 				for (Alumno al : Alumnos) {
 					System.out.println(al);
 					/*Guardo los datos del array en un fichero*/
-					limpio.write(al.toString());
+					limpio.write(al.info());
 					/*Salto de linea para que no este pegado*/
 					limpio.newLine();
-
 				}
+				
 
 			} catch (IOException e) {
 				e.printStackTrace();

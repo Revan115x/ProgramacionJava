@@ -1,5 +1,5 @@
-Alumno [nombre=Carlota, apellido=Castillo, nota=10.0, fechaNacimiento=2003-05-25]
-Alumno [nombre=Luis, apellido=Sanz, nota=9.5, fechaNacimiento=1998-02-02]
-Alumno [nombre=Chema, apellido=Ortiz, nota=8.5, fechaNacimiento=2010-09-15]
-Alumno [nombre=Ana, apellido=lopez, nota=7.2, fechaNacimiento=2002-12-14]
-Alumno [nombre=Fran, apellido=Altos, nota=5.2, fechaNacimiento=2004-06-01]
+Carlota,Castillo,10.0,2003-05-25
+Luis,Sanz,9.5,1998-02-02
+Chema,Ortiz,8.5,2010-09-15
+Ana,lopez,7.2,2002-12-14
+Fran,Altos,5.2,2004-06-01

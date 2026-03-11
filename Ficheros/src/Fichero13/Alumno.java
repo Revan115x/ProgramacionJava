@@ -27,6 +27,8 @@ public class Alumno {
 				+ fechaNacimiento + "]";
 	}
 	
-	
+	public String info() {
+		return nombre + "," + apellido + "," + nota + "," + fechaNacimiento;
+	}
 
 }

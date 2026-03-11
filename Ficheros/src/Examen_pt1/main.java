@@ -142,8 +142,13 @@ public class main {
 				}
 
 				/* MOSTRAMOS LOS DATOS DE COCHE YA ORDENADOS */
-				System.out.println("*****************ARRAYLIST ORDENADO****************");
-				System.out.println(coche);
+				//System.out.println("*****************ARRAYLIST ORDENADO****************");
+				//System.out.println(coche);
+				
+				
+				for (String auto: dueño.keySet()) {
+					System.out.println(dueño.get(dueño)+" | "+coche.toString());
+				}
 
 			} catch (IOException e) {
 				System.out.println("ERROR!");
