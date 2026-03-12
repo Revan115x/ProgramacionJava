@@ -5,16 +5,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class main2 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		/**/
-		
+
+		/* AHORA LEER UN DIRECTORIO Y SOLO MOSTRAR LOS ARCHIVOS QUE NO SE REPITEN */
+
 		/* carpetas a leer */
 		/* /home/inf1/Desktop/Programacion/ProgramacionJava/Ficheros/fich2 */
 		/* /home/inf1/Desktop/Programacion/ProgramacionJava/Ficheros/fich1 */
@@ -30,8 +29,9 @@ public class main2 {
 		DirectoryStream<Path> Stream2;
 
 		/* Hashset para mostrar los no repetidos en la coleccion */
-		HashMap<String,String> archivos1 = new HashMap<>();
-		
+		HashMap<String, Integer> archivos1 = new HashMap<>();
+		int cont = 0;
+
 		do {
 			System.out.println("Nombre carpeta1");
 			carpeta2 = sc.nextLine();
@@ -62,10 +62,11 @@ public class main2 {
 
 			/* bucle para leer carpeta */
 			for (Path path : Stream1) {
-				/* Entramos si son ficheros y sus nombres */
+				/* Entramos si son ficheros y mostramos sus nombres */
 				if (Files.isRegularFile(path)) {
 					System.out.println(path.getFileName().toString());
-					//archivos1.add(path.getFileName().toString());
+					/* AÑADIMOS DIRECTAMENTE A LA COLECCION */
+					archivos1.put(path.getFileName().toString(), 1);
 
 				}
 			}
@@ -81,30 +82,39 @@ public class main2 {
 
 			/* bucle para leer carpeta */
 			for (Path path : Stream2) {
-				/* Entramos si son ficheros y sus nombres */
+				/* Entramos si son ficheros y mostramos sus nombres */
 				if (Files.isRegularFile(path)) {
-					System.out.println(path.getFileName().toString());
-					//archivos1.add(path.getFileName().toString());
+
+					String resultado = path.getFileName().toString();
+					/*comparamos con la coleccion que tenemos y le preguntamos si ya tiene el nombre del fichero
+					 * si esta repetido pasa a valer 2 porque le sumas + 1*/
+					if (archivos1.containsKey(resultado))
+						archivos1.put(resultado, archivos1.get(resultado) + 1);
+					
+					/*si no repetido lo añade normal y listo*/
+					else
+						archivos1.put(resultado, 1); //resultado.get.(resultado)
 				}
 			}
 
-			/* For para leer la coleccion ficheros */
-			//for (String i : archivos1)
-				
-					//System.out.println(i);
+			/* For para leer la coleccion de los ficheros */
+			System.out.println("***************************************************************");
+			System.out.println("****************** DATOS CARPETA SIN REPETIR ******************");
+			System.out.println("***************************************************************");
 
+			for (String i : archivos1.keySet()) {
+				/*ahora sabemos que los repetidos valen 2 y los no repetidos 1*/
+				/*le indicamos que solo muestre los que valen 1*/
+				if (archivos1.get(i) == 1) {
+					/*como i vale string lo guardamos en variable*/
+					String resultadofinal=i;
+						System.out.println(resultadofinal);
+					
+				}
+			}
 		} catch (Exception e) {
 
 		}
 	}
-	
-	/*b2
-	a1
-	a2
-	b3
-	a3
-	a4
-	b1
-	*/
-	
+
 }
