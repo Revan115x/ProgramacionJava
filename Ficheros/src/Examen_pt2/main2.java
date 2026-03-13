@@ -30,7 +30,7 @@ public class main2 {
 
 		/* Hashset para mostrar los no repetidos en la coleccion */
 		HashMap<String, Integer> archivos1 = new HashMap<>();
-		int cont = 0;
+		
 
 		do {
 			System.out.println("Nombre carpeta1");
