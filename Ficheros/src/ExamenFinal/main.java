@@ -91,6 +91,24 @@ public class main {
 
 			break;
 		}
+		
+		case 2:
+			System.out.println("DIME EL DNI DEL ALUMNO");
+			String dni=sc.nextLine();
+			String line = null;
+			
+			leerFicheros = Files.newBufferedReader(path);
+			while ((line = leerFicheros.readLine()) != null) {
+				try {
+					String datos[] = line.split(",");
+
+					 String dniF = datos[0].trim();
+					 if (dni.equalsIgnoreCase(dniF)) {
+						 //escribir su nota
+					 }
+				}
+			break;
+		
 		default:
 
 		}
