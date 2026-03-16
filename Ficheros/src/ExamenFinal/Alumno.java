@@ -1,0 +1,29 @@
+package ExamenFinal;
+
+public class Alumno {
+
+	private String dni;
+	private String nombre;
+	private String apellido;
+	private int nota;
+	
+	public Alumno(String dni, String nombre, String apellido, int nota) {
+		super();
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.nota = nota;
+	}
+
+	public int getNota() {
+		return nota;
+	}
+
+	@Override
+	public String toString() {
+		return "Alumno [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", nota=" + nota + "]";
+	}
+	
+	
+	
+}

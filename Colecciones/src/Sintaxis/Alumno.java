@@ -8,4 +8,11 @@ public class Alumno {
 		this.nombre = nombre;
 		this.edad = edad;
 	}
+
+	@Override
+	public String toString() {
+		return "Alumno [nombre=" + nombre + ", edad=" + edad + "]";
+	}
+	
+	
 }
