@@ -1,0 +1,8 @@
+Alumno [dni=9898A, nombre=Cloe, apellido=Lorenzo, nota=10.0]
+Alumno [dni=2334C, nombre=Pedro, apellido=Reyes, nota=9.0]
+Alumno [dni=2334C, nombre=Pedro, apellido=Reyes, nota=7.0]
+Alumno [dni=5674F, nombre=Leon, apellido=Grado, nota=6.0]
+Alumno [dni=2334C, nombre=Pedro, apellido=Reyes, nota=6.0]
+Alumno [dni=8558I, nombre=Amalia, apellido=Sanz, nota=5.0]
+Alumno [dni=5674F, nombre=Leon, apellido=Grado, nota=5.0]
+Alumno [dni=8558I, nombre=Amalia, apellido=Sanz, nota=4.0]

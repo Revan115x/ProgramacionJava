@@ -5,9 +5,9 @@ public class Alumno {
 	private String dni;
 	private String nombre;
 	private String apellido;
-	private int nota;
+	private double nota;
 	
-	public Alumno(String dni, String nombre, String apellido, int nota) {
+	public Alumno(String dni, String nombre, String apellido, double nota) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -15,7 +15,7 @@ public class Alumno {
 		this.nota = nota;
 	}
 
-	public int getNota() {
+	public double getNota() {
 		return nota;
 	}
 
