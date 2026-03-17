@@ -2,6 +2,7 @@ package Nacionalidad_HashMap;
 
 import java.util.HashMap;
 import java.util.Scanner;
+import static java.nio.file.StandardOpenOption.*;
 
 public class main {
 
