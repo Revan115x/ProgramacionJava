@@ -173,4 +173,21 @@ public class Excepciones {
 		 * - IllegalArgumentException
 		 * - IOException / FileNotFoundException
 		 * - InterruptedException
+		 * 
+		 * 
+		 * 
+		 * Imposible convertir una cadena a un tipo de dato concreto:
+			NumberFormatException, DateTimeParseException.
+			➢ No poder crear una fecha o una hora porque los datos son incorrectos (
+			método of): DateTimeException
+			➢ Que al leer un número el formato no sea correcto:
+			InputMistMachException.
+			➢ Salirnos de los límites de un String: StringIndexOutOfBoundsException.
+			➢ Dividir por cero: ArithMeticException.
+			➢ Intentar acceder a un objeto que está sin instanciar:
+			NullPointerException
+			Creadas por el usuario.
+			➢ IOException.
+			➢ IllegalAccessException. (crear instancias, accede a campos o métodos
+			sin tener acceso a la definición de la clase)
 		 */

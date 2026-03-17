@@ -28,7 +28,7 @@ public class EArchivoSecuencialEscribir {
 			// Crea el fichero si no existe, si existe borra el contenido
 			//BufferedWriter writer = Files.newBufferedWriter(file, charset);
 			// A�ade informaci�n al final
-			BufferedWriter writer = Files.newBufferedWriter(file, charset,CREATE,APPEND);
+			BufferedWriter writer = Files.newBufferedWriter(file, charset,CREATE,APPEND,TRUNCATE_EXISTING,CREATE_NEW );
 		
 			do{
 				System.out.println("Anota l�nea (fin para salir):");
