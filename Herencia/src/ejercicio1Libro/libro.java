@@ -15,11 +15,14 @@ public class libro {
 		this.autor = autor;
 		this.editorial = editorial;
 		this.precio = precio;
+		
 	}
 
 	@Override
 	public String toString() {
 		return titulo + "," + autor + "," + editorial + "," + precio;
 	}
+	
+	
 
 }

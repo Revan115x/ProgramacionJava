@@ -14,7 +14,7 @@ public class texto extends libro{
 
 	@Override
 	public String toString() {
-		return "texto [curso=" + curso + ", descuento=" + descuento + ", toString()=" + super.toString() + "]";
+		return curso + "," + descuento + "," + super.toString();
 	}
 	
 }
