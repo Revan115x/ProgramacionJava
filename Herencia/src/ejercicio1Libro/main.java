@@ -119,6 +119,13 @@ public class main {
 			}
 
 		} while (opc != 0);
+		
+		System.out.println("A contunuacion muestro todos los cursos de los libros de texto de mi libreria");
+		for (libro l : libros) {
+			if (l instanceof texto)
+			//if(l.getClass().getSimpleName().equals("Texto "))
+			System.out.println(((texto)l).getCurso());
+			}
 
 		System.out.println("Fin Programa");
 	}
