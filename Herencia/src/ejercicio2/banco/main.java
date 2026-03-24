@@ -23,7 +23,7 @@ public class main {
 				
 		(400 * 3 * 30) / 365.
 		
-		d) Sortee un viaje entre todos los cuentones abiertos.*/
+		d) Sorte un viaje entre todos los cuentones abiertos.*/
 
 	}
 
