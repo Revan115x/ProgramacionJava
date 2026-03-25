@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package animales;
+package HERENCIAanimales;
 
 public class Herbivoro extends Animal {
     private String tipoHierba;
@@ -23,6 +23,6 @@ public Herbivoro(String n,int e,String tH)    {
  public String toString(){
        // String cadena=super.toString();
        // return cadena + "\nKg. Carne: "+ KgCarne;
-        return "Herbívoro:" + super.toString() + "\nTipo hierba: "+ tipoHierba ;
+        return "Herbï¿½voro:" + super.toString() + "\nTipo hierba: "+ tipoHierba ;
     }
 }

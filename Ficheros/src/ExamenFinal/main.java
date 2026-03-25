@@ -41,9 +41,9 @@ public class main {
 		boolean encontrado = false;
 
 		System.out.println("****************MENU*****************");
-		System.out.println("1.*******Alumnos Aprobados***********");
+		System.out.println("1.********Alumnos Aprobados**********");
 		System.out.println("2.**********alumno nota *************");
-		System.out.println("3.*******NOTA MAYOR A MENOR***********");
+		System.out.println("3.*******NOTA MAYOR A MENOR**********");
 		int opc = sc.nextInt();
 		sc.nextLine();
 
