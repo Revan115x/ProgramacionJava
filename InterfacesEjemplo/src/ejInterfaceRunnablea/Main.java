@@ -1,4 +1,4 @@
-package ejInterfaceRunnable;
+package ejInterfaceRunnablea;
 
 public class Main {
 
@@ -25,8 +25,8 @@ public class Main {
 			e.printStackTrace();
 		}
         }
-        // El programa continúa ejecutándose mientras el hilo está en marcha
-        // Hacemos una pausa en el hilo principal para esperar la finalización del hilo secundario
+        // El programa continï¿½a ejecutï¿½ndose mientras el hilo estï¿½ en marcha
+        // Hacemos una pausa en el hilo principal para esperar la finalizaciï¿½n del hilo secundario
         try {
             hilo.join(); // Espera hasta que el hilo termine
             hilo2.join();

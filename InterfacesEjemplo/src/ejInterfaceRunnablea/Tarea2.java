@@ -1,8 +1,8 @@
-package ejInterfaceRunnable;
+package ejInterfaceRunnablea;
 
 public class Tarea2 implements Runnable{
 	  public void run() {
-	        // Esta es la tarea que se ejecutará en un hilo separado
+	        // Esta es la tarea que se ejecutarï¿½ en un hilo separado
 	        for (int i = 0; i < 1000; i++) {
 	            System.out.println("Ejecutando tarea2... " + i);
 	            try {
