@@ -52,6 +52,24 @@ public class BD_Agenda extends BD_Conector {
 			return -1;
 		}
 	}
+	
+	
+	public int modificar(Contacto ct) {
+		String cadena = "UPDATE contactos set nombre='"+ct.getNombre()+"',apellidos='"+ct.getApellidos()+"'WHERE telefono='" + ct.getTelefono()+"'";
+
+		try {
+			this.abrir();
+			s = c.createStatement();
+			int filas = s.executeUpdate(cadena);
+			s.close();
+			this.cerrar();
+			return filas;
+
+		} catch (SQLException e) {
+			this.cerrar();
+			return -1;
+		}
+	}
 
 	public String buscarTelefono(Contacto ct) {
 		String cadena = "SELECT telefono FROM contactos WHERE nombre='" + ct.getNombre() + "' AND apellidos='"

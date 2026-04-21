@@ -23,7 +23,7 @@ public class Agenda {
 
 		do {
 			System.out.println(
-					"\n1.Nuevo Contacto\n2.Borrar Contacto\n3.Consultar teléfono\n4.Mostrar contactos\n5.Salir");
+					"\n1.Nuevo Contacto\n2.Borrar Contacto\n3.Consultar teléfono\n4.Mostrar contactos\n5.Modidicar contacto\n6.Salir");
 		
 				opc = sc.nextInt();
 			
@@ -84,9 +84,31 @@ public class Agenda {
 				ArrayList<Contacto> v = bd.mostrarContactos();
 				for (int i = 0; i < v.size(); i++)
 					System.out.println(v.get(i));
-
+				break;
+			case 5:
+				sc.nextLine(); //Limpiando buffer
+				System.out.println("ANota el telefono para modificar el contacto");
+				telefono = sc.nextLine();
+				System.out.println("Introduce nuevo nombre");
+				nombre = sc.nextLine();
+				System.out.println("Introduce nuevo apellidos");
+				apellidos = sc.nextLine();
+				ct = new Contacto(nombre, apellidos, telefono);
+				filas = bd.modificar(ct);
+				switch (filas) {
+				case 0:
+					System.out.println("No es contacto");
+					break;
+				case 1:
+					System.out.println("Contacto Modificado");
+					break;
+				default:
+					System.out.println("En este momento no podemos Modificarlo. Int�ntalo m�s tarde");
+				}
+				
+				break;
 			}
-		} while (opc != 5);
+		} while (opc != 6);
 
 	}
 
