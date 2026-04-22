@@ -52,10 +52,10 @@ public class BD_Agenda extends BD_Conector {
 			return -1;
 		}
 	}
-	
-	
+
 	public int modificar(Contacto ct) {
-		String cadena = "UPDATE contactos set nombre='"+ct.getNombre()+"',apellidos='"+ct.getApellidos()+"'WHERE telefono='" + ct.getTelefono()+"'";
+		String cadena = "UPDATE contactos set nombre='" + ct.getNombre() + "',apellidos='" + ct.getApellidos()
+				+ "'WHERE telefono='" + ct.getTelefono() + "'";
 
 		try {
 			this.abrir();
@@ -91,6 +91,28 @@ public class BD_Agenda extends BD_Conector {
 			return null;
 
 		}
+
+	}
+
+	public String buscarTelefon(Contacto tel) throws SQLException {
+		String cadena = "SELECT nombre,apellidos FROM contactos WHERE telefono='" + tel + "'";
+		Contacto Con = null;
+
+		String t = "";
+		this.abrir();
+		s = c.createStatement();
+		reg = s.executeQuery(cadena);
+		if (reg.next()) {
+			// t = reg.getString(1);
+			// t=reg.getString("telefono");
+			// t = reg.getString("nombre") + " " + reg.getString("apellidos");
+			Con = new Contacto(reg.getString("nombre"), reg.getString("apellidos"), tel);
+
+		}
+
+		s.close();
+		this.cerrar();
+		return Con;
 
 	}
 

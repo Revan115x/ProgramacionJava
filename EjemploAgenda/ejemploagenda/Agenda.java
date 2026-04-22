@@ -107,8 +107,21 @@ public class Agenda {
 				}
 				
 				break;
+			case 6:
+				sc.nextLine(); 
+				System.out.println("Introduce telefeno");
+				String tel = sc.nextLine();
+				//telefono=bd.buscarTelefon(tel);
+				Contacto con=bd.buscarTelefon(tel);
+				if (telefono == null)
+					System.out.println("Por motivos t�cnicos no podemos obtener la información en este momento");
+				else if (telefono.equals(""))
+					System.out.println("No es contacto");
+				else
+					System.out.println("Su tel�fono es: " + telefono);
+				break;
 			}
-		} while (opc != 6);
+		} while (opc != 7);
 
 	}
 
