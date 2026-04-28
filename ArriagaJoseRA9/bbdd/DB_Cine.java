@@ -9,7 +9,7 @@ import java.util.*;
 
 import modelos.Contacto;
 
-public class BD_Agenda extends BD_Conector {
+public class BD_cine extends BD_Conector {
 	private static Statement s;
 	private static ResultSet reg;
 
