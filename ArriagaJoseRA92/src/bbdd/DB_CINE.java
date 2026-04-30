@@ -3,6 +3,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import CINE.*;
+import colegio.ErrorBaseDatos;
 
 import java.time.*;
 import modelos.reservas;
@@ -17,8 +18,8 @@ public class DB_CINE extends BD_Conector{
 		super(file);
 	}
 	
-	public  Vector<String> listado() throws ErrorBaseDatos{
-		String cadenaSQL="SELECT * from salas";
+	/*public  Vector<String> listado() throws ErrorBaseDatos{
+		String cadenaSQL="SELECT pelicula,aforo,sala,plazas_ocupadas from salas";
 		Vector<String> listacine=new Vector<String>();
 		try{
 			this.abrir();
@@ -34,6 +35,27 @@ public class DB_CINE extends BD_Conector{
 		catch ( SQLException e){
 		//	System.out.println(e.getMessage());
 			throw new ErrorBaseDatos("Listando");
+			
+		}
+	}*/
+	
+	public  Vector<salas> listado() throws ErrorBaseDatos{
+		String cadenaSQL="SELECT * from salas";
+		Vector<salas> listacine=new Vector<salas>();
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			while ( reg.next()){
+				listacine.add(new salas(reg.getString(1),reg.getInt(2),reg.getInt(3),reg.getInt(4)));
+			}			
+			s.close();
+			this.cerrar();
+			return listacine;
+		}
+		catch ( SQLException e){
+		//	System.out.println(e.getMessage());
+			throw new ErrorBaseDatos("Listando cursos");
 			
 		}
 	}

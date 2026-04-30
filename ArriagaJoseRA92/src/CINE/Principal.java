@@ -6,6 +6,7 @@ import java.util.*;
 import java.sql.*;
 import bbdd.*;
 import modelos.reservas;
+import modelos.salas;
 
 public class Principal {
 
@@ -34,7 +35,7 @@ public class Principal {
 			sLeer.nextLine();
 			switch (opc) {
 			case 1:
-				Vector<String> salas;
+				Vector<salas> salas;
 				try {
 
 					salas = bd.listado();
@@ -48,12 +49,32 @@ public class Principal {
 					break;
 				}
 				System.out.println("Lista de salas");
-				for (int i = 0; i < salas.size(); i++)
+				for (int i = 0; i < salas.size(); i++) {
 					System.out.println(salas.get(i).toString());
-
+					System.out.println("plazas libres");
+					System.out.println(salas.get(i).plazas_libres());
+				}
+				
+				int pos;
+				
+				do {
+					System.out.print("ANOTA NUMERO DE SALA");
+					int sala = sLeer.nextInt();
+					pos=buscarsala(sala, salas);
+					if(pos==-1)
+						System.out.println("No existe esa sala");
+				}while(pos==-1);
+				
+				System.out.println("anota numero de entradas:");
+				int entradas = sLeer.nextInt();
+				
+				if(salas.get(pos).plazas_libres()<entradas) {
+					System.out.println("No hay suficientes plazas libres");
+					break;
+				}
 				break;
 
-			case 2:
+			/*case 2:
 				
 				try {
 
@@ -103,10 +124,25 @@ public class Principal {
 					System.out.println("Contacte con sistemas:" + e.getMessage());
 				}
 
-				break;
+				break;*/
 
 			}
 		} while (opc != 10);
 
 	}
+	
+	public static int buscarsala(int sala, Vector<salas> salas) {
+		
+		int resultado=-1;
+		
+		for (int i = 0; i < salas.size(); i++) {
+			if (salas.get(i).getSala()==sala) {
+				return resultado=i;
+			}
+		}
+		
+		return resultado;
+		
+	}
+	
 }

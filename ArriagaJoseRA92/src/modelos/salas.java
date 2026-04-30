@@ -14,6 +14,15 @@ public class salas {
 		this.sala = sala;
 		this.plazas_ocupadas = plazas_ocupadas;
 	}
+	
+	public int plazas_libres() {
+		
+		int resultado=aforo-plazas_ocupadas;
+		
+		return resultado;
+		
+	}
+	
 
 	public String getPeliculas() {
 		return peliculas;
@@ -46,6 +55,13 @@ public class salas {
 	public void setPlazas_ocupadas(int plazas_ocupadas) {
 		this.plazas_ocupadas = plazas_ocupadas;
 	}
+
+	@Override
+	public String toString() {
+		return "salas [peliculas=" + peliculas + ", aforo=" + aforo + ", sala=" + sala + ", plazas_ocupadas="
+				+ plazas_ocupadas + "]";
+	}
+	
 	
 	
 
