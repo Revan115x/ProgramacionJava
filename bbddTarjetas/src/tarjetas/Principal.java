@@ -4,7 +4,6 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.sql.*;
-
 import bbdd.*;
 import modelos.Cuenta;
 import modelos.Movimiento;
@@ -19,6 +18,7 @@ public class Principal {
 
 		Scanner sc = new Scanner(System.in);
 		int opc = 0;
+		int numero;
 
 		BD_Tarjetas bd = new BD_Tarjetas("mysql-properties.xml");
 
@@ -54,25 +54,40 @@ public class Principal {
 				Tarjeta tar = null;
 				try {
 					cuentas = bd.mostrarCuentas(dni);
+					int i = 0;
+					for (Cuenta c : cuentas) {
+						i++;
+						System.out.println(i + ". " + c.toString());
+					}
 					if (cuentas.size() == 0)
 						System.out.println("No hay ninguna titular con este titular");
 					else {
-						System.out.println("Las cuentas del que es titular el dni introducido");
-						System.out.println(cuentas);
-						System.out.println("Elige la cuenta introduciendo el numero de la cuenta: ");
-						int numCuenta = sc.nextInt();
-						sc.nextLine();
+						int num;
+						do {
+							System.out.println("Elige la cuenta introduciendo su posicion: ");
+							num = sc.nextInt();
+						} while (num > cuentas.size() || num <= 0);
+
+						num--;
+
+						Cuenta c = cuentas.get(num);
+
 						System.out.println("numero de la tarjeta: ej: 5555");
 						int numTarjeta = sc.nextInt();
+
 						sc.nextLine();
 						System.out.println("Introduce el titular: ");
 						String titular = sc.nextLine();
+
 						System.out.println("Introduce el límite: ");
 						double limite = sc.nextDouble();
+
 						sc.nextLine();
 						System.out.println("Su clave: ");
 						String clave = sc.nextLine();
-						int filas = bd.añadir_Tarjeta(new Tarjeta(numTarjeta, numCuenta, titular, limite, clave));
+
+						int filas = bd.añadir_Tarjeta(new Tarjeta(numTarjeta, c.getNumero(), titular, limite, clave));
+
 						switch (filas) {
 						case 1:
 							System.out.println("Tarjeta añadida correctamente");
@@ -88,103 +103,9 @@ public class Principal {
 
 				}
 				break;
+			
 			case 2:
-				System.out.println("Introduce el numero de la cuenta: ");
-				int numCuenta = sc.nextInt();
-				try {
-					Cuenta ct = bd.buscarCuenta(numCuenta);
-					if (ct == null)
-						System.out.println("No existe esa cuenta");
-					else {
-						int numTarjeta = bd.BuscarUltimoNumTarjeta() + 1;
-						sc.nextLine();
-						System.out.println("Introduce el titular: ");
-						String titular = sc.nextLine();
-						System.out.println("Introduce la clave: ");
-						String clave = sc.nextLine();
-						int filas = bd.añadir_Tarjeta(new Tarjeta(numTarjeta, numCuenta, titular, clave));
-						switch (filas) {
-						case 1:
-							System.out.println("Tarjeta dada de alta correctamente");
-							break;
-						case 0:
-							System.out.println("Error al dar de alta la tarjeta");
-							break;
-						}
-					}
-				} catch (ErrorBaseDatos e) {
-					System.out.println(e.getMessage() + " Contacte con sistemas");
-				}
-				break;
-			case 3:
-				System.out.println("\n--- SACAR DINERO (DÉBITO) ---");
-				System.out.print("Introduce el número de tarjeta: ");
-				int nt = sc.nextInt();
-				sc.nextLine(); // Limpiar buffer
-				System.out.print("Introduce la clave: ");
-				String clave = sc.nextLine();
-				System.out.print("Importe a retirar: ");
-				double imp = sc.nextDouble();
-
-				try {
-					bd.sacarDineroDebito(nt, clave, imp);
-				} catch (ErrorBaseDatos e) {
-					System.out.println("OPERACIÓN DENEGADA: " + e.getMessage());
-				}
-
-				break;
-			case 4:
-				System.out.println("\n--- OPERACIÓN CRÉDITO ---");
-				System.out.print("Número de tarjeta: ");
-				int numTarjeta = sc.nextInt();
-				sc.nextLine();
-				System.out.print("Clave: ");
-				clave = sc.nextLine();
-
-				System.out.print("Importe a sacar: ");
-				double importe = sc.nextDouble();
-
-				try {
-					// 1. Validar requisitos (Tipo, Bloqueo, Límite)
-					bd.validarTarjetaCredito(numTarjeta, clave, importe);
-					// 2. Si es válida, crear el objeto movimiento
-					// El constructor Movimiento(numTarjeta, importe) pone la fecha actual y cargado
-					// = false
-					Movimiento mov = new Movimiento(numTarjeta, importe);
-
-					// 3. Registrar en la tabla de movimientos
-					int filas = bd.añadir_Movimiento(mov);
-
-					if (filas == 1) {
-						System.out.println("Operación de crédito autorizada y movimiento registrado.");
-					}
-
-				} catch (ErrorBaseDatos e) {
-					System.out.println("OPERACIÓN DENEGADA: " + e.getMessage());
-				}
-				break;
-			case 8:
-				System.out.println("\n\nAlta movimiento");
-				System.out.println("Anota número de tarjeta: ");
-				numTarjeta = sc.nextInt();
-				System.out.println("Anota importe: ");
-				importe = sc.nextDouble();
-
-				Movimiento m = new Movimiento(numTarjeta, importe);
-
-				try {
-					int filas = bd.añadir_Movimiento(m);
-					if (filas == 0)
-						System.out.println("No se ha dado de alta el movimiento. Contacte con sistemas");
-					else
-						System.out.println("Movimiento dado de alta correctamente.");
-				} catch (ErrorBaseDatos e) {
-					System.out.println(e.getMessage() + "Avise a sistemas");
-				}
-
-				break;
-			default:
-				System.out.println("Opcion Incorrecta.");
+				
 				break;
 			}
 		} while (opc != 11);

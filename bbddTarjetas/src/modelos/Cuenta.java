@@ -21,10 +21,47 @@ public class Cuenta {
 		this.fecha = fecha;
 	}
 
+	
+	public int getNumero() {
+		return numero;
+	}
+
+
+
+	public String getTitular1() {
+		return titular1;
+	}
+
+
+
+	public String getTitular2() {
+		return titular2;
+	}
+
+
+
+	public String getTitular3() {
+		return titular3;
+	}
+
+
+
+	public double getSaldo() {
+		return saldo;
+	}
+
+
+
+	public LocalDate getFecha() {
+		return fecha;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Cuenta [numero=" + numero + ", titular1=" + titular1 + ", titular2=" + titular2 + ", titular3="
-				+ titular3 + ", saldo=" + saldo + ", fecha=" + fecha + "]\n";
+		return "Cuenta numero=" + numero + ", titular1=" + titular1 + ", titular2=" + titular2 + ", titular3="
+				+ titular3 + ", saldo=" + saldo + ", fecha=" + fecha + "\n";
 	}
 	
 
