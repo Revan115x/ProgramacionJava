@@ -63,4 +63,45 @@ public class BD_Tarjetas extends BD_Conector {
 		}
 	}
 
+	// NUMERO DE CUENTA MAXIMO.
+	public int Maximocuenta() throws ErrorBaseDatos {
+		String cadenaSQL = "SELECT MAX(`numero`) FROM cuentas ";
+		int max = 0;
+		try {
+			this.abrir();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			while (reg.next()) {
+				max = reg.getInt(1);
+			}
+			s.close();
+			this.cerrar();
+			return max;
+		} catch (SQLException e) {
+			this.cerrar();
+			throw new ErrorBaseDatos("ERROR AL DEVOLVER LA CUENTA MAXIMA");
+
+		}
+	}
+
+	public int VerificarCuenta(int num) throws ErrorBaseDatos {
+		String cadenaSQL = "SELECT * FROM cuentas where numero = '" + num + "'";
+		int existe = 0;
+		try {
+			this.abrir();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			while (reg.next()) {
+				existe = reg.getInt(1);
+			}
+			s.close();
+			this.cerrar();
+			return existe;
+		} catch (SQLException e) {
+			this.cerrar();
+			throw new ErrorBaseDatos("ERROR NO DEVUELVE LA CUENTA");
+
+		}
+	}
+
 }

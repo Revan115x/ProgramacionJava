@@ -3,7 +3,6 @@ package modelos;
 import java.time.LocalDate;
 
 public class Tarjeta {
-	
 	private int numero;
 	private int numeroCuenta;
 	private String titular;

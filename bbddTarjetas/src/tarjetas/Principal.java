@@ -18,7 +18,7 @@ public class Principal {
 
 		Scanner sc = new Scanner(System.in);
 		int opc = 0;
-		int numero;
+		int numTarjeta;
 
 		BD_Tarjetas bd = new BD_Tarjetas("mysql-properties.xml");
 
@@ -73,7 +73,7 @@ public class Principal {
 						Cuenta c = cuentas.get(num);
 
 						System.out.println("numero de la tarjeta: ej: 5555");
-						int numTarjeta = sc.nextInt();
+						numTarjeta = sc.nextInt();
 
 						sc.nextLine();
 						System.out.println("Introduce el titular: ");
@@ -105,6 +105,78 @@ public class Principal {
 				break;
 			
 			case 2:
+				System.out.println("Anota el dni: ");
+				dni = sc.nextLine();
+				try {
+					cuentas = bd.mostrarCuentas(dni);
+					int i = 0;
+					for (Cuenta c : cuentas) {
+						i++;
+						System.out.println(i + ". " + c.toString());
+					}
+					if (cuentas.size() == 0)
+						System.out.println("No hay ninguna titular con este titular");
+					else {
+						int num;
+						do {
+							System.out.println("Elige la cuenta introduciendo su posicion: ");
+							num = sc.nextInt();
+						} while (num > cuentas.size() || num <= 0);
+
+						num--;
+
+						Cuenta c = cuentas.get(num);
+						int nume=c.getNumero();
+
+						/*int pos= posicion(cuentas,num);*/
+						
+						int numero=bd.Maximocuenta();
+						
+						System.out.println("numero de la tarjeta: ej: 5555");
+						numTarjeta = sc.nextInt();
+
+						sc.nextLine();
+						System.out.println("Introduce el titular: ");
+						String titular = sc.nextLine();
+
+						sc.nextLine();
+						System.out.println("Su clave: ");
+						String clave = sc.nextLine();
+
+						int filas = bd.añadir_Tarjeta(new Tarjeta(numTarjeta, numero+1, titular, clave));
+
+						switch (filas) {
+						case 1:
+							System.out.println("Tarjeta añadida correctamente");
+							break;
+						case 0:
+							System.out.println("No añadida, contacte con sistemas");
+							break;
+						}
+
+					}
+				} catch (ErrorBaseDatos e) {
+					System.out.println(e.getMessage() + " Contacte con sistemas");
+
+				}
+				break;
+			case 3:
+				System.out.println(" SACAR DINERO\n ");
+				System.out.println("Numero de cuenta");
+				numTarjeta = sc.nextInt();
+					
+				try {
+					int cuentasnum = bd.VerificarCuenta(numTarjeta);
+					
+					if(cuentasnum==0)
+						System.out.println("No existe");
+					else {
+						
+					}
+				}catch (ErrorBaseDatos e) {
+					System.out.println(e.getMessage() + " Contacte con sistemas");
+				}
+				
 				
 				break;
 			}
@@ -112,4 +184,13 @@ public class Principal {
 
 	}
 
+	/*public static int  posicion(ArrayList<Cuenta> cuenta,int num) {
+		for(int i=0;i<cuenta.size();i++) {
+			if(num<cuenta.get(i).getNumero())
+				return i;
+		}
+			
+		return cuenta.size();
+	}*/
+	
 }
