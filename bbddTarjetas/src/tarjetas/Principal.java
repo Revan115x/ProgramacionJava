@@ -104,82 +104,154 @@ public class Principal {
 				break;
 
 			case 2:
-				System.out.println("Anota el dni: ");
-				dni = sc.nextLine();
+
+				int num;
+				boolean encontrado = false;
 				try {
-					cuentas = bd.mostrarCuentas(dni);
-					int i = 0;
-					for (Cuenta c : cuentas) {
-						i++;
-						System.out.println(i + ". " + c.toString());
-					}
-					if (cuentas.size() == 0)
-						System.out.println("No hay ninguna titular con este titular");
-					else {
-						int num;
-						do {
-							System.out.println("Elige la cuenta introduciendo su posicion: ");
-							num = sc.nextInt();
-						} while (num > cuentas.size() || num <= 0);
+					do {
+						System.out.println("Anota número de cuenta: ");
+						num = sc.nextInt();
+						// Método que busca la cuenta en la tabla de cuentas
+						encontrado = bd.buscarCuenta(num);
+					} while (encontrado == false);
+					numTarjeta = bd.Maximocuenta() + 1;
 
-						num--;
+					sc.nextLine();
+					System.out.println("Introduce el titular: ");
+					String titular = sc.nextLine();
 
-						Cuenta c = cuentas.get(num);
+					System.out.println("Su clave: ");
+					String clave = sc.nextLine();
 
-						numTarjeta = bd.Maximocuenta() + 1;
+					int filas = bd.añadir_Tarjeta(new Tarjeta(numTarjeta, num, titular, clave));
 
-						sc.nextLine();
-						System.out.println("Introduce el titular: ");
-						String titular = sc.nextLine();
-
-						System.out.println("Su clave: ");
-						String clave = sc.nextLine();
-
-						int filas = bd.añadir_Tarjeta(new Tarjeta(numTarjeta, c.getNumero(), titular, clave));
-
-						switch (filas) {
-						case 1:
-							System.out.println("Tarjeta añadida correctamente");
-							break;
-						case 0:
-							System.out.println("No añadida, contacte con sistemas");
-							break;
-						}
-
+					switch (filas) {
+					case 1:
+						System.out.println("Tarjeta añadida correctamente");
+						break;
+					case 0:
+						System.out.println("No añadida, contacte con sistemas");
+						break;
 					}
 				} catch (ErrorBaseDatos e) {
 					System.out.println(e.getMessage() + " Contacte con sistemas");
-
 				}
+
 				break;
+
 			case 3:
-				System.out.println(" NUMERO DE TARJETA");
+				System.out.println(" NUMERO DE TARJETA ");
 				numTarjeta = sc.nextInt();
 				sc.nextLine();
 				try {
-					ArrayList<Tarjeta> tarjetas;
-					tarjetas = bd.MostrarTarjeta(numTarjeta);
+					Tarjeta tar = null;
+					tar = bd.MostrarTarjeta(numTarjeta);
 
-					if (tarjetas.size() == 0)
+					if (tar == null)
 						System.out.println("NO EXISTE TARJETA CON ESE NUMERO");
 					else {
+
+						if (!tar.getTipo().equals("D")) {
+							System.out.println("NO ES DE DEBITO");
+							break;
+						}
+						
+						if(tar.getBloqueada()!=0) {
+							System.out.println("LA TARJETA ESTA BLOQUEDA NO PUEDES ACCEDER");
+							break;
+						}
+
 						System.out.println("CONTRASEÑA DE LA TARJETA");
 						String clave = sc.nextLine();
 
-						Tarjeta tar = tarjetas.get(0);
+						if (!clave.equals(tar.getClave()))
+							System.out.println("ERROR CLAVE");
+
+						System.out.println("Retirar Dinero");
+						double dinero = sc.nextInt();
+
+						Cuenta cuenta = null;
+						cuenta = bd.SaldoTarjeta(tar.getNumeroCuenta());
+
+						System.out.println(cuenta.getSaldo());
+
+						if (dinero > cuenta.getSaldo()) {
+							System.out.println("NO PERMITIDO RETIRAR POR FALTA DE SALDO");
+							break;
+						}
+						
+						System.out.println("Retirando dinero.....");
+						
+						int filas = bd.ActualizarSaldo(cuenta, dinero);
+
+						switch (filas) {
+						case 1:
+							System.out.println("SALDO ACTUALIZADO BEBE");
+							break;
+						case 0:
+							System.out.println("No se ha podido actualizar saldo, contacte con sistemas");
+							break;
+						}
+					}
+				} catch (ErrorBaseDatos e) {
+					System.out.println(e.getMessage() + " Contacte con sistemas");
+				}
+				break;
+			
+			case 4:
+				System.out.println(" NUMERO DE TARJETA ");
+				numTarjeta = sc.nextInt();
+				sc.nextLine();
+				try {
+					Tarjeta tar = null;
+					tar = bd.MostrarTarjeta(numTarjeta);
+
+					if (tar == null)
+						System.out.println("NO EXISTE TARJETA CON ESE NUMERO");
+					else {
+
+						if (!tar.getTipo().equals("D")) {
+							System.out.println("NO ES DE DEBITO");
+							break;
+						}
+						
+						if(tar.getBloqueada()!=0) {
+							System.out.println("LA TARJETA ESTA BLOQUEDA NO PUEDES ACCEDER");
+							break;
+						}
+
+						System.out.println("CONTRASEÑA DE LA TARJETA");
+						String clave = sc.nextLine();
 
 						if (!clave.equals(tar.getClave()))
 							System.out.println("ERROR CLAVE");
-						
+
 						System.out.println("Retirar Dinero");
-						int dinero=sc.nextInt();
-						
-						if(dinero>tar.getLimite())
-							System.out.println("NO PUEDES RETIRAR MAS DEL LIMTE");
-						
+						double dinero = sc.nextInt();
 
+						Cuenta cuenta = null;
+						cuenta = bd.SaldoTarjeta(tar.getNumeroCuenta());
+
+						System.out.println(cuenta.getSaldo());
+
+						if (dinero > cuenta.getSaldo()) {
+							System.out.println("NO PERMITIDO RETIRAR POR FALTA DE SALDO");
+							break;
+						}
+						
+						System.out.println("Retirando dinero.....");
+						
+						int filas = bd.ActualizarSaldo(cuenta, dinero);
+
+						switch (filas) {
+						case 1:
+							System.out.println("SALDO ACTUALIZADO BEBE");
+							break;
+						case 0:
+							System.out.println("No se ha podido actualizar saldo, contacte con sistemas");
+							break;
+						}
 					}
-
 				} catch (ErrorBaseDatos e) {
 					System.out.println(e.getMessage() + " Contacte con sistemas");
 				}

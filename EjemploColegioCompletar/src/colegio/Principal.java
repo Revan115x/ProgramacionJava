@@ -1,5 +1,4 @@
 package colegio;
-
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -9,161 +8,199 @@ import bbdd.*;
 import modelos.Alumno;
 import modelos.Curso;
 
+
 public class Principal {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
-		Scanner sLeer = new Scanner(System.in);
-		int opc = 0;
-
-		BD_Colegio bd = new BD_Colegio("mysql-properties.xml");
-
-		do {
+		
+		
+		Scanner sLeer=new Scanner(System.in);
+		int opc=0;
+		
+		
+		BD_Colegio bd=new BD_Colegio("mysql-properties.xml");
+		
+		
+		do	
+		{
 			System.out.println("\n\nGESTI�N COLEGIO");
 			System.out.println("***************");
-			System.out.println("1.Nuevo Alumno\n" + "2.Nuevo Curso\n3.Borrar Alumno\n4.Listado alumnos por curso\n"
-					+ "5.Listado de cursos\n" + "6.Consultar alumno\n" + "7.Consultar tutor de un curso\n"
-					+ "8.Listado alumnos por tutor\n" + "9.Listado alumnos por curso");
+			System.out.println("1.Nuevo Alumno\n"
+					+ "2.Nuevo Curso\n"
+					+ "3.Borrar Alumno\n"
+					+ "4.Listado alumnos por curso\n"
+					+ "5.Listado de cursos\n"
+					+ "6.Consultar alumno\n"
+					+ "7.Consultar tutor de un curso\n"
+					+ "8.Listado alumnos por tutor\n"
+					+ "9.Listado alumnos por curso"
+					+ "10.Alumnos con la matrícula superior a un número introducido por teclado\n"
+					+ "11.Dado un archivo de texto con alumnos, insertarlos en la tabla de alumnos");
 			System.out.print("\tTeclea opci�n: ");
-			try {
-				opc = sLeer.nextInt();
+			try{
+			opc=sLeer.nextInt();
 			}
-
-			catch (InputMismatchException e) {
+			
+			catch(InputMismatchException e ){
 				System.out.println("Debes introducir n�mero 1-5");
-				opc = 0;
+				opc=0;
 			}
-
+			
 			sLeer.nextLine();
-			switch (opc) {
+			switch (opc){
 			case 1:
 				System.out.println("\n\nALTA ALUMNO");
-				
 				System.out.print("Introduce nombre completo\t");
-				String nombre = sLeer.nextLine();
-				
+				String nombre=sLeer.nextLine();				
 				System.out.print("Introduce telefono\t");
-				String telefono = sLeer.nextLine();
-				
+				String telefono=sLeer.nextLine();
 				System.out.print("Introduce DNI\t");
-				String dni = sLeer.nextLine();
-				
+				String dni=sLeer.nextLine();
 				System.out.print("Introduce n�mero de matr�cula\t");
-				int matricula = sLeer.nextInt();
-				
+				int matricula=sLeer.nextInt();	
 				Vector<String> cursos;
-				
-					try {
-						cursos = bd.listadoCursos();
-					} catch (ErrorBaseDatos e) {
-						System.out.println("Contacte con sistemas:" + e.getMessage());
-						break;
-					}
-					
-				if (cursos == null) {
-					System.out.println("No hay cursos disponibles");
+				try {
+					cursos = bd.listadoCursos();
+				} catch (ErrorBaseDatos e) {
+					System.out.println("Contacte con sistemas:"+e.getMessage());
 					break;
 				}
-				
+				if (cursos.size()==0){
+						System.out.println("No hay cursos disponibles");
+						break;
+				}
 				System.out.println("Lista de cursos");
-				
-				for (int i = 0; i < cursos.size(); i++)
-					System.out.println(cursos.get(i));
-				
+				for (int i=0;i<cursos.size();i++)
+					System.out.println(cursos.get(i));				
 				System.out.print("Teclea el curso\t");
-				String curso = sLeer.next();
-				
-				Alumno al = new Alumno(dni, nombre, curso, matricula, telefono);
-				
+				String curso=sLeer.next();
+				Alumno al=new Alumno(dni,nombre,curso,matricula,telefono);			
 				int filas;
-				
 				try {
-					filas = bd.añadir_Alumno(al);
-					switch (filas) {
+					filas = bd.añadir_Alumno2(al);
+					switch (filas){
 					case 1:
 						System.out.println("\nAlumno a�adido");
 						break;
 					case 0:
 						System.out.println("\nNo a�adido, contacte con sistemas");
 						break;
-
+					
+						
 					}
 				} catch (ErrorBaseDatos e) {
 					// TODO Auto-generated catch block
-					System.out.println("Contacte con sistemas:" + e.getMessage());
-				}
-
-				break;
+					System.out.println("Contacte con sistemas:"+e.getMessage());
+				}				
 				
+			break;
+			
 			case 2:
-				System.out.println("\n ALTA NUEVO CURSO");
 				
-				System.out.println("Indicame la descripcion del curso");
-				String descripcion=sLeer.nextLine();
-				
-				System.out.println("Nombre del nuevo CURSO");
-				String Curso=sLeer.nextLine();
-				
-				System.out.println("numero de Aula");
+				System.out.println("Introduce curso:");
+				String nombreCurso=sLeer.nextLine();
+				System.out.println("Anota descripción:");
+				String des=sLeer.nextLine();
+				System.out.println("anota aula:");
 				String aula=sLeer.nextLine();
+				Curso cur=new Curso(des,nombreCurso,aula);
 				
-				Curso curs = new Curso (descripcion,Curso,aula);
 				
 				try {
-					filas = bd.añadir_Curso(curs);
-					switch (filas) {
+					filas=bd.añadir_Curso(cur);
+					switch (filas){
 					case 1:
-						System.out.println("\n Curso añadido");
+						System.out.println("\nCurso añadido");
 						break;
 					case 0:
-						System.out.println("\nNo a�adido, contacte con sistemas");
+						System.out.println("\nNo se ha podido añadir el cuso");
 						break;
-
+					
+						
 					}
 				} catch (ErrorBaseDatos e) {
 					// TODO Auto-generated catch block
-					System.out.println("Contacte con sistemas:" + e.getMessage());
+					System.out.println(e.getMessage() + "  Algo ha ido mal contacte con sistemas");;
 				}
-
 				
 				break;
-
-			case 4:
-				cursos = null;
-				try {
-
-					cursos = bd.listadoCursos();
-
+			
+			case 3:
+				System.out.println("Introduce dni:");
+			    dni=sLeer.nextLine();
+			    
+			    try {
+					filas=bd.borrar_Alumno(dni);
+					
+					switch (filas){
+					case 1:
+						System.out.println("\nAlumno borrado");
+						break;
+					case 0:
+						System.out.println("\nNo se ha podido borrar el alumno");
+						break;
+					
+						
+					}
 				} catch (ErrorBaseDatos e) {
-					System.out.println("Contacte con sistemas:" + e.getMessage());
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage() + "  Algo ha ido mal contacte con sistemas");
+				}
+				
+				
+				break;
+			case 4:	
+				cursos=null;
+				try {
+					
+					cursos=bd.listadoCursos();
+					
+				} catch (ErrorBaseDatos e) {
+					System.out.println("Contacte con sistemas:"+e.getMessage());
 					break;
 				}
-				if (cursos == null) {
-					System.out.println("No hay cursos disponibles");
-					break;
+				if (cursos.size()==0){
+						System.out.println("No hay cursos disponibles");
+						break;
 				}
 				System.out.println("Lista de cursos");
-				for (int i = 0; i < cursos.size(); i++)
-					System.out.println(cursos.get(i).toString());
-
+				for (int i=0;i<cursos.size();i++)
+					System.out.println(cursos.get(i).toString());		
+				
 				System.out.print("Teclea el curso del cual quieres ver los alumnos\t");
-				curso = sLeer.next();
-				ArrayList<Alumno> listado = null;
+				curso=sLeer.next();
+				ArrayList<Alumno> listado=null;
 				try {
 					listado = bd.listadoAlumnosCurso(curso);
 				} catch (ErrorBaseDatos e) {
-					System.out.println("Contacte con sistemas:" + e.getMessage());
+					System.out.println("Contacte con sistemas:"+e.getMessage());
 					break;
 				}
-
-				System.out.println("\n\nLISTADO ALUMNOS " + curso.toUpperCase() + "\n");
-				for (int i = 0; i < listado.size(); i++)
+				
+				System.out.println("\n\nLISTADO ALUMNOS "+ curso.toUpperCase()+"\n");
+				for (int i=0;i<listado.size();i++)									
 					System.out.println(listado.get(i).toString());
 				break;
-
+				
+			case 6:
+				System.out.println("Introduce dni:");
+			    dni=sLeer.nextLine();
+			    
+			    try {
+					al=bd.buscar_Alumno(dni);
+					if (al==null)
+						System.out.println("No existe ese alumno");
+					else
+						System.out.println(al);
+				} catch (ErrorBaseDatos e) {
+					// TODO Auto-generated catch block
+					System.out.println("Contacte con sistemas:"+e.getMessage());
+				}
+			    
+			    break;
 			case 9:
 				try {
 					bd.listadoAlumnosPorCurso();
@@ -171,10 +208,33 @@ public class Principal {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+				break;
+			
+			case 10:
+				System.out.println("Anota matrícula:");
+				int num=sLeer.nextInt();
+				
+				ArrayList<Alumno> alumnos;
+				
+				try {
+					alumnos=bd.buscar_Alumno_Mat(num);
+					if (alumnos.size()==0)
+						System.out.println("No hay ningún alumno con la matrícula mayor a "+ num);
+					else
+						System.out.println(alumnos);
+				} catch (ErrorBaseDatos e) {
+					// TODO Auto-generated catch block
+					System.out.println("Contacte con sistemas:"+e.getMessage());
+				}
 			}
-		} while (opc != 10);
-
-	}
+			
+		}
+		while (opc!=12);
+			
+	
+		}
+	
+	
+	
 
 }
