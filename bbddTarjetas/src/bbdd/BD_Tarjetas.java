@@ -65,7 +65,7 @@ public class BD_Tarjetas extends BD_Conector {
 
 	// NUMERO DE CUENTA MAXIMO.
 	public int Maximocuenta() throws ErrorBaseDatos {
-		String cadenaSQL = "SELECT MAX(`numero`) FROM cuentas ";
+		String cadenaSQL = "SELECT MAX(numero) FROM tarjetas ";
 		int max = 0;
 		try {
 			this.abrir();
@@ -84,22 +84,31 @@ public class BD_Tarjetas extends BD_Conector {
 		}
 	}
 
-	public int VerificarCuenta(int num) throws ErrorBaseDatos {
-		String cadenaSQL = "SELECT * FROM cuentas where numero = '" + num + "'";
-		int existe = 0;
+	public ArrayList<Tarjeta>  MostrarTarjeta(int num) throws ErrorBaseDatos {
+		String cadenaSQL = "SELECT * FROM tarjetas WHERE numero = " + num;
+		ArrayList<Tarjeta> tarjeta = new ArrayList<Tarjeta>();
 		try {
 			this.abrir();
 			s = c.createStatement();
 			reg = s.executeQuery(cadenaSQL);
 			while (reg.next()) {
-				existe = reg.getInt(1);
+				tarjeta.add(new Tarjeta(
+					    reg.getInt("numero"),
+					    reg.getInt("cuenta"),
+					    reg.getString("titular"),
+					    reg.getDouble("limite"),
+					    reg.getString("tipo"),
+					    reg.getDate("caducidad").toLocalDate(),
+					    reg.getString("clave"),
+					    reg.getInt("bloqueada")
+					));
 			}
 			s.close();
 			this.cerrar();
-			return existe;
+			return tarjeta;
 		} catch (SQLException e) {
 			this.cerrar();
-			throw new ErrorBaseDatos("ERROR NO DEVUELVE LA CUENTA");
+			throw new ErrorBaseDatos("ERROR NO DEVUELVE LA TARJETA");
 
 		}
 	}

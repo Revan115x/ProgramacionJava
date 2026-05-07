@@ -51,7 +51,6 @@ public class Principal {
 				System.out.println("Anota el dni: ");
 				String dni = sc.nextLine();
 				ArrayList<Cuenta> cuentas;
-				Tarjeta tar = null;
 				try {
 					cuentas = bd.mostrarCuentas(dni);
 					int i = 0;
@@ -103,7 +102,7 @@ public class Principal {
 
 				}
 				break;
-			
+
 			case 2:
 				System.out.println("Anota el dni: ");
 				dni = sc.nextLine();
@@ -126,24 +125,17 @@ public class Principal {
 						num--;
 
 						Cuenta c = cuentas.get(num);
-						int nume=c.getNumero();
 
-						/*int pos= posicion(cuentas,num);*/
-						
-						int numero=bd.Maximocuenta();
-						
-						System.out.println("numero de la tarjeta: ej: 5555");
-						numTarjeta = sc.nextInt();
+						numTarjeta = bd.Maximocuenta() + 1;
 
 						sc.nextLine();
 						System.out.println("Introduce el titular: ");
 						String titular = sc.nextLine();
 
-						sc.nextLine();
 						System.out.println("Su clave: ");
 						String clave = sc.nextLine();
 
-						int filas = bd.añadir_Tarjeta(new Tarjeta(numTarjeta, numero+1, titular, clave));
+						int filas = bd.añadir_Tarjeta(new Tarjeta(numTarjeta, c.getNumero(), titular, clave));
 
 						switch (filas) {
 						case 1:
@@ -161,36 +153,40 @@ public class Principal {
 				}
 				break;
 			case 3:
-				System.out.println(" SACAR DINERO\n ");
-				System.out.println("Numero de cuenta");
+				System.out.println(" NUMERO DE TARJETA");
 				numTarjeta = sc.nextInt();
-					
+				sc.nextLine();
 				try {
-					int cuentasnum = bd.VerificarCuenta(numTarjeta);
-					
-					if(cuentasnum==0)
-						System.out.println("No existe");
+					ArrayList<Tarjeta> tarjetas;
+					tarjetas = bd.MostrarTarjeta(numTarjeta);
+
+					if (tarjetas.size() == 0)
+						System.out.println("NO EXISTE TARJETA CON ESE NUMERO");
 					else {
+						System.out.println("CONTRASEÑA DE LA TARJETA");
+						String clave = sc.nextLine();
+
+						Tarjeta tar = tarjetas.get(0);
+
+						if (!clave.equals(tar.getClave()))
+							System.out.println("ERROR CLAVE");
 						
+						System.out.println("Retirar Dinero");
+						int dinero=sc.nextInt();
+						
+						if(dinero>tar.getLimite())
+							System.out.println("NO PUEDES RETIRAR MAS DEL LIMTE");
+						
+
 					}
-				}catch (ErrorBaseDatos e) {
+
+				} catch (ErrorBaseDatos e) {
 					System.out.println(e.getMessage() + " Contacte con sistemas");
 				}
-				
-				
 				break;
 			}
 		} while (opc != 11);
 
 	}
 
-	/*public static int  posicion(ArrayList<Cuenta> cuenta,int num) {
-		for(int i=0;i<cuenta.size();i++) {
-			if(num<cuenta.get(i).getNumero())
-				return i;
-		}
-			
-		return cuenta.size();
-	}*/
-	
 }

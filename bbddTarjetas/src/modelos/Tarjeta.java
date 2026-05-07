@@ -78,6 +78,7 @@ public class Tarjeta {
 		return caducidad;
 	}
 
+
 	public String getClave() {
 		return clave;
 	}
@@ -86,7 +87,12 @@ public class Tarjeta {
 		return bloqueada;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Tarjeta [numero=" + numero + ", numeroCuenta=" + numeroCuenta + ", titular=" + titular + ", limite="
+				+ limite + ", tipo=" + tipo + ", caducidad=" + caducidad + ", clave=" + clave + ", bloqueada="
+				+ bloqueada + "]";
+	}	
 	
 	
 	
