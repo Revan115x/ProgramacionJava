@@ -3,7 +3,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import CINE.*;
-import colegio.ErrorBaseDatos;
+import CINE.ErrorBaseDatos;
 
 import java.time.*;
 import modelos.reservas;

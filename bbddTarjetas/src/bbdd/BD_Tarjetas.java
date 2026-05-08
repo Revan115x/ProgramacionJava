@@ -85,6 +85,7 @@ public class BD_Tarjetas extends BD_Conector {
 		}
 	}
 
+	//METODO PARA BUSCAR CUENTA EN LA TABLA DE CUENTAS
 	public boolean buscarCuenta(int cta) throws ErrorBaseDatos {
 		String cadenaSQL = "SELECT * FROM cuentas WHERE número=" + cta;
 		boolean existe = false;
@@ -133,6 +134,7 @@ public class BD_Tarjetas extends BD_Conector {
 		}
 	}
 
+	
 	public Cuenta SaldoTarjeta(int num) throws ErrorBaseDatos {
 		String cadenaSQL = "SELECT * FROM cuentas WHERE número = " + num;
 		Cuenta cuenta = null;

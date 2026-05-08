@@ -101,11 +101,11 @@ public class main {
 
             // Copiar archivo
             Path copia = Paths.get("copia.txt");
-            Files.copy(archivo, copia, REPLACE_EXISTING);
+            Files.copy(archivo, copia /*REPLACE_EXISTING*/);
 
             // Mover archivo
             Path movido = Paths.get("movido.txt");
-            Files.move(archivo, movido, REPLACE_EXISTING);
+            Files.move(archivo, movido /*REPLACE_EXISTING*/);
 
             // Borrar archivo
             Files.deleteIfExists(copia);

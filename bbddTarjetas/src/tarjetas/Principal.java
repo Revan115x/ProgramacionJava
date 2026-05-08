@@ -29,12 +29,12 @@ public class Principal {
 			System.out.println("2. Dar de alta tarjeta de débito");
 			System.out.println("3. Sacar dinero de una tarjeta de débito.");
 			System.out.println("4. Sacar dinero de una tarjeta de crédito. ");
-			System.out.println("5.");
-			System.out.println("6.");
-			System.out.println("7.");
+			System.out.println("5. Estado de cuenta");
+			System.out.println("6. Bloquear tarjeta");
+			System.out.println("7. Desbloquear tarjeta");
 			System.out.println("8. Alta movimiento");
-			System.out.println("9.");
-			System.out.println("10. ");
+			System.out.println("9. Eliminar tarjeta");
+			System.out.println("10.INGRESAR DINERO");
 			System.out.print("\tTeclea opción: ");
 			try {
 				opc = sc.nextInt();
@@ -210,7 +210,7 @@ public class Principal {
 						System.out.println("NO EXISTE TARJETA CON ESE NUMERO");
 					else {
 
-						if (!tar.getTipo().equals("D")) {
+						if (!tar.getTipo().equals("C")) {
 							System.out.println("NO ES DE DEBITO");
 							break;
 						}
@@ -227,7 +227,7 @@ public class Principal {
 							System.out.println("ERROR CLAVE");
 
 						System.out.println("Retirar Dinero");
-						double dinero = sc.nextInt();
+						double dinero = sc.nextDouble();
 
 						Cuenta cuenta = null;
 						cuenta = bd.SaldoTarjeta(tar.getNumeroCuenta());

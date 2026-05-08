@@ -1,10 +1,10 @@
 package ejemploInterface1;
 
 public class Vehiculo implements Machine{
-	private String matrícula;
+	private String matr;
 	private int cuentaKms;
-	public Vehiculo(String matrícula) {
-		this.matrícula = matrícula;
+	public Vehiculo(String matracula) {
+		this.matr = matracula;
 		this.cuentaKms = 0;
 	}
 	
@@ -25,7 +25,7 @@ public class Vehiculo implements Machine{
 
 	@Override
 	public String toString() {
-		return "Vehiculo [matrícula=" + matrícula + ", cuentaKms=" + cuentaKms + "]";
+		return "Vehiculo [matrï¿½cula=" + matr + ", cuentaKms=" + cuentaKms + "]";
 	}
 	
 	

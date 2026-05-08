@@ -112,7 +112,7 @@ public class Agenda {
 				System.out.println("Introduce telefeno");
 				String tel = sc.nextLine();
 				//telefono=bd.buscarTelefon(tel);
-				Contacto con=bd.buscarTelefon(tel);
+				//Contacto con=bd.buscarTelefon(tel);
 				if (telefono == null)
 					System.out.println("Por motivos t�cnicos no podemos obtener la información en este momento");
 				else if (telefono.equals(""))
