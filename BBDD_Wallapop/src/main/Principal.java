@@ -1,0 +1,70 @@
+package main;
+
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.sql.*;
+import bbdd.*;
+import modelos.Usuarios;
+import modelos.Anuncios;
+import modelos.Vendidos;
+
+public class Principal {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		int opc = 0;
+
+		DB_Wallapop bd = new DB_Wallapop("mysql-properties.xml");
+
+		do {
+			/*MENU*/
+			try {
+				System.out.println(" MENU DE WALLAPOP ");
+				System.out.println("1.Comprar un producto");
+				
+				opc = sc.nextInt();
+			}
+
+			catch (InputMismatchException e) {
+				System.out.println("Debes introducir n�mero 1-5");
+				opc = 0;
+			}
+
+			sc.nextLine();
+			switch (opc) {
+			case 1:
+				System.out.println("\n EMAIL DEL USUARIO");
+				String email=sc.nextLine();
+				
+				try {
+					Usuarios usuario = bd.Usuario2(email);
+					
+					System.out.println(usuario.toString());
+					
+				}catch(ErrorBaseDatos e) {
+					System.out.println("");
+				}
+				
+				
+				break;
+			case 2:
+				
+				break;
+			case 3:
+				
+				break;
+			case 4:
+				
+				break;
+			case 5:
+				System.out.println("Saliendo del programa...");
+				break;
+			}
+		} while (opc != 5);
+	}
+}
