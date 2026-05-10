@@ -176,4 +176,51 @@ public class BD_Tarjetas extends BD_Conector {
 			throw new ErrorBaseDatos("ERROR NO DEVUELVE LA TARJETA");
 		}
 	}
+	
+	public void movimientos(Tarjeta tar , double dinero)throws ErrorBaseDatos {
+		
+		try {
+			this.abrir();
+			/*CUANDO LA TABLA TIENE UN CAMPO AUTO INCREMETABLE HACEMOS A INDICAR LOS CAMPOS QUE VAMOS A AÑADIR*/
+			PreparedStatement p = c.prepareStatement("INSERT INTO movimientos (tarjeta,cargado,importe,fecha) VALUES (?,?,?,?)");
+			p.setInt(1, tar.getNumero());
+			p.setInt(2, 1);
+			p.setDouble(3, dinero);
+			p.setObject(4, LocalDate.now());
+			p.executeUpdate();
+			p.close();
+			this.cerrar();
+		} catch (SQLException e) {
+			this.cerrar();
+			throw new ErrorBaseDatos("ERROR NO PUEDE ACTUALIZAR EL MOVIMIENTO");
+		}
+		
+	}
+	
+	public ArrayList<Movimiento> MovimientosTarjeta(int tar)throws ErrorBaseDatos{
+		String cadenaSQL = "SELECT tarjeta,cargado,importe,fecha FROM movimientos where tarjeta = "+tar;
+		ArrayList<Movimiento> mov = new ArrayList<Movimiento>();
+		try {
+			this.abrir();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			while (reg.next()) {
+				mov.add(new Movimiento(
+						reg.getInt("tarjeta"),
+						reg.getInt("cargado"),
+						reg.getDouble("importe"),
+						reg.getDate("fecha").toLocalDate()
+						)
+						);
+			}
+			s.close();
+			this.cerrar();
+			return mov;
+		} catch (SQLException e) {
+			this.cerrar();
+			throw new ErrorBaseDatos("Error al buscar alumno");
+
+		}
+	}
+	
 }

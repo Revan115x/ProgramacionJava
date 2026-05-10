@@ -3,34 +3,24 @@ package modelos;
 import java.time.LocalDate;
 
 public class Movimiento {
-	private int numero;
 	private int numTarjeta;
-	private boolean cargado;
+	private int cargado;
 	private double importe;
 	private LocalDate fecha;
 
-	public Movimiento(int numero, int numTarjeta, boolean cargado, double importe, LocalDate fecha) {
+	public Movimiento(int numTarjeta, int cargado, double importe, LocalDate fecha) {
 		super();
-		this.numero = numero;
 		this.numTarjeta = numTarjeta;
 		this.cargado = cargado;
 		this.importe = importe;
 		this.fecha = fecha;
 	}
 
-	public Movimiento(int numTarjeta, double importe) {
-		super();
-		this.numTarjeta = numTarjeta;
-		this.cargado = false;
-		this.importe = importe;
-		this.fecha = LocalDate.now();
-	}
-
 	public int getNumTarjeta() {
 		return numTarjeta;
 	}
 
-	public boolean isCargado() {
+	public int getCargado() {
 		return cargado;
 	}
 
@@ -41,6 +31,13 @@ public class Movimiento {
 	public LocalDate getFecha() {
 		return fecha;
 	}
+
+	@Override
+	public String toString() {
+		return "Movimiento [numTarjeta=" + numTarjeta + ", cargado=" + cargado + ", importe=" + importe + ", fecha="
+				+ fecha + "]";
+	}
+
 	
 	
 

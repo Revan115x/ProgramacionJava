@@ -29,13 +29,13 @@ public class Principal {
 			System.out.println("2. Dar de alta tarjeta de débito");
 			System.out.println("3. Sacar dinero de una tarjeta de débito.");
 			System.out.println("4. Sacar dinero de una tarjeta de crédito. ");
-			System.out.println("5. Estado de cuenta");
+			System.out.println("5. movimientos de tarjeta y cambio cargo");
 			System.out.println("6. Bloquear tarjeta");
 			System.out.println("7. Desbloquear tarjeta");
 			System.out.println("8. Alta movimiento");
 			System.out.println("9. Eliminar tarjeta");
 			System.out.println("10.INGRESAR DINERO");
-			System.out.print("\tTeclea opción: ");
+			System.out.print("\t Teclea opción: ");
 			try {
 				opc = sc.nextInt();
 			}
@@ -155,8 +155,8 @@ public class Principal {
 							System.out.println("NO ES DE DEBITO");
 							break;
 						}
-						
-						if(tar.getBloqueada()!=0) {
+
+						if (tar.getBloqueada() != 0) {
 							System.out.println("LA TARJETA ESTA BLOQUEDA NO PUEDES ACCEDER");
 							break;
 						}
@@ -179,9 +179,9 @@ public class Principal {
 							System.out.println("NO PERMITIDO RETIRAR POR FALTA DE SALDO");
 							break;
 						}
-						
+
 						System.out.println("Retirando dinero.....");
-						
+
 						int filas = bd.ActualizarSaldo(cuenta, dinero);
 
 						switch (filas) {
@@ -197,7 +197,7 @@ public class Principal {
 					System.out.println(e.getMessage() + " Contacte con sistemas");
 				}
 				break;
-			
+
 			case 4:
 				System.out.println(" NUMERO DE TARJETA ");
 				numTarjeta = sc.nextInt();
@@ -211,11 +211,11 @@ public class Principal {
 					else {
 
 						if (!tar.getTipo().equals("C")) {
-							System.out.println("NO ES DE DEBITO");
+							System.out.println("ERROR : LA TARJETA ES DE DEBITO");
 							break;
 						}
-						
-						if(tar.getBloqueada()!=0) {
+
+						if (tar.getBloqueada() != 0) {
 							System.out.println("LA TARJETA ESTA BLOQUEDA NO PUEDES ACCEDER");
 							break;
 						}
@@ -238,14 +238,17 @@ public class Principal {
 							System.out.println("NO PERMITIDO RETIRAR POR FALTA DE SALDO");
 							break;
 						}
-						
+
 						System.out.println("Retirando dinero.....");
-						
+
 						int filas = bd.ActualizarSaldo(cuenta, dinero);
 
 						switch (filas) {
 						case 1:
 							System.out.println("SALDO ACTUALIZADO BEBE");
+
+							bd.movimientos(tar, dinero);
+
 							break;
 						case 0:
 							System.out.println("No se ha podido actualizar saldo, contacte con sistemas");
@@ -253,6 +256,28 @@ public class Principal {
 						}
 					}
 				} catch (ErrorBaseDatos e) {
+					System.out.println(e.getMessage() + " Contacte con sistemas");
+				}
+				break;
+
+			case 5:
+				System.out.println(" NUMERO DE TARJETA ");
+				numTarjeta = sc.nextInt();
+				sc.nextLine();
+				try {
+					ArrayList<Movimiento>movimientos;
+					System.out.println("MOVIMIENTOS DE LA TARJETA : "+numTarjeta);
+					movimientos=bd.MovimientosTarjeta(numTarjeta);
+					
+					for(Movimiento mov: movimientos) {
+						
+						if(mov.getCargado()==0)
+							
+							System.out.println(mov.toString());
+					}
+					
+					
+				}catch(ErrorBaseDatos e) {
 					System.out.println(e.getMessage() + " Contacte con sistemas");
 				}
 				break;
