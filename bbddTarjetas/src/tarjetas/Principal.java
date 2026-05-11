@@ -143,9 +143,13 @@ public class Principal {
 				System.out.println(" NUMERO DE TARJETA ");
 				numTarjeta = sc.nextInt();
 				sc.nextLine();
+				
+				System.out.println("CONTRASEÑA DE LA TARJETA");
+				String clave = sc.nextLine();
+				
 				try {
 					Tarjeta tar = null;
-					tar = bd.MostrarTarjeta(numTarjeta);
+					tar = bd.MostrarTarjeta(numTarjeta,clave);
 
 					if (tar == null)
 						System.out.println("NO EXISTE TARJETA CON ESE NUMERO");
@@ -160,12 +164,6 @@ public class Principal {
 							System.out.println("LA TARJETA ESTA BLOQUEDA NO PUEDES ACCEDER");
 							break;
 						}
-
-						System.out.println("CONTRASEÑA DE LA TARJETA");
-						String clave = sc.nextLine();
-
-						if (!clave.equals(tar.getClave()))
-							System.out.println("ERROR CLAVE");
 
 						System.out.println("Retirar Dinero");
 						double dinero = sc.nextInt();
@@ -202,9 +200,13 @@ public class Principal {
 				System.out.println(" NUMERO DE TARJETA ");
 				numTarjeta = sc.nextInt();
 				sc.nextLine();
+				
+				System.out.println("CONTRASEÑA DE LA TARJETA");
+				clave = sc.nextLine();
+				
 				try {
 					Tarjeta tar = null;
-					tar = bd.MostrarTarjeta(numTarjeta);
+					tar = bd.MostrarTarjeta(numTarjeta,clave);
 
 					if (tar == null)
 						System.out.println("NO EXISTE TARJETA CON ESE NUMERO");
@@ -220,35 +222,21 @@ public class Principal {
 							break;
 						}
 
-						System.out.println("CONTRASEÑA DE LA TARJETA");
-						String clave = sc.nextLine();
-
-						if (!clave.equals(tar.getClave()))
-							System.out.println("ERROR CLAVE");
-
 						System.out.println("Retirar Dinero");
 						double dinero = sc.nextDouble();
 
-						Cuenta cuenta = null;
-						cuenta = bd.SaldoTarjeta(tar.getNumeroCuenta());
-
-						System.out.println(cuenta.getSaldo());
-
-						if (dinero > cuenta.getSaldo()) {
-							System.out.println("NO PERMITIDO RETIRAR POR FALTA DE SALDO");
+						
+						if (dinero > tar.getLimite()) {
+							System.out.println("NO PERMITIDO RETIRAR POR EXCEDER EL LIMITE DE LA TARJETA");
 							break;
 						}
-
-						System.out.println("Retirando dinero.....");
-
-						int filas = bd.ActualizarSaldo(cuenta, dinero);
+						//int filas = bd.ActualizarSaldo(cuenta, dinero);
+						
+						int filas = bd.movimientos(tar, dinero);
 
 						switch (filas) {
 						case 1:
-							System.out.println("SALDO ACTUALIZADO BEBE");
-
-							bd.movimientos(tar, dinero);
-
+							System.out.println("retirando dinero.....");
 							break;
 						case 0:
 							System.out.println("No se ha podido actualizar saldo, contacte con sistemas");
@@ -266,14 +254,16 @@ public class Principal {
 				sc.nextLine();
 				try {
 					ArrayList<Movimiento>movimientos;
-					System.out.println("MOVIMIENTOS DE LA TARJETA : "+numTarjeta);
-					movimientos=bd.MovimientosTarjeta(numTarjeta);
+
+					movimientos=bd.MovimientosTarjetaCargo(numTarjeta);
 					
 					for(Movimiento mov: movimientos) {
-						
-						if(mov.getCargado()==0)
 							
 							System.out.println(mov.toString());
+							
+							double resultado=mov.getImporte();
+							double TotalResultado=0;
+							TotalResultado += resultado;
 					}
 					
 					

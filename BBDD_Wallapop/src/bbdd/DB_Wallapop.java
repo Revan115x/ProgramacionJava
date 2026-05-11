@@ -47,9 +47,11 @@ public class DB_Wallapop extends BD_Conector{
 	
 	public Usuarios Usuario2(String mail) throws ErrorBaseDatos {
 		try {
+		this.abrir();
 		PreparedStatement p = c.prepareStatement("SELECT * FROM usuarios WHERE mail = ?");
 		p.setString(1, mail);
 		Usuarios user=null;
+		reg=p.executeQuery();
 		if (reg.next()) {
 			user = new Usuarios(
 					reg.getString("mail"),

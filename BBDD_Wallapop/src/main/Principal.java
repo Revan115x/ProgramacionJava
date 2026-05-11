@@ -42,7 +42,7 @@ public class Principal {
 				String email=sc.nextLine();
 				
 				try {
-					Usuarios usuario = bd.Usuario2(email);
+					Usuarios usuario = bd.Usuario(email);
 					
 					System.out.println(usuario.toString());
 					

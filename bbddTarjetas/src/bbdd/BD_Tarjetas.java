@@ -107,8 +107,8 @@ public class BD_Tarjetas extends BD_Conector {
 
 	}
 
-	public Tarjeta MostrarTarjeta(int num) throws ErrorBaseDatos {
-		String cadenaSQL = "SELECT * FROM tarjetas WHERE numero = " + num;
+	public Tarjeta MostrarTarjeta(int num, String clave) throws ErrorBaseDatos {
+		String cadenaSQL = "SELECT * FROM tarjetas WHERE numero = " + num+ " AND clave = '"+clave+"'";
 		Tarjeta tarjeta = null;
 		try {
 			this.abrir();
@@ -177,19 +177,19 @@ public class BD_Tarjetas extends BD_Conector {
 		}
 	}
 	
-	public void movimientos(Tarjeta tar , double dinero)throws ErrorBaseDatos {
+	public int movimientos(Tarjeta tar , double dinero)throws ErrorBaseDatos {
 		
 		try {
 			this.abrir();
 			/*CUANDO LA TABLA TIENE UN CAMPO AUTO INCREMETABLE HACEMOS A INDICAR LOS CAMPOS QUE VAMOS A AÑADIR*/
-			PreparedStatement p = c.prepareStatement("INSERT INTO movimientos (tarjeta,cargado,importe,fecha) VALUES (?,?,?,?)");
+			PreparedStatement p = c.prepareStatement("INSERT INTO movimientos (tarjeta,cargado,importe,fecha) VALUES (?,0,?,?)");
 			p.setInt(1, tar.getNumero());
-			p.setInt(2, 1);
-			p.setDouble(3, dinero);
-			p.setObject(4, LocalDate.now());
-			p.executeUpdate();
+			p.setDouble(2, dinero);
+			p.setObject(3, LocalDate.now());
+			int filas = p.executeUpdate();
 			p.close();
 			this.cerrar();
+			return filas;
 		} catch (SQLException e) {
 			this.cerrar();
 			throw new ErrorBaseDatos("ERROR NO PUEDE ACTUALIZAR EL MOVIMIENTO");
@@ -197,8 +197,8 @@ public class BD_Tarjetas extends BD_Conector {
 		
 	}
 	
-	public ArrayList<Movimiento> MovimientosTarjeta(int tar)throws ErrorBaseDatos{
-		String cadenaSQL = "SELECT tarjeta,cargado,importe,fecha FROM movimientos where tarjeta = "+tar;
+	public ArrayList<Movimiento> MovimientosTarjetaCargo(int tar)throws ErrorBaseDatos{
+		String cadenaSQL = "SELECT tarjeta,cargado,importe,fecha FROM movimientos where tarjeta = "+tar+" and cargado = 0";
 		ArrayList<Movimiento> mov = new ArrayList<Movimiento>();
 		try {
 			this.abrir();
@@ -220,6 +220,22 @@ public class BD_Tarjetas extends BD_Conector {
 			this.cerrar();
 			throw new ErrorBaseDatos("Error al buscar alumno");
 
+		}
+	}
+	
+	public int ActualizarCargoCuenta(double dinero) throws ErrorBaseDatos {
+		try {
+			this.abrir();
+			PreparedStatement p = c.prepareStatement("UPDATE cuentas SET saldo= saldo - ? WHERE número= ?" );
+			p.setDouble(1, dinero);
+			p.setInt(2, ct.getNumero());
+			int filas = p.executeUpdate();
+			p.close();
+			this.cerrar();
+			return filas;
+		} catch (SQLException e) {
+			this.cerrar();
+			throw new ErrorBaseDatos("ERROR NO DEVUELVE LA TARJETA");
 		}
 	}
 	
