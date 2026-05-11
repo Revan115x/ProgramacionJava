@@ -256,15 +256,32 @@ public class Principal {
 					ArrayList<Movimiento>movimientos;
 
 					movimientos=bd.MovimientosTarjetaCargo(numTarjeta);
+					double TotalResultado=0;
 					
 					for(Movimiento mov: movimientos) {
 							
 							System.out.println(mov.toString());
 							
 							double resultado=mov.getImporte();
-							double TotalResultado=0;
 							TotalResultado += resultado;
+							
 					}
+					
+					Tarjeta Tar=bd.MostrarTarjetaMovimiento(numTarjeta);
+					int numeroCuenta=Tar.getNumeroCuenta();
+					Cuenta cuenta=bd.mostrarcuentapornumero(numeroCuenta);
+					
+					int filas=bd.ActualizarSaldo(cuenta, TotalResultado);
+					
+					switch (filas) {
+					case 1:
+						System.out.println("SALDO CUENTA ACTUALIZADO");
+						break;
+					case 0:
+						System.out.println("No se ha podido actualizar saldo, contacte con sistemas");
+						break;
+					}
+					
 					
 					
 				}catch(ErrorBaseDatos e) {

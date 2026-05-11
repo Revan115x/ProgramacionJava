@@ -223,20 +223,53 @@ public class BD_Tarjetas extends BD_Conector {
 		}
 	}
 	
-	public int ActualizarCargoCuenta(double dinero) throws ErrorBaseDatos {
+	public Tarjeta MostrarTarjetaMovimiento(int num) throws ErrorBaseDatos {
+		String cadenaSQL = "SELECT * FROM tarjetas WHERE numero= "+num;
+		Tarjeta tarjeta = null;
 		try {
 			this.abrir();
-			PreparedStatement p = c.prepareStatement("UPDATE cuentas SET saldo= saldo - ? WHERE número= ?" );
-			p.setDouble(1, dinero);
-			p.setInt(2, ct.getNumero());
-			int filas = p.executeUpdate();
-			p.close();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			if (reg.next()) {
+				tarjeta = new Tarjeta(reg.getInt("numero"), 
+						reg.getInt("cuenta"), 
+						reg.getString("titular"),
+						reg.getDouble("limite"), 
+						reg.getString("tipo"),
+						reg.getDate("caducidad").toLocalDate(),
+						reg.getString("clave"), 
+						reg.getInt("bloqueada"));
+			}
+			s.close();
 			this.cerrar();
-			return filas;
+			return tarjeta;
 		} catch (SQLException e) {
 			this.cerrar();
 			throw new ErrorBaseDatos("ERROR NO DEVUELVE LA TARJETA");
+
 		}
+	}
+	
+	public Cuenta mostrarcuentapornumero(int numCuenta) throws ErrorBaseDatos {
+		String cadenaSQL = "SELECT * FROM cuentas WHERE número = "+numCuenta;
+		Cuenta cuenta=null;
+		try {
+			this.abrir();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			if (reg.next()) {
+				cuenta = (new Cuenta(reg.getInt("número"), reg.getString("titular1"), reg.getString("titular2"),
+						reg.getString("titular3"), reg.getDouble("saldo"), reg.getDate("fecha").toLocalDate()));
+			}
+			s.close();
+			this.cerrar();
+			return cuenta;
+		} catch (SQLException e) {
+			this.cerrar();
+			throw new ErrorBaseDatos("ERROR AL MOSTRAR CUENTA POR NUMERO");
+
+		}
+
 	}
 	
 }
