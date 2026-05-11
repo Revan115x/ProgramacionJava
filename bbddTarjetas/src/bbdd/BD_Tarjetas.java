@@ -31,8 +31,12 @@ public class BD_Tarjetas extends BD_Conector {
 			s = c.createStatement();
 			reg = s.executeQuery(cadenaSQL);
 			while (reg.next()) {
-				cuentas.add(new Cuenta(reg.getInt("número"), reg.getString("titular1"), reg.getString("titular2"),
-						reg.getString("titular3"), reg.getDouble("saldo"), reg.getDate("fecha").toLocalDate()));
+				cuentas.add(new Cuenta(reg.getInt("número"),
+						reg.getString("titular1"), 
+						reg.getString("titular2"),
+						reg.getString("titular3"), 
+						reg.getDouble("saldo"),
+						reg.getDate("fecha").toLocalDate()));
 			}
 			s.close();
 			this.cerrar();
@@ -197,6 +201,7 @@ public class BD_Tarjetas extends BD_Conector {
 		
 	}
 	
+	//METODO PARA DEVOLVER ARRAYLIST DE MOVIMIENTO DE UN NUMERO DE TARJETA
 	public ArrayList<Movimiento> MovimientosTarjetaCargo(int tar)throws ErrorBaseDatos{
 		String cadenaSQL = "SELECT tarjeta,cargado,importe,fecha FROM movimientos where tarjeta = "+tar+" and cargado = 0";
 		ArrayList<Movimiento> mov = new ArrayList<Movimiento>();
@@ -223,6 +228,7 @@ public class BD_Tarjetas extends BD_Conector {
 		}
 	}
 	
+	//METODO PARA DEVOLVER TARJETA POR NUMERO DE TARJETA
 	public Tarjeta MostrarTarjetaMovimiento(int num) throws ErrorBaseDatos {
 		String cadenaSQL = "SELECT * FROM tarjetas WHERE numero= "+num;
 		Tarjeta tarjeta = null;
@@ -250,6 +256,7 @@ public class BD_Tarjetas extends BD_Conector {
 		}
 	}
 	
+	//METODO PARA DEVOLVER CUENTA POR NUMERO DE CUENTA DE TARJETA
 	public Cuenta mostrarcuentapornumero(int numCuenta) throws ErrorBaseDatos {
 		String cadenaSQL = "SELECT * FROM cuentas WHERE número = "+numCuenta;
 		Cuenta cuenta=null;
@@ -272,4 +279,73 @@ public class BD_Tarjetas extends BD_Conector {
 
 	}
 	
+	//METODO QUE CAMBIA EL CARGADO DE UNA TARJETA A COBRADO(1) 
+	public void ActualizarCargoM(int numeroTarjeta) throws ErrorBaseDatos{
+		try {
+			this.abrir();
+			PreparedStatement p = c.prepareStatement("UPDATE movimientos SET cargado = 1  WHERE tarjeta= ?" );
+			p.setInt(1,numeroTarjeta); 
+			p.executeUpdate();
+			p.close();
+			this.cerrar();
+		} catch (SQLException e) {
+			this.cerrar();
+			throw new ErrorBaseDatos("ERROR NO DEVUELVE LA TARJETA");
+		}
+	}
+	
+	//METODO PARA MOSTRAR TARJETA POR NOMBRE DE TITULAR
+	public Tarjeta MostrarTarjetaTitular(String titular) throws ErrorBaseDatos {
+		String cadenaSQL = "SELECT * FROM tarjetas WHERE titular Like '%"+titular+"%' AND caducidad > SYSDATE()" ;
+		Tarjeta tarjeta = null;
+		try {
+			this.abrir();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			if (reg.next()) {
+				tarjeta = new Tarjeta(reg.getInt("numero"), 
+						reg.getInt("cuenta"), 
+						reg.getString("titular"),
+						reg.getDouble("limite"), 
+						reg.getString("tipo"),
+						reg.getDate("caducidad").toLocalDate(),
+						reg.getString("clave"), 
+						reg.getInt("bloqueada"));
+			}
+			s.close();
+			this.cerrar();
+			return tarjeta;
+		} catch (SQLException e) {
+			this.cerrar();
+			throw new ErrorBaseDatos("ERROR NO DEVUELVE LA TARJETA");
+
+		}
+	}
+	
+	//METODO PARA BUSCAR CUENTA ASOSIADA A TARJETA
+	public ArrayList<Cuenta> cuentaAsociada(int numerocuenta) throws ErrorBaseDatos {
+		String cadenaSQL = "SELECT * FROM cuentas WHERE número = "+numerocuenta ;
+		ArrayList<Cuenta>cuenta = new ArrayList<Cuenta>();
+		try {
+			this.abrir();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			while (reg.next()) {
+				cuenta.add(new Cuenta(reg.getInt("número"),
+						reg.getString("titular1"), 
+						reg.getString("titular2"),
+						reg.getString("titular3"), 
+						reg.getDouble("saldo"),
+						reg.getDate("fecha").toLocalDate()));
+			}
+			s.close();
+			this.cerrar();
+			return cuenta;
+		} catch (SQLException e) {
+			this.cerrar();
+			throw new ErrorBaseDatos("ERROR NO DEVUELVE LA TARJETA");
+
+		}
+	}
+
 }

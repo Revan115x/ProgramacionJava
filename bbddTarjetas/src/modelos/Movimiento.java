@@ -34,8 +34,8 @@ public class Movimiento {
 
 	@Override
 	public String toString() {
-		return "Movimiento [numTarjeta=" + numTarjeta + ", cargado=" + cargado + ", importe=" + importe + ", fecha="
-				+ fecha + "]";
+		return "numTarjeta=" + numTarjeta + ", cargado=" + cargado + ", importe=" + importe + ", fecha="
+				+ fecha + "";
 	}
 
 	

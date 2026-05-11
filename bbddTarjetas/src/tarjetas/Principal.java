@@ -143,13 +143,13 @@ public class Principal {
 				System.out.println(" NUMERO DE TARJETA ");
 				numTarjeta = sc.nextInt();
 				sc.nextLine();
-				
+
 				System.out.println("CONTRASEÑA DE LA TARJETA");
 				String clave = sc.nextLine();
-				
+
 				try {
 					Tarjeta tar = null;
-					tar = bd.MostrarTarjeta(numTarjeta,clave);
+					tar = bd.MostrarTarjeta(numTarjeta, clave);
 
 					if (tar == null)
 						System.out.println("NO EXISTE TARJETA CON ESE NUMERO");
@@ -200,13 +200,13 @@ public class Principal {
 				System.out.println(" NUMERO DE TARJETA ");
 				numTarjeta = sc.nextInt();
 				sc.nextLine();
-				
+
 				System.out.println("CONTRASEÑA DE LA TARJETA");
 				clave = sc.nextLine();
-				
+
 				try {
 					Tarjeta tar = null;
-					tar = bd.MostrarTarjeta(numTarjeta,clave);
+					tar = bd.MostrarTarjeta(numTarjeta, clave);
 
 					if (tar == null)
 						System.out.println("NO EXISTE TARJETA CON ESE NUMERO");
@@ -225,13 +225,12 @@ public class Principal {
 						System.out.println("Retirar Dinero");
 						double dinero = sc.nextDouble();
 
-						
 						if (dinero > tar.getLimite()) {
 							System.out.println("NO PERMITIDO RETIRAR POR EXCEDER EL LIMITE DE LA TARJETA");
 							break;
 						}
-						//int filas = bd.ActualizarSaldo(cuenta, dinero);
-						
+						// int filas = bd.ActualizarSaldo(cuenta, dinero);
+
 						int filas = bd.movimientos(tar, dinero);
 
 						switch (filas) {
@@ -253,38 +252,65 @@ public class Principal {
 				numTarjeta = sc.nextInt();
 				sc.nextLine();
 				try {
-					ArrayList<Movimiento>movimientos;
+					ArrayList<Movimiento> movimientos;
 
-					movimientos=bd.MovimientosTarjetaCargo(numTarjeta);
-					double TotalResultado=0;
-					
-					for(Movimiento mov: movimientos) {
-							
-							System.out.println(mov.toString());
-							
-							double resultado=mov.getImporte();
+					movimientos = bd.MovimientosTarjetaCargo(numTarjeta);
+					double TotalResultado = 0;
+
+					System.out.println("TU TARJETA TIENE LOS SIGUIENTES CARGOS");
+					int cont = 0;
+					if (movimientos.size() != 0) {
+
+						for (Movimiento mov : movimientos) {
+							cont++;
+							System.out.println(cont + " Movimiento: " + mov.toString());
+
+							double resultado = mov.getImporte();
 							TotalResultado += resultado;
-							
+
+						}
+
+						Tarjeta Tar = bd.MostrarTarjetaMovimiento(numTarjeta);
+						int numeroCuenta = Tar.getNumeroCuenta();
+						Cuenta cuenta = bd.mostrarcuentapornumero(numeroCuenta);
+
+						int filas = bd.ActualizarSaldo(cuenta, TotalResultado);
+
+						switch (filas) {
+						case 1:
+							System.out.println("SALDO CUENTA ACTUALIZADO");
+
+							bd.ActualizarCargoM(numTarjeta);
+
+							break;
+						case 0:
+							System.out.println("No se ha podido actualizar saldo, contacte con sistemas");
+							break;
+						}
+					} else {
+						System.out.println("Tarjeta sin movimientos");
 					}
-					
-					Tarjeta Tar=bd.MostrarTarjetaMovimiento(numTarjeta);
-					int numeroCuenta=Tar.getNumeroCuenta();
-					Cuenta cuenta=bd.mostrarcuentapornumero(numeroCuenta);
-					
-					int filas=bd.ActualizarSaldo(cuenta, TotalResultado);
-					
-					switch (filas) {
-					case 1:
-						System.out.println("SALDO CUENTA ACTUALIZADO");
-						break;
-					case 0:
-						System.out.println("No se ha podido actualizar saldo, contacte con sistemas");
-						break;
+
+				} catch (ErrorBaseDatos e) {
+					System.out.println(e.getMessage() + " Contacte con sistemas");
+				}
+				break;
+			case 6:
+				System.out.println("DIME EL TITULAR DE LA TARJETA");
+				String titular = sc.nextLine();
+				try {
+					Tarjeta tar = bd.MostrarTarjetaTitular(titular);
+
+					System.out.println(tar.toString());
+
+					int numerocuenta = tar.getNumeroCuenta();
+
+					ArrayList<Cuenta> cuenta = bd.cuentaAsociada(numerocuenta);
+
+					for (Cuenta ct : cuenta) {
+						System.out.println(ct.toString());
 					}
-					
-					
-					
-				}catch(ErrorBaseDatos e) {
+				} catch (ErrorBaseDatos e) {
 					System.out.println(e.getMessage() + " Contacte con sistemas");
 				}
 				break;
