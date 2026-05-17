@@ -25,9 +25,6 @@ public class Alumno extends Persona {
 		this.fechaMatricula=LocalDate.now();
 	}
 
-	
-
-
 	public Alumno(String dni, String nombre, String curso, int matricula,
 			String telenono, LocalDate fechaMatricula) {
 		super(dni, nombre, curso);
