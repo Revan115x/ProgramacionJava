@@ -2,10 +2,13 @@ package EmpresaInformatica;
 
 public abstract class Empleado {
 	
-	private String nombre,dni,direccion,telefono;
+	protected int numeroId;
+	protected String nombre,dni,direccion,telefono;
+	
 
-	public Empleado(String nombre, String dni, String direccion, String telefono) {
+	public Empleado(int numeroId,String nombre, String dni, String direccion, String telefono) {
 		super();
+		this.numeroId=numeroId;
 		this.nombre = nombre;
 		this.dni = dni;
 		this.direccion = direccion;
@@ -33,7 +36,5 @@ public abstract class Empleado {
 		return "Empleado [nombre=" + nombre + ", dni=" + dni + ", direccion=" + direccion + ", telefono=" + telefono
 				+ "]";
 	}
-		sdsa
-	
 
 }
