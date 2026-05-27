@@ -33,7 +33,7 @@ public abstract class Empleado {
 		return "Empleado [nombre=" + nombre + ", dni=" + dni + ", direccion=" + direccion + ", telefono=" + telefono
 				+ "]";
 	}
-	
+		sdsa
 	
 
 }
