@@ -1,4 +1,4 @@
-package ejercicio1Libro;
+package Libros;
 
 import java.io.BufferedReader;
 import java.io.Reader;

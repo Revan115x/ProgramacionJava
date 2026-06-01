@@ -2,17 +2,36 @@ package EmpresaInformatica;
 
 public abstract class Empleado {
 	
-	protected int numeroId;
+	protected static int contador = 0;
+	private int numeroId;
 	protected String nombre,dni,direccion,telefono;
+	protected int horasTrabajadas;
 	
-
-	public Empleado(int numeroId,String nombre, String dni, String direccion, String telefono) {
+	public Empleado(String nombre, String dni, String direccion, String telefono) {
 		super();
-		this.numeroId=numeroId;
+		contador++;
+		this.numeroId = contador;
 		this.nombre = nombre;
 		this.dni = dni;
 		this.direccion = direccion;
 		this.telefono = telefono;
+		this.horasTrabajadas = 0;
+	}
+	
+	public abstract double pagarEmpl();
+	
+	public void sumarHoras(int horas) {
+		horasTrabajadas+=horas;
+	}
+	
+	
+
+	public static int getContador() {
+		return contador;
+	}
+
+	public int getNumeroId() {
+		return numeroId;
 	}
 
 	public String getNombre() {
@@ -31,10 +50,16 @@ public abstract class Empleado {
 		return telefono;
 	}
 
+	public int getHorasTrabajadas() {
+		return horasTrabajadas;
+	}
+
 	@Override
 	public String toString() {
-		return "Empleado [nombre=" + nombre + ", dni=" + dni + ", direccion=" + direccion + ", telefono=" + telefono
-				+ "]";
+		return "[numeroId=" + numeroId + ", nombre=" + nombre + ", dni=" + dni + ", direccion=" + direccion
+				+ ", telefono=" + telefono + ", horasTrabajadas=" + horasTrabajadas + "]";
 	}
+	
+	
 
 }

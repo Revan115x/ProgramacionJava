@@ -1,4 +1,4 @@
-package ejercicio1Libro;
+package Libros;
 
 public class libro {
 	
