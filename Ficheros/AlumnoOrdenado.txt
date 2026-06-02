@@ -1,5 +1,0 @@
-Carlota,Castillo,10.0,2003-05-25
-Luis,Sanz,9.5,1998-02-02
-Chema,Ortiz,8.5,2010-09-15
-Ana,lopez,7.2,2002-12-14
-Fran,Altos,5.2,2004-06-01
