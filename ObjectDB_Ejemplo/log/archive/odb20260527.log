@@ -1,0 +1,11 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-27 18:43:59 #1 store] 
+Database '/home/inf1/Desktop/ProgramacionJava/ObjectDB_Ejemplo/db/libros.odb' is opened by 9855@salesianas
+
+[2026-05-27 18:43:59 #2 store] 
+Configuration path: ?
+
+[2026-05-27 18:43:59 #3 type] 
+Type objetodb.Libro is not enhanced.
+

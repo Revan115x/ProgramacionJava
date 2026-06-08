@@ -3,18 +3,18 @@ package netflix;
 import java.time.LocalDate;
 
 public class suscripcionPrime extends suscripcion {
-	
+
 	private int dispositivos;
-	private double mensualidad=25;
+	private double mensualidad = 25;
 
 	public suscripcionPrime(String mail, int passwd) {
 		super(mail, passwd);
-		dispositivos=0;
+		dispositivos = 0;
 	}
-	
+
 	public int conexiones() {
-		if(dispositivos>3) {
-			System.out.println("HAY UN DISPOSITIVO CONECTADO");
+		if (dispositivos >= 3) {
+			System.out.println("HAY VARIOS DISPOSITIVO CONECTADO");
 			return 1;
 		}
 		return 0;
@@ -23,7 +23,7 @@ public class suscripcionPrime extends suscripcion {
 	@Override
 	public void conectar() {
 		System.out.println("conectado...");
-		dispositivos++;	
+		dispositivos++;
 	}
 
 	@Override
@@ -35,9 +35,8 @@ public class suscripcionPrime extends suscripcion {
 
 	@Override
 	public double verPelicula(int i) {
-		
-		return mensualidad;
-		
+		int cont=0;
+		return cont+=i;
 	}
 
 }

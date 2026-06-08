@@ -38,75 +38,86 @@ public class main {
 			case 1:
 				boolean encontrado = false;
 				String mail;
-
 				System.out.println("EMAIL");
 				mail = sc.nextLine();
-				/*for (suscripcion sub : cuentas) {
+				for (suscripcion sub : cuentas) {
 					if (sub.getMail().equalsIgnoreCase(mail)) {
-						encontrado = true;
+						if (sub instanceof suscripcionPrime) {
+							cuentas.remove(0);
+							cuentas.add(new suscripcionStandard(sub.getMail(), sub.getPasswd()));
+							System.out.println("SE CAMBIO LA CUENTA A STANDARD");
+							encontrado = true;
+						}
+						if (sub instanceof suscripcionStandard) {
+							cuentas.remove(0);
+							cuentas.add(new suscripcionPrime(sub.getMail(), sub.getPasswd()));
+							System.out.println("SE CAMBIO LA CUENTA A PRIME");
+							encontrado = true;
+						}
 					}
-				}*/
-
-				int contraseña = r.nextInt(1001, 9999);
-				System.out.println("DIME EL TIPO 1.Standard / 2. Prime");
-				int tipo = sc.nextInt();
-				switch (tipo) {
-				case 1:
-					cuentas.add(new suscripcionStandard(mail, contraseña));
-					break;
-				case 2:
-					cuentas.add(new suscripcionPrime(mail, contraseña));
 				}
+				if (encontrado == false) {
+					int contraseña = r.nextInt(1000, 10000);
+					System.out.println("DIME EL TIPO 1.Standard / 2. Prime");
+					int tipo = sc.nextInt();
+					switch (tipo) {
+					case 1:
+						cuentas.add(new suscripcionStandard(mail, contraseña));
+						break;
+					case 2:
+						cuentas.add(new suscripcionPrime(mail, contraseña));
+					}
+				}
+
+				for (suscripcion sub : cuentas) {
+					System.out.println(sub.toString());
+				}
+
 				break;
 			case 2:
-				boolean bien = false;
-				int cont = 0;
-				do {
-					System.out.println("Email");
-					mail = sc.nextLine();
-					//ME DA ERROR PORQUE REGRISTRA EL OTRO USUARIO TAMBIEN -_-
-					for (suscripcion sub : cuentas) {
-						if (sub.getMail().equalsIgnoreCase(mail)) {
-							s = sub;
-							bien = true;
-						}
-						cont++;
-					}
-				} while (!bien || cont > 3);
-
-				if (s.conexiones() == 1) {
-					System.out.println("MUCHAS CONEXIONES");
-					break;
+				if (cuentas.size() == 0) {
+					System.out.println("NO HAY USUARIOS");
 				} else {
-					if (s.caducado == 1) {
-						System.out.println("suscripcion caducada");
+					suscripcion s1 = null;
+					int cont = 0;
+					boolean correcto = false;
+					System.out.println("Introduce el Email");
+					mail = sc.nextLine();
+					do {
+						System.out.println("Introduce contraseña");
+						int pass = sc.nextInt();
+						if (cont >= 3) {
+							System.out.println("HAS AGOTADO TUS INTENTOS");
+							break;
+						}
+						for (suscripcion sub : cuentas) {
+							if (pass != sub.getPasswd()) {
+								cont++;
+							} else {
+								correcto = true;
+								s1 = sub;
+							}
+						}
+					} while (!correcto);
+					sc.nextLine();
+					if (s1.verCaducado() == 1)
 						break;
-					}
-
-					System.out.println("Titulo pelicula");
+					if (s1.conexiones() == 1)
+						break;
+					s1.conectar();
+					cont = 0;
+					System.out.println("TITULO PELICULA");
 					String titulo = sc.nextLine();
 					pelicula p = null;
-					double pago=0;
 
-					for (pelicula pl : peliculas) {
-						if (titulo.equalsIgnoreCase(pl.getTitulo()))
-							p = pl;
-					}
-					for (suscripcion sub : cuentas) {
-						if (p.getCosto() == 0) {
-							sub.conectar();
-							pago = sub.verPelicula(p.getCosto());
-							System.out.println(pago);
-						} else {
-							if  (p.getCosto() == 1) {
-								sub.conectar();
-								pago = sub.verPelicula(p.getCosto());
-								System.out.println(pago);
-							}
-
+					for (pelicula peli : peliculas) {
+						if (peli.getTitulo().equalsIgnoreCase(titulo)) {
+							p = peli;
 						}
 					}
-
+					if(p != null) {
+					    s1.verPelicula(p.getCosto());
+					}
 				}
 				break;
 			case 3:
@@ -123,7 +134,7 @@ public class main {
 		} while (opc != 5);
 
 	}
-	
-	//LO HE INTENTADO :,,,(
+
+// LO HE INTENTADO :,,,(
 
 }

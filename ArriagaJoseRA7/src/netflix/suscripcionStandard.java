@@ -11,12 +11,14 @@ public class suscripcionStandard extends suscripcion {
 	public suscripcionStandard(String mail, int passwd) {
 		super(mail, passwd);
 		dispositivos = 0;
-		contpelicula=0;
+		contpelicula = 0;
 	}
 
 	public int conexiones() {
-		if (dispositivos == 1)
+		if (dispositivos == 1) {
+			System.out.println("HAY UN DISPOSITIVO CONECTADO");
 			return 1;
+		}
 		return 0;
 	}
 
@@ -36,14 +38,14 @@ public class suscripcionStandard extends suscripcion {
 
 	@Override
 	public double verPelicula(int i) {
-		double pago=0;
+		double pago = 0;
 		if (i == 1) {
 			contpelicula++;
-			return  pago = mensualidad+(contpelicula * 2);
-			
+			return pago = mensualidad + (contpelicula * 2);
+
 		}
 		return pago;
-			
+
 	}
 
 }
