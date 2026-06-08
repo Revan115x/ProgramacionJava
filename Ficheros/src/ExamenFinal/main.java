@@ -11,9 +11,13 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
+
+import ficheros.suscripcion;
+
 import java.nio.file.OpenOption;
 
 public class main {
@@ -166,3 +170,4 @@ public class main {
 	}
 
 }
+
