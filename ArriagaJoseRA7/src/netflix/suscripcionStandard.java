@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 public class suscripcionStandard extends suscripcion {
 
-	private double mensualidad = 15;
+	private double mensualidad = 8;
 	private int dispositivos;
-	private int contpelicula;
+	private int contpeliculapago;
 
 	public suscripcionStandard(String mail, int passwd) {
 		super(mail, passwd);
 		dispositivos = 0;
-		contpelicula = 0;
+		contpeliculapago = 0;
 	}
 
 	public int conexiones() {
@@ -37,15 +37,22 @@ public class suscripcionStandard extends suscripcion {
 	}
 
 	@Override
-	public double verPelicula(int i) {
-		double pago = 0;
-		if (i == 1) {
-			contpelicula++;
-			return pago = mensualidad + (contpelicula * 2);
+	public void verPelicula(int i) {
 
+		if(i == 1) {
+			contpeliculapago++;
+			peliculasPago++;
 		}
-		return pago;
+		else {
+			peliculasGratis++;
+		}
+	}
 
+	@Override
+	public double cobrarmensualidad() {
+		double pagos = contpeliculapago * 1.5;
+		totalRecaudado += pagos + mensualidad;
+		return pagos + mensualidad;
 	}
 
 }

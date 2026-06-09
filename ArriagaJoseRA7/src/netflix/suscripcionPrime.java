@@ -34,9 +34,20 @@ public class suscripcionPrime extends suscripcion {
 	}
 
 	@Override
-	public double verPelicula(int i) {
-		int cont=0;
-		return cont+=i;
+	public void verPelicula(int i) {
+
+		if(i == 1)
+			peliculasPago++;
+		else
+			peliculasGratis++;
+
+		peliculasGratis++;
+	}
+
+	@Override
+	public double cobrarmensualidad() {
+		totalRecaudado += mensualidad;
+		return mensualidad;
 	}
 
 }
