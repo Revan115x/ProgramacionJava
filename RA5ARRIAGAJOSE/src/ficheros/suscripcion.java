@@ -6,25 +6,23 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 
 public class suscripcion {
-	
+
 	private String nif;
 	private LocalDate fecha;
 	private double importa;
 	private String nombre;
 	private String Apellido;
 	private String Mail;
-	
-	public suscripcion(String nif,String nombre,String Apellido,String Mail, LocalDate fecha,double importa) {
+
+	public suscripcion(String nif, String nombre, String Apellido, String Mail, LocalDate fecha, double importa) {
 		super();
 		this.nif = nif;
-		this.fecha = LocalDate.now().plusYears(1);
-		this.importa = importa*0.20;
+		this.fecha = fecha.plusYears(1);
+		this.importa = importa * 1.20;
 		this.nombre = nombre;
 		this.Apellido = Apellido;
 		this.Mail = Mail;
 	}
-	
-	
 
 	public suscripcion(String nif, LocalDate fecha, double importa) {
 		super();
@@ -33,9 +31,6 @@ public class suscripcion {
 		this.importa = importa;
 	}
 
-	
-
-
 	public suscripcion(String nombre, String apellido, String mail) {
 		super();
 		this.nombre = nombre;
@@ -43,7 +38,29 @@ public class suscripcion {
 		Mail = mail;
 	}
 
+	public String getNif() {
+		return nif;
+	}
 
+	public LocalDate getFecha() {
+		return fecha;
+	}
+
+	public double getImporta() {
+		return importa;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getApellido() {
+		return Apellido;
+	}
+
+	public String getMail() {
+		return Mail;
+	}
 
 	@Override
 	public String toString() {
@@ -51,12 +68,4 @@ public class suscripcion {
 				+ ", Apellido=" + Apellido + ", Mail=" + Mail + "]";
 	}
 
-
-
-	
-
-
-	
-	
-	
 }
