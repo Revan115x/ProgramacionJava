@@ -1,0 +1,4 @@
+P03,Monitor,180
+P05,Camara,90
+P06,Microfono,45
+P01,Raton,15

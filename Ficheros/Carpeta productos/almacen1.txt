@@ -1,0 +1,4 @@
+P01,Raton,15
+P02,Teclado,25
+P03,Monitor,180
+P04,Altavoz,35

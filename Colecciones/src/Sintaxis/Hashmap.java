@@ -4,63 +4,155 @@ import java.util.HashMap;
 
 public class Hashmap {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
-        /***********************************HashMap*****************************************/
+		/***********************************
+		 * HashMap
+		 ***********************************/
 
-        /*
-         * HashMap<K,V>:
-         * Estructura que almacena datos en pares clave-valor.
-         *
-         * Concepto:
-         * - Cada elemento tiene una clave (key) y un valor (value).
-         * - Las claves no se pueden repetir.
-         * - Permite acceder muy rápido a un valor usando su clave.
-         * - No mantiene el orden de los elementos.
-         * - Clase del paquete java.util.
-         */
+		/*
+		 * HashMap<K,V>
+		 *
+		 * K = Clave (Key) V = Valor (Value)
+		 *
+		 * Ejemplo:
+		 *
+		 * DNI -----> Nombre 111A ----> Juan 222B ----> Ana
+		 *
+		 * Las claves NO pueden repetirse. Los valores sí pueden repetirse.
+		 */
 
-        /* Declarar un HashMap */
-        HashMap<Integer, Alumno> mapaAlumnos = new HashMap<>();
-        // Integer → clave (key)
-        // Alumno → valor (value)
-        // mapaAlumnos → nombre de la variable
+		HashMap<String, String> alumnos = new HashMap<>();
 
-        /* Tamaño */
-        System.out.println(mapaAlumnos.size()); // inicialmente 0
+		/**************************************************************************
+		 * 1. AGREGAR ELEMENTOS
+		 **************************************************************************/
 
-        /* Agregar elementos */
-        mapaAlumnos.put(1, new Alumno("Ana", 20));
-        mapaAlumnos.put(2, new Alumno("Luis", 22));
-        // put(key, value) → agrega o reemplaza un elemento
+		alumnos.put("111A", "Juan");
+		alumnos.put("222B", "Ana");
+		alumnos.put("333C", "Pedro");
 
-        /* Obtener elemento */
-        mapaAlumnos.get(1); // obtiene el valor asociado a la clave 1
+		System.out.println("1) HashMap después de insertar:");
+		System.out.println(alumnos);
+		System.out.println();
 
-        /* Verificar si existe una clave */
-        if (mapaAlumnos.containsKey(1)) {
-            System.out.println("Existe la clave 1");
-        }
+		/**************************************************************************
+		 * 2. TAMAÑO DEL HASHMAP
+		 **************************************************************************/
 
-        /* Verificar si existe un valor */
-        if (mapaAlumnos.containsValue(new Alumno("Ana", 20))) {
-            System.out.println("Existe ese alumno");
-        }
+		System.out.println("2) Número de elementos:");
+		System.out.println(alumnos.size());
+		System.out.println();
 
-        /* Eliminar elemento */
-        mapaAlumnos.remove(1); // elimina el elemento con clave 1
+		/**************************************************************************
+		 * 3. OBTENER UN VALOR
+		 **************************************************************************/
 
-        /* Verificar si está vacío */
-        if (mapaAlumnos.isEmpty()) {
-            System.out.println("El mapa está vacío");
-        }
+		System.out.println("3) Nombre asociado al DNI 222B:");
+		System.out.println(alumnos.get("222B"));
+		System.out.println();
 
-        /* Borrar todos los elementos */
-        mapaAlumnos.clear();
+		/**************************************************************************
+		 * 4. COMPROBAR SI EXISTE UNA CLAVE
+		 **************************************************************************/
 
-        /* Recorrer HashMap (clave y valor) */
-        for (Integer clave : mapaAlumnos.keySet()) {
-            System.out.println(clave + " -> " + mapaAlumnos.get(clave));
-        }
-    }
+		if (alumnos.containsKey("111A")) {
+			System.out.println("4) Existe el DNI 111A");
+		}
+
+		System.out.println();
+
+		/**************************************************************************
+		 * 5. COMPROBAR SI EXISTE UN VALOR
+		 **************************************************************************/
+
+		if (alumnos.containsValue("Ana")) {
+			System.out.println("5) Existe Ana");
+		}
+
+		System.out.println();
+
+		/**************************************************************************
+		 * 6. MODIFICAR UN VALOR
+		 **************************************************************************/
+
+		alumnos.put("111A", "Juan Carlos");
+
+		System.out.println("6) DNI 111A modificado:");
+		System.out.println(alumnos);
+		System.out.println();
+
+		/**************************************************************************
+		 * 7. ELIMINAR ELEMENTO
+		 **************************************************************************/
+
+		alumnos.remove("333C");
+
+		System.out.println("7) Después de eliminar 333C:");
+		System.out.println(alumnos);
+		System.out.println();
+
+		/**************************************************************************
+		 * 8. RECORRER SOLO LAS CLAVES
+		 **************************************************************************/
+
+		System.out.println("8) Claves:");
+
+		for (String clave : alumnos.keySet()) {
+			System.out.println(clave);
+		}
+
+		System.out.println();
+
+		/**************************************************************************
+		 * 9. RECORRER SOLO LOS VALORES
+		 **************************************************************************/
+
+		System.out.println("9) Valores:");
+
+		for (String valor : alumnos.values()) {
+			System.out.println(valor);
+		}
+
+		System.out.println();
+
+		/**************************************************************************
+		 * 10. RECORRER CLAVE Y VALOR (LO MÁS USADO EN EXAMEN)
+		 **************************************************************************/
+
+		System.out.println("10) Clave y valor:");
+
+		for (String clave : alumnos.keySet()) {
+
+			System.out.println("DNI: " + clave + " Nombre: " + alumnos.get(clave));
+		}
+
+		System.out.println();
+
+		/**************************************************************************
+		 * 11. COMPROBAR SI ESTÁ VACÍO
+		 **************************************************************************/
+
+		System.out.println("11) ¿Está vacío?");
+		System.out.println(alumnos.isEmpty());
+		System.out.println();
+
+		/**************************************************************************
+		 * 12. BORRAR TODO  
+		 **************************************************************************/
+
+		alumnos.clear();
+
+		System.out.println("12) Después de clear():");
+		System.out.println(alumnos);
+		System.out.println();
+
+		/**************************************************************************
+		 * 13. COMPROBAR SI ESTÁ VACÍO DESPUÉS DE BORRAR
+		 **************************************************************************/
+
+		System.out.println("13) ¿Está vacío ahora?");
+		System.out.println(alumnos.isEmpty());
+
+	}
 }

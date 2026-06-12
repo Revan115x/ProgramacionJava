@@ -1,0 +1,4 @@
+P07,Webcam,50
+P08,Impresora,120
+P04,Altavoz,35
+P09,DiscoSSD,70

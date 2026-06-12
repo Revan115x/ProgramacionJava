@@ -2,91 +2,260 @@ package Sintaxis;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
-import Almacen.ArrayList.Almacen;
 
 public class Linkedlist {
 
     public static void main(String[] args) {
 
-        /***********************************LinkedList*****************************************/
+        /*********************************** LinkedList ***********************************/
 
         /*
-         * LinkedList<E>:
-         * Ventaja: agregar o eliminar elementos en cualquier posición es rápido.
-         * Desventaja: acceder a un elemento por índice es más lento que en ArrayList.
+         * LinkedList<E>
          *
-         * Concepto:
-         * - Lista dinámica que crece o se achica sola según lo que metas o saques.
-         * - Internamente usa nodos enlazados (cada elemento apunta al siguiente y al anterior).
-         * - Solo guarda objetos.
-         * - Clase de java.util.
+         * E = Tipo de objeto que almacena.
+         *
+         * Características:
+         *
+         * - Mantiene el orden de inserción.
+         * - Permite elementos repetidos.
+         * - Muy rápida para insertar o eliminar elementos.
+         * - Más lenta que ArrayList para acceder a posiciones concretas.
+         *
+         * Ejemplo:
+         *
+         * Posición 0 -> Ana
+         * Posición 1 -> Luis
+         * Posición 2 -> Pedro
          */
 
-        /* Declarar un LinkedList */
-        LinkedList<Alumno> listaAlumnos = new LinkedList<>();
-        // LinkedList<Alumno> → tipo de objeto que guarda
-        // listaAlumnos → nombre de la lista
+        LinkedList<String> alumnos = new LinkedList<>();
 
-        /* Tamaño */
-        System.out.println(listaAlumnos.size()); // Inicialmente 0
 
-        /* Agregar elementos */
-        listaAlumnos.add(new Alumno("Ana", 20)); // al final
-        listaAlumnos.addLast(new Alumno("Marta", 21)); // al final
-        listaAlumnos.addFirst(new Alumno("Luis", 22)); // al inicio
+        /**************************************************************************
+         * 1. AGREGAR ELEMENTOS
+         **************************************************************************/
 
-        /* Obtener elemento */
-        listaAlumnos.get(0); // obtiene el primer elemento
-        // ➤ Obtener primero o último
-        System.out.println(listaAlumnos.getFirst()); // primer elemento
-        System.out.println(listaAlumnos.getLast());  // último elemento
+        alumnos.add("Ana");
+        alumnos.add("Luis");
+        alumnos.add("Pedro");
 
-        /* Modificar elemento */
-        listaAlumnos.set(0, new Alumno("Carlos", 23)); // reemplaza el elemento en la posición 0
+        System.out.println("1) LinkedList después de insertar:");
+        System.out.println(alumnos);
+        System.out.println();
 
-        /* Borrar elemento */
-        listaAlumnos.remove(0); // elimina el elemento en la posición 0
-        listaAlumnos.remove(new Alumno("Marta", 21)); // elimina por objeto usando equals
-        // ➤ Eliminar primero o último
-        listaAlumnos.removeFirst();
-        listaAlumnos.removeLast();
 
-        /* Recorrer lista */
-        for (int i = 0; i < listaAlumnos.size(); i++) {
-            System.out.println(listaAlumnos.get(i)); // imprime cada elemento
+        /**************************************************************************
+         * 2. AGREGAR AL PRINCIPIO Y AL FINAL
+         **************************************************************************/
+
+        alumnos.addFirst("Marta");
+        alumnos.addLast("Carlos");
+
+        System.out.println("2) Después de addFirst y addLast:");
+        System.out.println(alumnos);
+        System.out.println();
+
+
+        /**************************************************************************
+         * 3. TAMAÑO DE LA LISTA
+         **************************************************************************/
+
+        System.out.println("3) Número de elementos:");
+        System.out.println(alumnos.size());
+        System.out.println();
+
+
+        /**************************************************************************
+         * 4. OBTENER ELEMENTO POR POSICIÓN
+         **************************************************************************/
+
+        System.out.println("4) Elemento en posición 0:");
+        System.out.println(alumnos.get(0));
+        System.out.println();
+
+
+        /**************************************************************************
+         * 5. OBTENER PRIMERO Y ÚLTIMO
+         **************************************************************************/
+
+        System.out.println("5) Primer elemento:");
+        System.out.println(alumnos.getFirst());
+
+        System.out.println("Último elemento:");
+        System.out.println(alumnos.getLast());
+
+        System.out.println();
+
+
+        /**************************************************************************
+         * 6. MODIFICAR ELEMENTO
+         **************************************************************************/
+
+        alumnos.set(0, "Juan");
+
+        System.out.println("6) Después de modificar posición 0:");
+        System.out.println(alumnos);
+
+        System.out.println();
+
+
+        /**************************************************************************
+         * 7. ELIMINAR POR POSICIÓN
+         **************************************************************************/
+
+        alumnos.remove(0);
+
+        System.out.println("7) Después de eliminar posición 0:");
+        System.out.println(alumnos);
+
+        System.out.println();
+
+
+        /**************************************************************************
+         * 8. ELIMINAR POR VALOR
+         **************************************************************************/
+
+        alumnos.remove("Pedro");
+
+        System.out.println("8) Después de eliminar Pedro:");
+        System.out.println(alumnos);
+
+        System.out.println();
+
+
+        /**************************************************************************
+         * 9. ELIMINAR PRIMERO Y ÚLTIMO
+         **************************************************************************/
+
+        alumnos.removeFirst();
+        alumnos.removeLast();
+
+        System.out.println("9) Después de removeFirst y removeLast:");
+        System.out.println(alumnos);
+
+        System.out.println();
+
+
+        /**************************************************************************
+         * 10. COMPROBAR SI EXISTE UN ELEMENTO
+         **************************************************************************/
+
+        if(alumnos.contains("Luis")) {
+            System.out.println("10) Luis existe en la lista");
         }
 
-        // ➤ FOR-EACH (más limpio)
-        for (Alumno a : listaAlumnos) {
-            System.out.println(a.nombre + " " + a.edad);
+        System.out.println();
+
+
+        /**************************************************************************
+         * 11. OBTENER POSICIÓN DE UN ELEMENTO
+         **************************************************************************/
+
+        int posicion = alumnos.indexOf("Luis");
+
+        System.out.println("11) Posición de Luis:");
+        System.out.println(posicion);
+
+        System.out.println();
+
+
+        /**************************************************************************
+         * 12. RECORRER CON FOR CLÁSICO
+         **************************************************************************/
+
+        System.out.println("12) Recorrido con for:");
+
+        for(int i = 0 ; i < alumnos.size() ; i++) {
+
+            System.out.println(alumnos.get(i));
+
         }
 
-        // ➤ CONTAINS (verificar si existe un objeto en la lista)
-        if (listaAlumnos.contains(new Alumno("Ana", 20))) {
-            System.out.println("Ana está en la lista");
+        System.out.println();
+
+
+        /**************************************************************************
+         * 13. RECORRER CON FOR-EACH
+         **************************************************************************/
+
+        System.out.println("13) Recorrido con for-each:");
+
+        for(String nombre : alumnos) {
+
+            System.out.println(nombre);
+
         }
 
-        // ➤ CLONAR la lista
-        LinkedList<Alumno> copiaLista = new LinkedList<>(listaAlumnos);
+        System.out.println();
 
-        // ➤ VERIFICAR si está vacía
-        if (listaAlumnos.isEmpty()) {
-            System.out.println("La lista está vacía");
-        }
-        
-        // ➤ OBTENER POSICIÓN de un elemento
-        int pos = listaAlumnos.indexOf(new Alumno("Ana", 20));
-        System.out.println(pos); // muestra la posición o -1 si no está
 
-        // ➤ ITERATOR (recorrer con ListIterator)
-        ListIterator<Alumno> it = listaAlumnos.listIterator();
-        System.out.println("Recorrido hacia adelante:");
+        /**************************************************************************
+         * 14. RECORRER CON LISTITERATOR
+         **************************************************************************/
+
+        ListIterator<String> it = alumnos.listIterator();
+
+        System.out.println("14) Hacia adelante:");
+
         while(it.hasNext()) {
+
             System.out.println(it.next());
+
         }
-        System.out.println("Recorrido hacia atrás:");
+
+        System.out.println();
+
+        System.out.println("14) Hacia atrás:");
+
         while(it.hasPrevious()) {
+
             System.out.println(it.previous());
+
         }
+
+        System.out.println();
+
+
+        /**************************************************************************
+         * 15. CLONAR LINKEDLIST
+         **************************************************************************/
+
+        LinkedList<String> copia = new LinkedList<>(alumnos);
+
+        System.out.println("15) Copia de la lista:");
+        System.out.println(copia);
+
+        System.out.println();
+
+
+        /**************************************************************************
+         * 16. COMPROBAR SI ESTÁ VACÍA
+         **************************************************************************/
+
+        System.out.println("16) ¿Está vacía?");
+        System.out.println(alumnos.isEmpty());
+
+        System.out.println();
+
+
+        /**************************************************************************
+         * 17. BORRAR TODO
+         **************************************************************************/
+
+        alumnos.clear();
+
+        System.out.println("17) Después de clear():");
+        System.out.println(alumnos);
+
+        System.out.println();
+
+
+        /**************************************************************************
+         * 18. COMPROBAR SI ESTÁ VACÍA DESPUÉS DE BORRAR
+         **************************************************************************/
+
+        System.out.println("18) ¿Está vacía ahora?");
+        System.out.println(alumnos.isEmpty());
+
     }
 }

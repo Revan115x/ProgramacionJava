@@ -1,64 +1,158 @@
 package Sintaxis;
 
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.HashMap;
 
 public class Hashset {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
-        /***********************************HashSet*****************************************/
+		/***********************************
+		 * HashMap
+		 ***********************************/
 
-        /*
-         * HashSet<E>:
-         * Colección que almacena elementos únicos.
-         *
-         * Concepto:
-         * - No permite elementos duplicados.
-         * - No mantiene el orden de inserción.
-         * - Internamente usa un HashMap.
-         * - Solo guarda objetos.
-         * - Clase del paquete java.util.
-         */
+		/*
+		 * HashMap<K,V>
+		 *
+		 * K = Clave (Key) V = Valor (Value)
+		 *
+		 * Ejemplo:
+		 *
+		 * DNI -----> Nombre 111A ----> Juan 222B ----> Ana
+		 *
+		 * Las claves NO pueden repetirse. Los valores sí pueden repetirse.
+		 */
 
-        /* Declarar un HashSet */
-        HashSet<Alumno> conjuntoAlumnos = new HashSet<>();
-        // HashSet<Alumno> → tipo de objeto que guarda
-        // conjuntoAlumnos → nombre del conjunto
+		HashMap<String, String> alumnos = new HashMap<>();
 
-        /* Tamaño */
-        System.out.println(conjuntoAlumnos.size()); // inicialmente 0
+		/**************************************************************************
+		 * 1. AGREGAR ELEMENTOS
+		 **************************************************************************/
 
-        /* Agregar elementos */
-        conjuntoAlumnos.add(new Alumno("Ana", 20));
-        conjuntoAlumnos.add(new Alumno("Luis", 22));
-        // add(E e) → agrega un elemento si no existe
+		alumnos.put("111A", "Juan");
+		alumnos.put("222B", "Ana");
+		alumnos.put("333C", "Pedro");
 
-        /* Verificar si existe un elemento */
-        if (conjuntoAlumnos.contains(new Alumno("Ana", 20))) {
-            System.out.println("Ana está en el conjunto");
-        }
+		System.out.println("1) HashMap después de insertar:");
+		System.out.println(alumnos);
+		System.out.println();
 
-        /* Eliminar elemento */
-        conjuntoAlumnos.remove(new Alumno("Luis", 22));
+		/**************************************************************************
+		 * 2. TAMAÑO DEL HASHMAP
+		 **************************************************************************/
 
-        /* Verificar si está vacío */
-        if (conjuntoAlumnos.isEmpty()) {
-            System.out.println("El conjunto está vacío");
-        }
+		System.out.println("2) Número de elementos:");
+		System.out.println(alumnos.size());
+		System.out.println();
 
-        /* Borrar todos los elementos */
-        conjuntoAlumnos.clear();
+		/**************************************************************************
+		 * 3. OBTENER UN VALOR
+		 **************************************************************************/
 
-        /* Recorrer con for-each */
-        for (Alumno a : conjuntoAlumnos) {
-            System.out.println(a);
-        }
+		System.out.println("3) Nombre asociado al DNI 222B:");
+		System.out.println(alumnos.get("222B"));
+		System.out.println();
 
-        /* Recorrer con Iterator */
-        Iterator<Alumno> it = conjuntoAlumnos.iterator();
-        while (it.hasNext()) {
-            System.out.println(it.next());
-        }
-    }
+		/**************************************************************************
+		 * 4. COMPROBAR SI EXISTE UNA CLAVE
+		 **************************************************************************/
+
+		if (alumnos.containsKey("111A")) {
+			System.out.println("4) Existe el DNI 111A");
+		}
+
+		System.out.println();
+
+		/**************************************************************************
+		 * 5. COMPROBAR SI EXISTE UN VALOR
+		 **************************************************************************/
+
+		if (alumnos.containsValue("Ana")) {
+			System.out.println("5) Existe Ana");
+		}
+
+		System.out.println();
+
+		/**************************************************************************
+		 * 6. MODIFICAR UN VALOR
+		 **************************************************************************/
+
+		alumnos.put("111A", "Juan Carlos");
+
+		System.out.println("6) DNI 111A modificado:");
+		System.out.println(alumnos);
+		System.out.println();
+
+		/**************************************************************************
+		 * 7. ELIMINAR ELEMENTO
+		 **************************************************************************/
+
+		alumnos.remove("333C");
+
+		System.out.println("7) Después de eliminar 333C:");
+		System.out.println(alumnos);
+		System.out.println();
+
+		/**************************************************************************
+		 * 8. RECORRER SOLO LAS CLAVES
+		 **************************************************************************/
+
+		System.out.println("8) Claves:");
+
+		for (String clave : alumnos.keySet()) {
+			System.out.println(clave);
+		}
+
+		System.out.println();
+
+		/**************************************************************************
+		 * 9. RECORRER SOLO LOS VALORES
+		 **************************************************************************/
+
+		System.out.println("9) Valores:");
+
+		for (String valor : alumnos.values()) {
+			System.out.println(valor);
+		}
+
+		System.out.println();
+
+		/**************************************************************************
+		 * 10. RECORRER CLAVE Y VALOR (LO MÁS USADO EN EXAMEN)
+		 **************************************************************************/
+
+		System.out.println("10) Clave y valor:");
+
+		for (String clave : alumnos.keySet()) {
+
+			System.out.println("DNI: " + clave + " Nombre: " + alumnos.get(clave));
+		}
+
+		System.out.println();
+
+		/**************************************************************************
+		 * 11. COMPROBAR SI ESTÁ VACÍO
+		 **************************************************************************/
+
+		System.out.println("11) ¿Está vacío?");
+		System.out.println(alumnos.isEmpty());
+		System.out.println();
+
+		/**************************************************************************
+		 * 12. BORRAR TODO
+		 **************************************************************************/
+
+		alumnos.clear();
+
+		System.out.println("12) Después de clear():");
+		System.out.println(alumnos);
+		System.out.println();
+
+		/**************************************************************************
+		 * 13. COMPROBAR SI ESTÁ VACÍO DESPUÉS DE BORRAR
+		 **************************************************************************/
+
+		System.out.println("13) ¿Está vacío ahora?");
+		System.out.println(alumnos.isEmpty());
+
+	}
 }

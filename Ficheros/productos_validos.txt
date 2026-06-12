@@ -1,0 +1,8 @@
+P03,Monitor,180.0
+P05,Camara,90.0
+P06,Microfono,45.0
+P07,Webcam,50.0
+P08,Impresora,120.0
+P04,Altavoz,35.0
+P09,DiscoSSD,70.0
+P02,Teclado,25.0
